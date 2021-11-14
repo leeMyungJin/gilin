@@ -147,11 +147,36 @@ function updateNick(){
 	var innerHtml = '';
 	$.ajax({
 	     type : 'POST',
-	     url : '/mypage/updateNick',
+	     url : '/member/updateNickname',
 	     dataType : null,
 	     data : param,
 	     success : function(result) {
 	     	alert("닉네임이 변경되었습니다.");
+	     },
+	     error: function(request, status, error) {
+	     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	
+	     }
+	 }); 
+}
+
+function updateBaseImg(){
+	var param = {
+			profilePic : '../img/myprofile.svg'
+			, memberId : memberId
+		};
+		
+	var innerHtml = '';
+	$.ajax({
+	     type : 'POST',
+	     url : '/member/updateBaseImg',
+	     dataType : null,
+	     data : param,
+	     success : function(result) {
+	     	alert("프로필이 변경되었습니다.");
+	     	//location.reload();
+	     	$('#profilePic').attr('src', '../img/myprofile.svg');
+	     	console.log("<%=session.getAttribute("profilePic")%>");
 	     },
 	     error: function(request, status, error) {
 	     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -180,11 +205,11 @@ function updateNick(){
           <div class="flex_wrap">
             <div class="profile_wrap">
               <div class="profile_img">
-                <img src="<%=session.getAttribute("profilePic")%>" alt="" class="default">
+                <img id="profilePic" src="<%=session.getAttribute("profilePic")%>" alt="" class="default">
               </div>
               <div class="btn_wrap">
                 <button>사진 수정 <span class="material-icons">chevron_right</span></button>
-                <button>기본 이미지로 변경 <span class="material-icons">chevron_right</span></button>
+                <button onClick="updateBaseImg()">기본 이미지로 변경 <span class="material-icons" >chevron_right</span></button>
               </div>
             </div>
             <div class="my_info_txt">

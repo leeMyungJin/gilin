@@ -36,11 +36,17 @@ public class LoginController {
     public void login(@RequestParam HashMap<String,String> params, HttpServletRequest req){
     	MemberVo memberVo = loginService.getMemberInfo(params);
     	
+    	HttpSession session = req.getSession();
     	if(memberVo == null) {
     		loginService.insertMember(params);
     		
+    		session.setAttribute("id", params.get("id"));
+    		session.setAttribute("adminYn", params.get("adminYn"));
+    		session.setAttribute("email", params.get("email"));
+    		session.setAttribute("nickname", params.get("nickname"));
+    		session.setAttribute("profilePic", params.get("profilePic"));
+    		
     	}else {
-    		HttpSession session = req.getSession();
     		session.setAttribute("id", memberVo.getId());
     		session.setAttribute("adminYn", memberVo.getAdminYn());
     		session.setAttribute("email", memberVo.getEmail());

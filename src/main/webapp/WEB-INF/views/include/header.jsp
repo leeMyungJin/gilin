@@ -95,22 +95,22 @@ function kakaoUnlink() {
 function webLogin(params){
 	console.log("params : ");
 	console.log(params);
-		
-	var innerHtml = '';
+	
 	$.ajax({
 	     type : 'POST',
 	     url : '/login/login',
+	     async : false, // 비동기모드 : true, 동기식모드 : false
 	     dataType : null,
 	     data : params,
 	     success : function(result) {
-	     	console.log("login success");
-	     	location.reload();
+	    	 console.log("login success");
+		     location.reload();
 	     },
 	     error: function(request, status, error) {
 	     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	
 	     }
 	 }); 
+	
 }
 
 function moveMypage(){

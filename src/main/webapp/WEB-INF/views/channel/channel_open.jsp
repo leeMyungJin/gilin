@@ -133,7 +133,6 @@ function saveChannel(type){
 		 
 
 		  if($("#file").val() != ''){
-			  alert("!");
 		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
 			 const time = new Date().toTimeString().split(" ")[0];
 			 console.log("imgUpload.files.name: ", imgUpload.files[0].name);
@@ -165,7 +164,6 @@ function saveChannel(type){
    	  		
    	  		$.ajax({
 	   	           url : url,
-	   	           async : false, // 비동기모드 : true, 동기식모드 : false
 	   	           type : 'POST',
 	   	           cache : false,
 	   	           dataType : null,

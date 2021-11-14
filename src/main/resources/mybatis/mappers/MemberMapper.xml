@@ -5,7 +5,13 @@
 
 	<update id="updateNickname" parameterType="hashMap">
 		update web."member" set
-			nickname = #{nickname}
+			<if test="nickname != null and nickname != ''">
+				nickname = #{nickname}
+			</if>
+			
+			<if test="profilePic != null and profilePic != ''">
+				profile_pic = #{profilePic}
+			</if>
 		where id = #{memberId}
 	</update>
 

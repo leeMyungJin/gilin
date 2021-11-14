@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +29,22 @@ public class MemberController {
     	return "member/mypage";
     }
     
-    /* 채널 수정 */
+    /* 닉네임 수정 */
     @RequestMapping(value = "/updateNickname")
     @ResponseBody
-    public void updateNickname(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    public void updateNickname(@RequestParam HashMap<String,String> params, HttpServletRequest req, HttpSession session){
+    	session.setAttribute("nickname", params.get("nickname"));
+    	
+    	memberService.updateNickname(params);
+    }   
+    
+    /* 채널 수정 */
+    @RequestMapping(value = "/updateBaseImg")
+    @ResponseBody
+    public void updateBaseImg(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	HttpSession session = req.getSession();
+    	session.setAttribute("profilePic", params.get("profilePic"));
+    	
     	memberService.updateNickname(params);
     }   
    
