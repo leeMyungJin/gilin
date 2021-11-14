@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Mappers.ProjectMapper">
+	<select id="getAllProjectList" parameterType="hashMap" resultType="ProjectVo">
+		select p.pj_seq
+				, p.ch_seq 
+				, p.pj_name 
+				, p.pj_img 
+				, p.pj_memo 
+				, p.pj_content 
+				, to_char(p.fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
+				, to_char(p.fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
+				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
+				, p.cret_id 
+				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
+				, p.updt_id 
+				, pf.fd_amt as fd_sum_amt
+				, case when pfc.pj_seq is not null then 'Y' else 'N' end as fd_yn --펀딩완료여부
+				, case when to_char(now()-p.fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-p.fd_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-p.fd_end_dt, 'dd')::numeric end as d_day
+		from web.project p left join (select pj_seq, sum(fd_amt) as fd_amt
+										from web.project_funding
+										group by pj_seq) pf on pf.pj_seq = p.pj_seq 
+						   left join (select distinct pj_seq
+										from web.project_funding
+										where cret_id = #{memberId}) pfc on pfc.pj_seq = p.pj_seq
+		where p.ch_seq = #{chSeq}::numeric
+		<choose>
+			<when test="state == 'orderName'">
+				order by p.pj_name
+			</when>
+			<when test="state == 'orderMaxAmt'">
+				order by pf.fd_amt, p.pj_name
+			</when>
+			<when test="state == 'orderMinAmt'">
+				order by pf.fd_amt desc, p.pj_name
+			</when>
+			<when test="state == 'latest'">
+				order by p.cret_dt desc
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getMyProjectList" parameterType="hashMap" resultType="ProjectVo">
+		select p.pj_seq
+				, p.ch_seq 
+				, p.pj_name 
+				, p.pj_img 
+				, p.pj_memo 
+				, p.pj_content 
+				, to_char(p.fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
+				, to_char(p.fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
+				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
+				, p.cret_id 
+				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
+				, p.updt_id 
+				, pf.fd_amt as fd_sum_amt
+				, case when pfc.pj_seq is not null then 'Y' else 'N' end as fd_yn --펀딩완료여부
+				, case when to_char(now()-p.fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-p.fd_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-p.fd_end_dt, 'dd')::numeric end as d_day
+		from web.project p left join (select pj_seq, sum(fd_amt) as fd_amt
+										from web.project_funding
+										group by pj_seq) pf on pf.pj_seq = p.pj_seq 
+						   left join (select distinct pj_seq
+										from web.project_funding
+										where cret_id = #{memberId}) pfc on pfc.pj_seq = p.pj_seq
+		where 1=1
+		<if test="chSeq != null and chSeq != ''">
+			and p.ch_seq = #{chSeq}::numeric
+		</if>
+		and p.cret_id = #{memberId}
+	</select>
+
+</mapper>

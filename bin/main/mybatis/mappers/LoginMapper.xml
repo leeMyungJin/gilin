@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Mappers.LoginMapper">
+	<select id="getMemberInfo" parameterType="hashMap" resultType="MemberVo">
+		select * 
+		from web.member
+		where id = #{id}
+	</select>
+	
+	<insert id="insertMember" parameterType="hashMap">
+		insert into web."member" (
+			id
+			, nickname
+			, profile_pic 
+			, age 
+			, gender 
+			, email 
+			, cret_dt 
+			, cret_id 
+		)values(
+			#{id}
+			, #{nickname}
+			, #{profilePic} 
+			, #{age}
+			, #{gender} 
+			, #{email} 
+			, NOW()
+			, #{id}
+		)
+	</insert>
+	
+	<update id="updateLoginTime" parameterType = "MemberVo">
+		update web.member set
+		lateass_dt = now()
+		where id = #{id}
+	</update>
+	
+</mapper>
