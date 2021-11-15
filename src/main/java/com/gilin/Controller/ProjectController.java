@@ -32,12 +32,12 @@ public class ProjectController {
 	
     @RequestMapping(value = "/projectOpen", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveMyProject(Model model) {
-    	return "project/myproject";
+    	return "project/project_open";
     }
     
-    @RequestMapping(value = "/myProject", method = {RequestMethod.POST , RequestMethod.GET})
+    @RequestMapping(value = "/myproject", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveProjectOpen(Model model) {
-    	return "project/project_open";
+    	return "project/myproject";
     }
 	
     @RequestMapping(value = "/project", method = {RequestMethod.POST , RequestMethod.GET})

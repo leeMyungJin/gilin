@@ -44,6 +44,10 @@ function getMyProjectList(){
 		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveProjectDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
 		   								'<div class="img_wrap">'+
 						                  '<img src="'+result[i].pjImg+'" alt="">'+
+						                  '<div class="btn_wrap">'+
+						                    '<button class="gall_hover_btn">프로젝트 바로가기</button>'+
+						                    '<button class="gall_hover_btn">수정/삭제</button>'+
+						                  '</div>'+
 						                '</div>'+
 						                '<div class="txt_wrap">'+
 						                  '<p class="chn_tit">'+result[i].pjName+'</p>'+
@@ -72,7 +76,63 @@ function getMyProjectList(){
 		 }); 
 		
 	}else{
-		innerHtml = '<p class="no-gallery">참여한 채널이 없습니다.</p>';	
+		innerHtml = '<p class="no-gallery">참여한 프로젝트가 없습니다.</p>';	
+		$('#myProject').html(innerHtml);
+	}
+
+}
+
+//내 펀딩 조회
+function getMyFundingList(){
+	var param = {
+		memberId 	: memberId
+		, chSeq : ''
+	};
+	
+	var innerHtml = '';
+	if(memberId != null){
+		$.ajax({
+		     type : 'POST',
+		     url : '/funding/getMyFundingList',
+		     dataType : null,
+		     data : param,
+		     success : function(result) {
+		     	console.log("getMyFundingList success");
+		     	
+		     	if(result.length > 0){
+		          	for(var i =0; i<result.length; i++){
+		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveProjectDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
+		   								'<div class="img_wrap">'+
+						                  '<img src="'+result[i].pjImg+'" alt="">'+
+						                '</div>'+
+						                '<div class="txt_wrap">'+
+						                  '<p class="chn_tit">'+result[i].pjName+'</p>'+
+						                  '<p class="chn_txt">'+result[i].pjMemo+'</p>'+
+						                  '<div class="detail_info">'+
+						                    '<p class="budget">'+Number(result[i].fdSumAmt).toLocaleString('ko-KR')+'</p>'+
+						                    '<p class="dday">'+result[i].dDay+'</p>'+
+						                  '</div>'+
+						                '</div>'+
+						              '</div>';
+						              
+		          	}
+		          	
+		          }else{
+		        	  //내 펀딩이 없을 경우
+		        	  innerHtml = '<p class="no-gallery">참여한 프로젝트가 없습니다.</p>';	
+		          }
+		     	
+		    	$('#myFunding').html(innerHtml);
+		     	
+		     },
+		     error: function(request, status, error) {
+		     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
+		     }
+		 }); 
+		
+	}else{
+		innerHtml = '<p class="no-gallery">참여한 프로젝트가 없습니다.</p>';	
 		$('#myProject').html(innerHtml);
 	}
 
@@ -105,6 +165,11 @@ function getMyChannelList(){
 		          			
 		   				innerHtml += '<div class="img_wrap">'+
 						                  '<img src="'+result[i].chImg+'" alt="">'+
+						                  '<div class="btn_wrap">'+
+						                    '<button class="gall_hover_btn">채널 바로가기</button>'+
+						                    '<button class="gall_hover_btn">결과 보고서</button>'+
+						                    '<button class="gall_hover_btn">수정/삭제</button>'+
+						                  '</div>'+
 						                '</div>'+
 						                '<div class="txt_wrap">'+
 						                  '<p class="chn_tit">'+result[i].chName+'</p>'+
@@ -190,7 +255,7 @@ function updateBaseImg(){
 <body onload="pageLoad();">
   <%@ include file="../include/header.jsp" %>
 
-  <div class="sub mypage">
+  <div class="sub mypage mychannel">
 
     <div class="sub_header02">
       <div class="inner">
@@ -227,8 +292,7 @@ function updateBaseImg(){
             <h3 class="tit">MY 펀딩 관리</h3>
             <a href="/funding/myfunding" class="btn_style01">전체보기</a>
           </div>
-          <div id="myFunding" class="flex_wrap gallery gall03">
-          </div>
+          <div id="myFunding" class="flex_wrap gallery gall03"></div>
         </div>
 
         <div class="line"></div>
@@ -238,8 +302,7 @@ function updateBaseImg(){
             <h3 class="tit">MY 채널 관리</h3>
             <a href="/channel/mychannel" class="btn_style01">전체보기</a>
           </div>
-          <div id="myChannel" class="flex_wrap gallery gall03"> 
-          </div>
+          <div id="myChannel" class="flex_wrap gallery gall03"></div>
         </div>
 
         <div class="line"></div>
@@ -249,8 +312,7 @@ function updateBaseImg(){
             <h3 class="tit">MY 프로젝트 관리</h3>
             <a href="/project/myproject" class="btn_style01">전체보기</a>
           </div>
-          <div id="myProject" class="flex_wrap gallery gall03">
-          </div>
+          <div id="myProject" class="flex_wrap gallery gall03"></div>
         </div>
 
 
