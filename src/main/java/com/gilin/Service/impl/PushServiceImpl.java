@@ -140,7 +140,8 @@ public class PushServiceImpl implements PushService{
     @Override
     public String getUserToken(HashMap<String, String> params) {
         // TODO Auto-generated method stub
-        return loginMapper.getUserToken(params);
+//        return loginMapper.getUserToken(params);
+        return "";
     }
     
 }

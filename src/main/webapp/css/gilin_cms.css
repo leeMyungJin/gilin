@@ -1,0 +1,154 @@
+:root{
+  --cms-point-color:#FF5733;
+}
+
+/* 관리자모드 */
+#cms{width:100%;overflow-x:hidden;}
+#cms .aside{width:20%;max-width:calc(var(--spacing) * 20);background:var(--main-color);height:100vh;padding:calc(var(--spacing) * 3) 0 0 calc(var(--spacing) * 3);position:fixed;top:0;left:0;}
+#cms .aside .logo svg{width:120px;}
+#cms .aside .logo svg path{fill:#fff;}
+#cms .aside .gnb{margin-top:calc(var(--spacing) * 5);}
+#cms .aside .gnb a{display:flex;align-items:center;padding:8px;color:#fff;}
+#cms .aside .gnb a span{margin:0 calc(var(--spacing) * 2) 0 0;padding:4px;}
+#cms .aside .gnb a.active{background:#fff;border-radius:50px 0 0 50px;color:#000;position:relative;}
+#cms .aside .gnb a.active span{color:#fff;background:var(--main-color);border-radius:100%;}
+#cms .aside .gnb a.active:before{content:'';position:absolute;top:-26px;right:-1px;width:26px;height:26px;background:url('../img/active_after.svg') center no-repeat;}
+#cms .aside .gnb a.active:after{content:'';position:absolute;bottom:-25px;right:0;width:26px;height:26px;background:url('../img/active_after.svg') center no-repeat;transform:rotate(270deg)}
+#cms .aside .gnb a:hover{color:#000;}
+#cms .aside .cms_exit{position:absolute;bottom:0;left:0;height:calc(var(--spacing) * 5);background:#333;width:100%;color:#fff;display:flex;align-items:center;justify-content:center;}
+#cms .aside .cms_exit span{margin-left:var(--spacing);}
+
+.cms_cont{min-height:100vh;margin-left:calc(var(--spacing) * 20);padding:calc(var(--spacing) * 4);}
+.cms_cont .cms_tit{font-size:24px;margin-bottom:calc(var(--spacing) * 3);display:flex;align-items:center;}
+.cms_cont .cms_tit span{font-size:1.5em;margin-right:var(--spacing);opacity:.2;}
+
+.overview_area{border:1px solid var(--bor-color);border-radius:var(--radius);padding:calc(var(--spacing) * 3);margin-bottom:calc(var(--spacing) * 4);}
+.overview_area .item{text-align:center;border-right:1px solid var(--bor-color);}
+.overview_area.fb2 .item{width:50%;}
+.overview_area.fb3 .item{width:33.33333%;}
+.overview_area.fb4 .item{width:25%;}
+.overview_area .item:last-child{border-right:none;}
+.overview_area .over_tit{font-size:18px;color:var(--cms-point-color);font-weight:bold;margin-bottom:calc(var(--spacing) * 2);}
+.overview_area .over_txt{font-size:28px;}
+.overview_area .item.btn_wrap{display:flex;align-items:center;justify-content:center;}
+.overview_area .btn{border-radius:50px;background:var(--main-color);color:#fff;display:inline-flex;align-items:center;padding:6px 6px 6px 12px;font-size:18px;}
+.overview_area .btn span{margin-left:12px;}
+
+/* CMS 탭 */
+.cms_cont ul.tab{display:flex;align-items:center;}
+.cms_cont ul.tab li + li{margin-left:-1px;}
+.cms_cont ul.tab li a{color:var(--txt-color);padding:calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);background:#fff;border:1px solid var(--bor-color);display:block;}
+.cms_cont ul.tab li.current a{color:#000;font-weight:bold;}
+.cms_cont ul.tab li:first-child a{border-radius:var(--radius) 0 0 0;}
+.cms_cont ul.tab li:last-child a{border-radius:0 var(--radius) 0 0;}
+
+
+/* 필터 & 보드 */
+.cms_filter_cont{padding:calc(var(--spacing) * 2);background:#fff;border:1px solid var(--bor-color);border-radius:var(--radius);}
+
+/* 필터영역 */
+.filter_area{align-items:center;justify-content:flex-start;padding:calc(var(--spacing) * 1.5) calc(var(--spacing) * 2);background:#eee;margin-bottom:calc(var(--spacing) * 2);border-radius:var(--radius);}
+.filter_area input, .filter_area select{border:1px solid #ddd;background:#fff;height:calc(var(--spacing) * 3);padding:0 6px;}
+.filter_area .btn{height:calc(var(--spacing) * 3);background:#000;border-radius:4px;color:#fff;padding:0 calc(var(--spacing) * 1.5);}
+.filter_area .mr{margin-right:var(--spacing);}
+.filter_area .item{margin-right:calc(var(--spacing) * 4);border-right:1px solid #ccc;padding-right:calc(var(--spacing) * 4);}
+.filter_area .item:last-child{border-right:none;}
+
+/* 보드 버튼 영역 */
+.dashboard_btn_area{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding-bottom:calc(var(--spacing) * 1.5);
+  background-color: white;
+  width: 100%;
+  float: right;
+}
+
+
+#setGridPageCount {border:1px solid #ddd;background:#fff;height:calc(var(--spacing) * 3);padding:0 6px;color:var(--txt-color);}
+
+.dashboard_btn_area .dash_btn{border:1px solid var(--bor-color);color:var(--txt-color);background:#fff;display:flex;align-items:center;font-size:14px;margin-left:6px;border-radius:4px;padding:4px 8px;height:calc(var(--spacing) * 3);}
+.dashboard_btn_area .dash_btn span{color:var(--txt-color);margin-right:4px;}
+.dashboard_btn_area select{border:1px solid #ddd;background:#fff;height:calc(var(--spacing) * 3);padding:0 6px;color:var(--txt-color);}
+.dashboard_btn_area.layout02{justify-content:space-between;}
+.dashboard_btn_area.layout02 .flex_box{display:flex;align-items:center;}
+.dashboard_btn_area.layout02 .flex_box *{margin-left:6px;}
+.dashboard_btn_area.layout02 .flex_box *:first-child{margin-left:0;}
+
+
+
+/* 채널관리 */
+.edit_modal .modal_cont{background:#fff;min-width:calc(var(--spacing) * 38);border-radius:var(--radius);overflow:hidden;}
+.edit_modal .modal_cont .close_btn{position:absolute;top:21px;right:12px;color:#fff;cursor:pointer;}
+.edit_modal .modal_cont h2{background:var(--point-color);color:#fff;padding:calc(var(--spacing) * 2);font-size:20px;}
+.edit_modal .modal_cont .required_wrap{margin:calc(var(--spacing) * 2) calc(var(--spacing) * 2) 0;border-bottom:2px solid var(--point-color);padding-bottom:calc(var(--spacing) * 2);text-align:right;color:var(--alert-color);font-weight:600;}
+.edit_modal .modal_cont .required{color:var(--alert-color);vertical-align:super;font-weight:600;}
+.edit_modal .modal_cont .modal_table{margin:calc(var(--spacing) * 2);width:calc(100% - calc(var(--spacing) * 4));}
+.edit_modal .modal_cont .modal_table td{padding-bottom:8px;}
+.edit_modal .modal_cont .modal_table th{color:var(--point-color);font-weight:500;text-align:left;padding-right:var(--spacing);}
+.edit_modal .modal_cont .modal_table input, .edit_modal .modal_cont .modal_table select{border:1px solid #ddd;background:#fff;}
+.edit_modal .modal_cont .btn_wrap{margin:calc(var(--spacing) * 2);display:flex;justify-content:space-between;gap:var(--spacing);}
+.edit_modal .modal_cont .btn_wrap button{width:100%;}
+.edit_modal .modal_cont .chk_wrap{display:flex;align-items:center;}
+
+/* 공지관리 */
+.cms_notice .cms_filter_cont{border-radius:0 0 var(--radius) var(--radius);margin-top:-1px;}
+
+/* 공지관리 */
+.cms_terms .cms_filter_cont{border-radius:0 0 var(--radius) var(--radius);margin-top:-1px;}
+
+
+/* 전승희 변경 */
+.term-save-wrap {
+  overflow: hidden;
+}
+
+
+.dashboard_area .setGrid {min-height:200px; height: auto; background:#ddd; }
+
+.dashboard_area.editor_area {
+  display: none;
+}
+
+.dashboard_area.editor_area.current {
+  display: block;
+}
+
+.dashboard_btn_area.cust{
+  width: 80%
+}
+
+.wj-control .wj-input-group .wj-form-control {
+  background-color: white !important;
+}
+
+button.btn.jeon{
+  height:calc(var(--spacing) * 3);
+  background:#000;
+  border-radius:4px;color:#fff;
+  padding:0 calc(var(--spacing) * 1.5);
+}
+
+.create_modal .modal_cont{background:#fff;min-width:calc(var(--spacing) * 38);border-radius:var(--radius);overflow:hidden;}
+.create_modal .modal_cont .close_btn{position:absolute;top:21px;right:12px;color:#fff;cursor:pointer;}
+.create_modal .modal_cont h2{background:var(--point-color);color:#fff;padding:calc(var(--spacing) * 2);font-size:20px;}
+.create_modal .modal_cont .required_wrap{margin:calc(var(--spacing) * 2) calc(var(--spacing) * 2) 0;border-bottom:2px solid var(--point-color);padding-bottom:calc(var(--spacing) * 2);text-align:right;color:var(--alert-color);font-weight:600;}
+.create_modal .modal_cont .required{color:var(--alert-color);vertical-align:super;font-weight:600;}
+.create_modal .modal_cont .modal_table{margin:calc(var(--spacing) * 2);width:calc(100% - calc(var(--spacing) * 4));}
+.create_modal .modal_cont .modal_table td{padding-bottom:8px;}
+.create_modal .modal_cont .modal_table th{color:var(--point-color);font-weight:500;text-align:left;padding-right:var(--spacing);}
+.create_modal .modal_cont .modal_table input, .create_modal .modal_cont .modal_table select{border:1px solid #ddd;background:#fff;}
+.create_modal .modal_cont .btn_wrap{margin:calc(var(--spacing) * 2);display:flex;justify-content:space-between;gap:var(--spacing);}
+.create_modal .modal_cont .btn_wrap button{width:100%;}
+.create_modal .modal_cont .chk_wrap{display:flex;align-items:center;}
+
+
+.modal .modal-form-title.create {
+  display: none;
+}
+
+
+#modalNotice.edit_modal .modal_cont .modal_table th {
+  width: 10%;
+}

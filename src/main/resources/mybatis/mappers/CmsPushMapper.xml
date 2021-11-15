@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Cms.Mapper.CmsPushMapper">
+
+    <select id="getListBySearch" parameterType="hashMap" resultType="CmsPushVo">
+        select * from web.push_history
+        where 1=1
+        <if test="from != ''">
+            AND
+            send_dt &gt;= #{from}::date
+        </if>
+
+        <if test="to != ''">
+            AND
+            send_dt &lt;= #{to}::date
+        </if>
+        order by send_dt desc
+    </select>
+
+</mapper>

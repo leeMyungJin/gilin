@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Cms.Mapper.CmsChannelMapper">
+
+    <select id="getList" resultType="CmsChannelVo">
+        select
+            t1.ch_seq,
+            t1.ch_name,
+            t1.ch_img,
+            t1.ch_active_yn,
+            t1.ch_memo,
+            to_char(t1.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt,
+            to_char(t1.ch_end_dt, 'YYYY-MM-DD') as ch_end_dt,
+            to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt,
+            t1.ch_fd_end_dt,
+            t1.ch_pass,
+            t1.ch_open_yn,
+            to_char(t1.cret_dt, 'YYYY-MM-DD') as cret_dt,
+            t1.cret_id,
+            to_char(t1.updt_dt, 'YYYY-MM-DD') as updt_dt,
+            t1.updt_id,
+            concat(to_char(t1.ch_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_end_dt, 'YYYY-MM-DD')) as ch_date_range,
+            concat(to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_fd_end_dt, 'YYYY-MM-DD')) as funding_date_range,
+            (case when t1.ch_active_yn = true then 'Y' else 'N' end) as active,
+            t2.nickname
+        from web.channel t1
+        left outer join web.member t2 on t1.cret_id = t2.id
+        order by cret_dt desc
+    </select>
+
+    <select id="getCount" resultType="map">
+        select
+        count(*) as totalCount,
+        (select count(ch_seq) as cnt from web.channel where (ch_st_dt &lt;= now() and ch_end_dt &gt; now()) or (ch_fd_st_dt &lt;= now() and ch_fd_end_dt &gt; now())) as activeCount,
+        (select count(ch_seq) as cnt from web.channel where (ch_st_dt &gt; now() or ch_end_dt &lt; now()) or (ch_fd_st_dt &gt; now() or ch_fd_end_dt &lt; now())) as inactiveCount
+        from web.channel
+    </select>
+
+    <select id="getListBySearch" parameterType="hashMap" resultType="CmsChannelVo">
+        select
+           t1.ch_seq,
+           t1.ch_name,
+           t1.ch_img,
+           t1.ch_active_yn,
+           t1.ch_memo,
+           to_char(t1.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt,
+           to_char(t1.ch_end_dt, 'YYYY-MM-DD') as ch_end_dt,
+           to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt,
+           t1.ch_fd_end_dt,
+           t1.ch_pass,
+           t1.ch_open_yn,
+           to_char(t1.cret_dt, 'YYYY-MM-DD') as cret_dt,
+           t1.cret_id,
+           to_char(t1.updt_dt, 'YYYY-MM-DD') as updt_dt,
+           t1.updt_id,
+           concat(to_char(t1.ch_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_end_dt, 'YYYY-MM-DD')) as ch_date_range,
+           concat(to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_fd_end_dt, 'YYYY-MM-DD')) as funding_date_range,
+           (case when t1.ch_active_yn = true then 'Y' else 'N' end) as active,
+           t2.nickname
+        from web.channel t1
+        left outer join web.member t2 on t1.cret_id = t2.id
+        where 1=1
+        <if test="inq != ''">
+            AND
+            <choose>
+                <when test="con == 'ch_name'">
+                    <foreach collection="inq" item="item" index="index" open="(" close=")" separator="or">
+                        t1.ch_name like '%' || #{item} || '%'
+                    </foreach>
+                </when>
+                <when test="con == 'nickname'">
+                    <foreach collection="inq" item="item" index="index" open="(" close=")" separator="or">
+                        t2.nickname LIKE '%' || #{item} || '%'
+                    </foreach>
+                </when>
+                <otherwise>
+                    <foreach collection="inq" item="item" index="index" open="(" close=")" separator="or">
+                        t1.ch_name LIKE '%' || #{item} || '%'
+                        or t2.nickname LIKE '%' || #{item} || '%'
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="from != ''">
+            AND
+            t1.ch_st_dt &gt;= #{from}::date
+        </if>
+
+        <if test="to != ''">
+            AND
+            t1.ch_end_dt &lt;= #{to}::date
+        </if>
+
+        <if test="active != ''">
+            AND
+              <choose>
+                  <when test="active == 'active'">
+                      ((t1.ch_st_dt &lt;= now() and t1.ch_end_dt &gt; now())
+                      OR
+                      (ch_fd_st_dt &lt;= now() and ch_fd_end_dt &gt; now()))
+                  </when>
+                  <otherwise>
+                      ((t1.ch_st_dt &gt; now() or t1.ch_end_dt &lt; now())
+                      AND
+                      (t1.ch_fd_st_dt &gt; now() or t1.ch_fd_end_dt &lt; now()))
+                  </otherwise>
+              </choose>
+        </if>
+
+        order by t1.cret_dt desc
+    </select>
+
+    <insert id="create" parameterType="hashMap">
+        insert into web.channel
+        (
+            ch_name, ch_img, ch_active_yn, ch_memo, ch_st_dt, ch_end_dt, ch_fd_st_dt, ch_fd_end_dt,
+            ch_pass, ch_open_yn, cret_dt, cret_id, updt_dt, updt_id
+        )
+        values
+        (
+            #{chName}, #{chImg}, ${chActiveYn}, #{chMemo}, #{chStDt}::timestamp, #{chEndDt}::timestamp,
+            #{chFdStDt}::timestamp, #{chFdEndDt}::timestamp, #{chPass}, #{chOpenYn}, #{cretDt}::timestamp, #{cretId},
+            #{updtDt}::timestamp, #{updtId}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="CmsChannelVo">
+        update web.channel
+            set
+                ch_name = #{chName},
+                ch_img = #{chImg},
+                ch_active_yn = #{chActiveYn},
+                ch_memo = #{chMemo},
+                ch_st_dt = #{chStDt}::timestamp ,
+                ch_end_dt = #{chEndDt}::timestamp ,
+                ch_fd_st_dt = #{chFdStDt}::timestamp ,
+                ch_fd_end_dt = #{chFdEndDt}::timestamp ,
+                ch_pass = #{chPass},
+                ch_open_yn = #{chOpenYn},
+                updt_dt = #{updtDt}::timestamp,
+                updt_id = #{updtId}
+            where
+                ch_seq = #{chSeq}
+    </update>
+
+    <delete id="delete" parameterType="CmsChannelVo">
+        delete from web.channel where ch_seq = #{chSeq}
+    </delete>
+
+
+    <select id="validationByName" parameterType="String" resultType="CmsChannelVo">
+        select * from web.channel where ch_name like '%' || #{chName} || '%' limit 1
+    </select>
+
+
+</mapper>
