@@ -42,8 +42,8 @@ public class CmsProjectServiceImpl implements CmsProjectService {
     }
 
     @Override
-    public void create(HashMap<String, Object> params) {
-        cmsProjectMapper.create(params);
+    public void create(CmsProjectVo cmsProjectVo) {
+        cmsProjectMapper.create(cmsProjectVo);
     }
 
     @Override

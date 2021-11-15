@@ -52,8 +52,8 @@ public class CmsChannelServiceImpl implements CmsChannelService {
     }
 
     @Override
-    public void create(HashMap<String, Object> params) {
-        cmsChannelMapper.create(params);
+    public void create(CmsChannelVo cmsChannelVo) {
+        cmsChannelMapper.create(cmsChannelVo);
     }
 
     @Override

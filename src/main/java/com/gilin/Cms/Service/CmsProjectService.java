@@ -14,6 +14,6 @@ public interface CmsProjectService {
     public Map<String, Integer> getProjectCount();
     public List<CmsProjectVo> getListBySearch(HashMap<String, Object> params);
     public void update(CmsProjectVo cmsProjectVo);
-    public void create(HashMap<String, Object> params);
+    public void create(CmsProjectVo cmsProjectVo);
     public void delete(HashMap<String, Object> params);
 }

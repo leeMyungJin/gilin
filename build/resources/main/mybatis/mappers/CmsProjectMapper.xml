@@ -56,6 +56,7 @@
         t1.cret_id,
         t1.updt_dt,
         t1.updt_id,
+       (case when(t1.active_yn = true) then 'Y' else 'N' end) as active_yn,
         t2.ch_name,
         t3.sumFdAmt,
         t3.fundingCount,
@@ -104,7 +105,7 @@
         order by t1.cret_dt desc
     </select>
 
-    <insert id="create" parameterType="hashMap">
+    <insert id="create" parameterType="CmsProjectVo">
         insert into web.project
             (
                 ch_seq, pj_name, pj_img, pj_memo, pj_content, fd_st_dt, fd_end_dt,
@@ -130,7 +131,7 @@
         updt_dt = #{updtDt}::timestamp,
         updt_id = #{updtId}
         where
-        pj_seq = #{pjSeq}
+        pj_seq = ${pjSeq}
     </update>
 
 

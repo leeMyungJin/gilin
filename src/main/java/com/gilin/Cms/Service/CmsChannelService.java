@@ -15,7 +15,7 @@ public interface CmsChannelService {
     public void update(CmsChannelVo cmsChannelVo);
     public void delete(CmsChannelVo cmsChannelVo);
     public void insert(CmsChannelVo cmsChannelVo);
-    public void create(HashMap<String, Object> params);
+    public void create(CmsChannelVo cmsChannelVo);
     public CmsChannelVo validationByName(String chName);
 
 }

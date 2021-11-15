@@ -47,12 +47,8 @@ public class CmsController {
     CmsPushService cmsPushService;
 
 
-    private String path = "/Users/seungheejeon/Desktop/workspace/2021_11/gilin/upload/";
+    private String path = "/var/upload/img/";
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
 
     @GetMapping("/cms/user")
     public String index(Model model) throws JsonProcessingException {
@@ -159,12 +155,12 @@ public class CmsController {
                 String originFileName = multi.getOriginalFilename();
                 String ext = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
                 long size = multi.getSize();
+                String uploadpath = path;
 
                 String fileName = "";
 
                 Calendar calendar = Calendar.getInstance();
 
-                fileName += path;
                 fileName += calendar.get(Calendar.YEAR);
                 fileName += calendar.get(Calendar.MONTH);
                 fileName += calendar.get(Calendar.DATE);
@@ -175,11 +171,11 @@ public class CmsController {
                 fileName += ext;
 
                 String saveFileName = fileName;
-                File file = new File(saveFileName);
+                File file = new File(uploadpath, saveFileName);
                 if(!file.exists()) // 해당 경로가 없을 경우
                     file.mkdirs();  // 폴더 생성
                 multi.transferTo(file);
-                cmsChannelVo.setChImg("https://gilin.co.kr/"+saveFileName);
+                cmsChannelVo.setChImg("https://gilin.co.kr/img/"+saveFileName);
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -197,8 +193,44 @@ public class CmsController {
 
     @PostMapping("/cms/channel/create")
     @ResponseBody
-    public void channelCreate(@RequestParam HashMap<String,Object> params) {
-        cmsChannelService.create(params);
+    public void channelCreate(CmsChannelVo cmsChannelVo) {
+
+        if (!cmsChannelVo.getChImgFileUpload().isEmpty()) {
+
+            try {
+                MultipartFile multi = cmsChannelVo.getChImgFileUpload();
+                String originFileName = multi.getOriginalFilename();
+                String ext = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
+                long size = multi.getSize();
+                String uploadpath = path;
+
+                String fileName = "";
+
+                Calendar calendar = Calendar.getInstance();
+
+                fileName += calendar.get(Calendar.YEAR);
+                fileName += calendar.get(Calendar.MONTH);
+                fileName += calendar.get(Calendar.DATE);
+                fileName += calendar.get(Calendar.HOUR);
+                fileName += calendar.get(Calendar.MINUTE);
+                fileName += calendar.get(Calendar.SECOND);
+                fileName += calendar.get(Calendar.MILLISECOND);
+                fileName += ext;
+
+                String saveFileName = fileName;
+                File file = new File(uploadpath, saveFileName);
+                if(!file.exists()) // 해당 경로가 없을 경우
+                    file.mkdirs();  // 폴더 생성
+                multi.transferTo(file);
+                cmsChannelVo.setChImg("https://gilin.co.kr/img/"+saveFileName);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+
+        cmsChannelService.create(cmsChannelVo);
     }
 
 
@@ -247,12 +279,12 @@ public class CmsController {
                 String originFileName = multi.getOriginalFilename();
                 String ext = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
                 long size = multi.getSize();
+                String uploadpath = path;
 
                 String fileName = "";
 
                 Calendar calendar = Calendar.getInstance();
 
-                fileName += path;
                 fileName += calendar.get(Calendar.YEAR);
                 fileName += calendar.get(Calendar.MONTH);
                 fileName += calendar.get(Calendar.DATE);
@@ -263,11 +295,11 @@ public class CmsController {
                 fileName += ext;
 
                 String saveFileName = fileName;
-                File file = new File(saveFileName);
+                File file = new File(uploadpath, saveFileName);
                 if(!file.exists()) // 해당 경로가 없을 경우
                     file.mkdirs();  // 폴더 생성
                 multi.transferTo(file);
-                cmsProjectVo.setPjImg("https://gilin.co.kr/"+saveFileName);
+                cmsProjectVo.setPjImg("https://gilin.co.kr/img/"+saveFileName);
 
             } catch(Exception e) {
                 System.out.println(e.getMessage());
@@ -288,8 +320,47 @@ public class CmsController {
 
     @PostMapping("/cms/project/create")
     @ResponseBody
-    public void projectCreate(@RequestParam HashMap<String, Object> params) {
-        cmsProjectService.create(params);
+    public void projectCreate(CmsProjectVo cmsProjectVo) {
+
+        if (!cmsProjectVo.getPjImageFileUpload().isEmpty()) {
+
+            try {
+                MultipartFile multi = cmsProjectVo.getPjImageFileUpload();
+                String originFileName = multi.getOriginalFilename();
+                String ext = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
+                long size = multi.getSize();
+                String uploadpath = path;
+
+                String fileName = "";
+
+                Calendar calendar = Calendar.getInstance();
+
+                fileName += calendar.get(Calendar.YEAR);
+                fileName += calendar.get(Calendar.MONTH);
+                fileName += calendar.get(Calendar.DATE);
+                fileName += calendar.get(Calendar.HOUR);
+                fileName += calendar.get(Calendar.MINUTE);
+                fileName += calendar.get(Calendar.SECOND);
+                fileName += calendar.get(Calendar.MILLISECOND);
+                fileName += ext;
+
+                String saveFileName = fileName;
+
+
+                cmsProjectVo.setPjImg("https://gilin.co.kr/img/"+saveFileName);
+                File file = new File(uploadpath, saveFileName);
+                if(!file.exists()) // 해당 경로가 없을 경우
+                    file.mkdirs();  // 폴더 생성
+                multi.transferTo(file);
+
+
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+
+        cmsProjectService.create(cmsProjectVo);
     }
 
 
@@ -353,7 +424,7 @@ public class CmsController {
 
         try {
 
-            String uploadpath = path;
+            String uploadpath = path + "/editor/";
             String originFilename = multi.getOriginalFilename();
             String extName = originFilename.substring(originFilename.lastIndexOf("."),originFilename.length());
             long size = multi.getSize();
@@ -375,7 +446,7 @@ public class CmsController {
                 if(!file.exists()) // 해당 경로가 없을 경우
                     file.mkdirs();  // 폴더 생성
                 multi.transferTo(file);
-                String url = "https://gilin.co.kr/img/img_stor/"+saveFileName;
+                String url = "https://gilin.co.kr/img/editor/"+saveFileName;
                 result.put("url", url);
                 result.put("code", "1");
             }

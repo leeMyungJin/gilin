@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter @Setter @ToString
 public class CmsProjectVo {
 
-    private long pjSeq;
+    private String pjSeq;
     private String chSeq;
     private String pjName;
     private String pjImg;
@@ -21,6 +21,7 @@ public class CmsProjectVo {
     private String cretId;
     private String updtDt;
     private String updtId;
+    private String activeYn;
 
     /* 커스텀 필드 조인 등 */
     private String fdAmt;

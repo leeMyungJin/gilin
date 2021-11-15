@@ -292,7 +292,7 @@
         {binding: 'pjName', header: '프로젝트 명', isReadOnly: true, width: 200, align: "center"},
         {binding: 'pjImg', header: '프로젝트 대표 이미지', isReadOnly: true, width: 350, align: "center"},
         {binding: 'pjMemo', header: '프로젝트 요약 설명',  width: 200, align: "center" },
-        {binding: 'active', header: '활성화',  width: 100, align: "center", dataMap: ["Y", "N"]},
+        {binding: 'activeYn', header: '활성화',  width: 100, align: "center", dataMap: ["Y", "N"]},
         {binding: 'active', header: '상태',  width: 100, align: "center"},
         {binding: 'fdRangeDt', header: '펀딩 기간',  width: 350, align: "center"},
         {binding: 'sumFdAmt', header: '펀딩 금액',  width: 100, align: "center"},

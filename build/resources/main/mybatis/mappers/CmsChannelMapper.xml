@@ -112,7 +112,7 @@
         order by t1.cret_dt desc
     </select>
 
-    <insert id="create" parameterType="hashMap">
+    <insert id="create" parameterType="CmsChannelVo">
         insert into web.channel
         (
             ch_name, ch_img, ch_active_yn, ch_memo, ch_st_dt, ch_end_dt, ch_fd_st_dt, ch_fd_end_dt,
