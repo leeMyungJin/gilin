@@ -27,11 +27,13 @@ public class ProjectController {
 	
     @RequestMapping(value = "/myprojectModi", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveMyprojectModi(Model model) {
-    	return "project/myproject_modi";
+    	model.addAttribute("pageType", "myproject_modi");
+    	return "project/project_open";
     }
 	
     @RequestMapping(value = "/projectOpen", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveMyProject(Model model) {
+    	model.addAttribute("pageType", "project_open");
     	return "project/project_open";
     }
     

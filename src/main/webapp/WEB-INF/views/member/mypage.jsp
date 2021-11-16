@@ -41,15 +41,15 @@ function getMyProjectList(){
 		     	
 		     	if(result.length > 0){
 		          	for(var i =0; i<result.length; i++){
-		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveProjectDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
+		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite">' : '<div class="flex_box">')+
 		   								'<div class="img_wrap">'+
 						                  '<img src="'+result[i].pjImg+'" alt="">'+
 						                  '<div class="btn_wrap">'+
-						                    '<button class="gall_hover_btn">프로젝트 바로가기</button>'+
-						                    '<button class="gall_hover_btn">수정/삭제</button>'+
+						                    '<button class="gall_hover_btn" onClick="moveProjectDtl('+result[i].pjSeq+');">프로젝트 바로가기</button>'+
+						                    '<button class="gall_hover_btn" onClick="moveProjectUpdate('+result[i].pjSeq+');">수정/삭제</button>'+
 						                  '</div>'+
 						                '</div>'+
-						                '<div class="txt_wrap">'+
+						                '<div class="txt_wrap" onClick="moveProjectDtl('+result[i].pjSeq+');">'+
 						                  '<p class="chn_tit">'+result[i].pjName+'</p>'+
 						                  '<p class="chn_txt">'+result[i].pjMemo+'</p>'+
 						                  '<div class="detail_info">'+
@@ -101,7 +101,7 @@ function getMyFundingList(){
 		     	
 		     	if(result.length > 0){
 		          	for(var i =0; i<result.length; i++){
-		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveProjectDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
+		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveFundingDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
 		   								'<div class="img_wrap">'+
 						                  '<img src="'+result[i].pjImg+'" alt="">'+
 						                '</div>'+
@@ -157,21 +157,16 @@ function getMyChannelList(){
 		     	
 		     	if(result.length > 0){
 		          	for(var i =0; i<result.length; i++){
-		          		if(result[i].finYn == 'Y'){
-		          			innerHtml +=(result[i].chOpenYn ? '<div class="flex_box expired" onClick="moveChannelDtl('+result[i].chSeq+');">' : '<div class="flex_box expired" onClick="showPop('+result[i].chSeq+');">');
-		          		}else{
-		          			innerHtml +=(result[i].chOpenYn ? '<div class="flex_box" onClick="moveChannelDtl('+result[i].chSeq+');">' : '<div class="flex_box" onClick="showPop('+result[i].chSeq+');">');
-		          		}
-		          			
-		   				innerHtml += '<div class="img_wrap">'+
+		          		innerHtml += (result[i].finYn == 'Y' ? '<div class="flex_box expired">' : '<div class="flex_box">')+
+		   								'<div class="img_wrap">'+
 						                  '<img src="'+result[i].chImg+'" alt="">'+
 						                  '<div class="btn_wrap">'+
-						                    '<button class="gall_hover_btn">채널 바로가기</button>'+
-						                    '<button class="gall_hover_btn">결과 보고서</button>'+
-						                    '<button class="gall_hover_btn">수정/삭제</button>'+
+						                    '<button type="button" class="gall_hover_btn" onClick="moveChannelDtl('+result[i].chSeq+');">채널 바로가기</button>'+
+						                    '<button type="button" class="gall_hover_btn" onClick="moveChannelReport('+result[i].chSeq+');">결과 보고서</button>'+
+						                    '<button type="button" class="gall_hover_btn" onClick="moveChannelUpdate('+result[i].chSeq+');">수정/삭제</button>'+
 						                  '</div>'+
 						                '</div>'+
-						                '<div class="txt_wrap">'+
+						                '<div class="txt_wrap" onClick="moveChannelDtl('+result[i].chSeq+');">'+
 						                  '<p class="chn_tit">'+result[i].chName+'</p>'+
 						                  '<p class="chn_txt">'+result[i].chMemo+'</p>'+
 						                  '<div class="detail_info">'+
@@ -225,9 +220,9 @@ function updateNick(){
 	 }); 
 }
 
-function updateBaseImg(){
+function updateBaseImg(imgUrl){
 	var param = {
-			profilePic : '../img/myprofile.svg'
+			profilePic : imgUrl
 			, memberId : memberId
 		};
 		
@@ -240,7 +235,7 @@ function updateBaseImg(){
 	     success : function(result) {
 	     	alert("프로필이 변경되었습니다.");
 	     	//location.reload();
-	     	$('#profilePic').attr('src', '../img/myprofile.svg');
+	     	$('#profilePic').attr('src', imgUrl);
 	     	console.log("<%=session.getAttribute("profilePic")%>");
 	     },
 	     error: function(request, status, error) {
@@ -248,6 +243,53 @@ function updateBaseImg(){
 	
 	     }
 	 }); 
+}
+
+function moveChannelDtl(chSeq){
+	location.href="/channel/channel?chSeq="+chSeq;
+}
+
+function moveChannelReport(chSeq){
+	location.href="/report/myreport?chSeq="+chSeq;
+}
+
+function moveChannelUpdate(chSeq){
+	location.href="/channel/mychannelModi?chSeq="+chSeq;
+}
+
+function moveProjectDtl(pjSeq){
+	location.href="/project/project?pjSeq="+pjSeq;
+}
+
+function moveProjectUpdate(pjSeq){
+	location.href="/project/myprojectModi?pjSeq="+pjSeq;
+}
+
+function moveFundingDtl(pjSeq){
+	location.href="/funding/funding?pjSeq="+pjSeq;
+}
+
+function clickFile(){
+	$('#file').trigger("click");
+}
+
+function changeFile(){
+	var imgUpload = $("#file")[0];
+	var chImg = '';
+	
+	if($("#file").val() != ''){
+		const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+		const time = new Date().toTimeString().split(" ")[0];
+		console.log("imgUpload.files.name: ", imgUpload.files[0].name);
+		  
+		chImg = 'https://gilin.co.kr/img/'+ date + '_' + time + '_' +imgUpload.files[0].name;
+		$('#filePath').val('/img');
+		$('#fileName').val(date + '_' + time + '_' +imgUpload.files[0].name);
+		$("#imgForm").submit();
+		
+		updateBaseImg(chImg);
+		$('#imgForm')[0].reset();
+	}
 }
 
 </script>
@@ -273,8 +315,13 @@ function updateBaseImg(){
                 <img id="profilePic" src="<%=session.getAttribute("profilePic")%>" alt="" class="default">
               </div>
               <div class="btn_wrap">
-                <button>사진 수정 <span class="material-icons">chevron_right</span></button>
-                <button onClick="updateBaseImg()">기본 이미지로 변경 <span class="material-icons" >chevron_right</span></button>
+                <form id="imgForm" action="https://211.37.179.144/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
+	             	<button type="button" onClick="clickFile();">사진 수정 <span class="material-icons">chevron_right</span></button>
+	                <input style="display:none;" type='file' name="file" id="file" onchange="changeFile()">
+	                <input type="hidden" name="filePath" id="filePath" value= "" >
+        			<input type="hidden" name="fileName" id="fileName" value = "" >
+	            </form>
+	            <button onClick="updateBaseImg('../img/myprofile.svg')">기본 이미지로 변경 <span class="material-icons" >chevron_right</span></button>
               </div>
             </div>
             <div class="my_info_txt">
@@ -319,8 +366,7 @@ function updateBaseImg(){
       </div>
     </div>
 
-
-
+	<iframe id="imgIframe" name="imgIframe" style="display:none"></iframe>
   </div>
   
 	<%@ include file="../include/footer.jsp" %>
