@@ -157,7 +157,6 @@
     //개인정보수집약관 추가
     function saveTerm(f){
 
-        console.log("test...")
 
         var _editor;
 

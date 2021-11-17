@@ -4,7 +4,11 @@
 <mapper namespace="com.gilin.Cms.Mapper.CmsNoticeMapper">
 
     <select id="getList" resultType="CmsNoticeVo">
-        select * from web.notice
+        select * from web.notice order by cret_dt DESC
+    </select>
+
+    <select id="getMustList" resultType="CmsNoticeVo">
+        select * from web.notice where must_yn = true order by cret_dt DESC
     </select>
 
 
