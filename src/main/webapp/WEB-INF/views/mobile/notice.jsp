@@ -93,21 +93,21 @@
 <div class="wrap">
     <!-- 아코디언 메뉴 리스트 -->
     <ul class="accr_wrp">
-        <c:forEach var="mustNoticeVoList" items="${CmsNoticeVo}">
+        <c:forEach var="mustList" items="${mustList}">
             <li class="accr_box" id="must">
                 <h2 class="title">
                     <i></i>
-                    <span class="day">${mustNoticeVoList.cretDt}</span>
-                    <span class="tit">[필독]${mustNoticeVoList.ntTitle}</span>
+                    <span class="day">${mustList.cretDt}</span>
+                    <span class="tit">[필독]${mustList.ntTitle}</span>
                 </h2>
                 <div class="accr_cont">
-                        ${mustNoticeVoList.content}
+                    ${mustList.content}
                 </div>
             </li>
         </c:forEach>
     </ul>
     <ul class="accr_wrp" id="notice">
-        <c:forEach var="CmsNoticeVo" items="${CmsNoticeVo}">
+        <c:forEach var="CmsNoticeVo" items="${CmsNoticeVo}" >
             <li class="accr_box" data-no="${CmsNoticeVo.ntSeq}">
                 <h2 class="title">
                     <i></i>
@@ -115,7 +115,7 @@
                     <span class="tit">${CmsNoticeVo.ntTitle}</span>
                 </h2>
                 <div class="accr_cont">
-                        ${CmsNoticeVo.content}
+                    ${CmsNoticeVo.content}
                 </div>
             </li>
         </c:forEach>
@@ -147,7 +147,7 @@
     .accr_box .title.on i {transform: rotate(-45deg);}
     .accr_cont{display:none; height:100%; padding:8px 20px; background-color: #fafafa;}
     .accr_cont p, .accr_cont li  {padding:4px;}
-    #must {background:#F6E4C9;}
+    #must {background:#FFCB46;}
 
 </style>
 </body>

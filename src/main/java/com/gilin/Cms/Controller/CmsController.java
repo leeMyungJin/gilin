@@ -480,6 +480,7 @@ public class CmsController {
 
         }
 
+        model.addAttribute("title", "이용약관");
         model.addAttribute("terms", contents.get("service"));
 
         return "terms/terms";
@@ -505,6 +506,7 @@ public class CmsController {
 
         }
 
+        model.addAttribute("title", "개인정보처리방침");
         model.addAttribute("terms", contents.get("privacy"));
 
         return "terms/terms";
@@ -512,12 +514,12 @@ public class CmsController {
 
     @GetMapping("/m/notice")
     public String mobileNotice(Model model) {
-        List<CmsNoticeVo> cmsNoticeVoList = cmsNoticeService.getList();
-        List<CmsNoticeVo> mustNoticeVoList = cmsNoticeService.getMustList();
-        System.out.println(mustNoticeVoList.toString());
+        List<CmsNoticeVo> noticeList = cmsNoticeService.getList();
+        List<CmsNoticeVo> mustList = cmsNoticeService.getMustList();
+        System.out.println(mustList.toString());
 
-        model.addAttribute("CmsNoticeVo", cmsNoticeVoList);
-        model.addAttribute("mustNoticeVoList", mustNoticeVoList);
+        model.addAttribute("CmsNoticeVo", noticeList);
+        model.addAttribute("mustList", mustList);
         return "mobile/notice";
     }
 

@@ -12,10 +12,27 @@
         <li><a href="/cms/notice"><span class="material-icons-round">campaign</span>공지관리</a></li>
         <li><a href="/cms/terms"><span class="material-icons-round">report</span>약관관리</a></li>
     </ul>
-    <a href="#" class="cms_exit"><span class="material-icons-outlined">logout</span> <span>관리자모드 나가기</span> </a>
+
+    <div class="terms_area">
+        <a href="/m/notice" target="_blank">공지사항</a>
+        <a href="/termsUse" target="_blank">이용약관</a>
+        <a href="/termsPrivacy" target="_blank">개인정보처리방침</a>
+    </div>
+    <a href="/" class="cms_exit"><span class="material-icons-outlined">logout</span> <span>관리자모드 나가기</span> </a>
 </aside>
 
-
+<style>
+    .terms_area {
+        position: absolute;
+        bottom: 80px;
+    }
+    .terms_area a {
+        margin: 5px 0 0 0px;
+        opacity: 0.6;
+        display: block;
+        font-size: 0.9em;
+    }
+</style>
 <script>
 
     /* CMS 메뉴 active */

@@ -51,7 +51,7 @@
 </head>
 <body>
 <article class="terms_wrp">
-    <h1 class="terms_tit">개인정보처리방침</h1>
+    <h1 class="terms_tit">${title}</h1>
     <%=request.getAttribute("terms")%>
 </article>
 </body>
