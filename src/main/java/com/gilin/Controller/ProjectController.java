@@ -28,6 +28,7 @@ public class ProjectController {
     @RequestMapping(value = "/myprojectModi", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveMyprojectModi(Model model) {
     	model.addAttribute("pageType", "myproject_modi");
+        model.addAttribute("pjSeq", params.get("pjSeq"));
     	return "project/project_open";
     }
 	
