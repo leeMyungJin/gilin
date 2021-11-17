@@ -289,7 +289,7 @@ function enterkey(type) {
       </div>
       <div id="allChannel" class="flex_wrap gallery gall04"></div>
       <a id="addViewBtn" href="javascript:void(0);" class="btn_style01 more" onClick="addViewChannel();">채널 더보기</a>
-
+	</div>
     <!-- 프로젝트 패스워드 모달 -->
     <div id="popChkPass" class="modal chn_pw_modal">
       <div class="modal_bg"></div>

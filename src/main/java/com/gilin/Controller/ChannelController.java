@@ -42,6 +42,7 @@ public class ChannelController {
     @RequestMapping(value = "/mychannelModi", method = {RequestMethod.POST , RequestMethod.GET})
     public String moveMychannelModi(Model model) {
     	model.addAttribute("pageType", "mychannel_modi");
+        model.addAttribute("chSeq", params.get("chSeq"));
     	return "channel/channel_open";
     }
     
