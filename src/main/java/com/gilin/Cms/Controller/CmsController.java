@@ -409,9 +409,7 @@ public class CmsController {
     @GetMapping("/cms/push/more")
     @ResponseBody
     public List<CmsPushVo> pushMore(@RequestParam HashMap<String,Object> params) {
-        System.out.println(params.toString());
         List<CmsPushVo> pushVoList = cmsPushService.getListBySearch(params);
-        System.out.println(params);
         return pushVoList;
     }
 
@@ -461,5 +459,66 @@ public class CmsController {
         return result;
     }
 
+
+    @GetMapping("/termsUse")
+    public String termsUse(Model model) {
+
+        List<CmsTermsVo> cmsTermsVo = termsService.getTerms();
+        Map<String, String> contents = new HashMap<>();
+        for (CmsTermsVo terms : cmsTermsVo) {
+
+            switch (terms.getSubject())
+            {
+                case "이용약관":
+                    contents.put("service", terms.getContent());
+                    break;
+                case "개인정보수집약관" :
+                    contents.put("privacy", terms.getContent());
+                    break;
+                default: break;
+            }
+
+        }
+
+        model.addAttribute("terms", contents.get("service"));
+
+        return "terms/terms";
+    }
+
+    @GetMapping("/termsPrivacy")
+    public String termsPrivacy(Model model) {
+
+        List<CmsTermsVo> cmsTermsVo = termsService.getTerms();
+        Map<String, String> contents = new HashMap<>();
+        for (CmsTermsVo terms : cmsTermsVo) {
+
+            switch (terms.getSubject())
+            {
+                case "이용약관":
+                    contents.put("service", terms.getContent());
+                    break;
+                case "개인정보수집약관" :
+                    contents.put("privacy", terms.getContent());
+                    break;
+                default: break;
+            }
+
+        }
+
+        model.addAttribute("terms", contents.get("privacy"));
+
+        return "terms/terms";
+    }
+
+    @GetMapping("/m/notice")
+    public String mobileNotice(Model model) {
+        List<CmsNoticeVo> cmsNoticeVoList = cmsNoticeService.getList();
+        List<CmsNoticeVo> mustNoticeVoList = cmsNoticeService.getMustList();
+        System.out.println(mustNoticeVoList.toString());
+
+        model.addAttribute("CmsNoticeVo", cmsNoticeVoList);
+        model.addAttribute("mustNoticeVoList", mustNoticeVoList);
+        return "mobile/notice";
+    }
 
 }

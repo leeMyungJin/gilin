@@ -17,6 +17,16 @@ public class CmsNoticeServiceImpl implements CmsNoticeService {
     CmsNoticeMapper noticeMapper;
 
     @Override
+    public List<CmsNoticeVo> getList() {
+        return noticeMapper.getList();
+    }
+
+    @Override
+    public List<CmsNoticeVo> getMustList() {
+        return noticeMapper.getMustList();
+    }
+
+    @Override
     public Map<String, Integer> getCount() {
         return noticeMapper.getCount();
     }
