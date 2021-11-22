@@ -32,4 +32,29 @@ public class ProjectServiceImpl implements ProjectService{
 		return projectList;
 	}
 
+	
+	@Override
+	public ProjectVo getProjectInfo(HashMap<String,Object> params, String id){
+		                		
+		params.put("memberId", id);
+		ProjectVo projectVo = projectMapper.getProjectInfo(params);
+    	
+		return projectVo;
+	}
+	
+	@Override
+	public void insertProject(HashMap<String, String> params) {
+		projectMapper.insertProject(params);
+	}
+	
+	@Override
+	public void updateProject(HashMap<String, String> params) {
+		projectMapper.updateProject(params);
+	}
+	
+	@Override
+	public void deleteProject(HashMap<String, String> params) {
+		projectMapper.deleteProject(params);
+	}
+   
 }

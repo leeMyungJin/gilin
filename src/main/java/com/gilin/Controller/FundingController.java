@@ -41,4 +41,41 @@ public class FundingController {
     	return fundingList;
     }
     
+    /* 펀딩 등록 */
+    @RequestMapping(value = "/saveFunding")
+    @ResponseBody
+    public void saveFunding(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	fundingService.saveFunding(params);
+    }   
+    
+    @RequestMapping(value = "/getFundingCommentList")
+    @ResponseBody
+    public List<FundingVo> getFundingCommentList(@RequestParam HashMap<String,Object> params){
+    	
+    	List<FundingVo> fundingList = fundingService.getFundingCommentList(params);
+    	
+    	return fundingList;
+    }
+    
+    @RequestMapping(value = "/getFundingCommentPageInfo")
+    @ResponseBody
+    public HashMap<String,Object> getFundingCommentPageInfo(@RequestParam HashMap<String,Object> params){
+    	
+    	return fundingService.getFundingCommentPageInfo(params);
+    }
+    
+    /* 댓글 삭제 */
+    @RequestMapping(value = "/deleteComment")  
+    @ResponseBody
+    public void deleteComment(@RequestParam HashMap<String,String> params){
+    	fundingService.deleteComment(params);
+    }
+    
+    /* 수정 */
+    @RequestMapping(value = "/updateComment")
+    @ResponseBody
+    public void updateComment(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	fundingService.updateComment(params);
+    }    
+    
 }

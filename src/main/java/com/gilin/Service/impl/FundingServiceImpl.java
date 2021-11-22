@@ -25,4 +25,30 @@ public class FundingServiceImpl implements FundingService{
 		return fundingList;
 	}
 	
+	@Override
+	public void saveFunding(HashMap<String, String> params) {
+		fundingMapper.saveFunding(params);
+	}
+	
+	@Override
+	public List<FundingVo> getFundingCommentList(HashMap<String,Object> params){
+		                		
+		List<FundingVo> fundingList = fundingMapper.getFundingCommentList(params);
+		return fundingList;
+	}
+	
+	public HashMap<String,Object> getFundingCommentPageInfo(HashMap<String,Object> params){
+		return fundingMapper.getFundingCommentPageInfo(params);
+	}
+	
+	@Override
+	public void deleteComment(HashMap<String, String> params) {
+		fundingMapper.deleteComment(params);
+		
+	}
+	
+	@Override
+	public void updateComment(HashMap<String, String> params) {
+		fundingMapper.updateComment(params);
+	}
 }

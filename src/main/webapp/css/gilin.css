@@ -330,3 +330,15 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .report_item .result_txt:before{content:'- ';}
 .report_item .result_txt span{color:var(--main-color);font-size:1.2em;font-weight:bold;}
 .report_item .grid_box{border:1px solid var(--bor-color);min-height:100px;}
+
+/* 공지사항 */
+.accordion-wrap{border-bottom: 1px solid #ddd;}
+.accordion-item{cursor: pointer;}
+.accordion-header{transition: ease-in-out 100ms;display:flex;align-items:center;justify-content:space-between;padding:24px;}
+.accordion-header .date{font-size:13px;color:#aaa;margin-left:24px;}
+.accordion-text{display: none;padding:24px;border-top:1px solid #ddd;}
+.accordion-text p{line-height:1.6;}
+.arrow_icon{transition: ease-in-out 300ms;}
+.arrow_icon.rotate{transform: rotate(180deg);}
+.accordion-header.active{background:#f4f4f4;}
+.accordion-no-bar{border-bottom: 0;}

@@ -24,7 +24,7 @@ function pageLoad(){
 }
 
 //내 체널 조회
-function getMyChannelList(){
+function getMyChannelList(type){
 	var param = {
 		memberId 	: memberId
 		, name : ''
@@ -113,7 +113,7 @@ function moveChannelUpdate(chSeq){
 <body onload="pageLoad();">
   <%@ include file="../include/header.jsp" %>
 
-  <div class="sub mychannel">
+  <div class="section03 sub mychannel">
 
     <div class="sub_header02">
       <div class="inner">
@@ -127,9 +127,8 @@ function moveChannelUpdate(chSeq){
         <a id="addViewBtn" href="javascript:void(0);" class="btn_style01 more" onClick="addViewChannel();">채널 더보기</a>
     </div>
   </div>
-  
+ </div>
 	<%@ include file="../include/footer.jsp" %>
-
 
 </body>
 </html>

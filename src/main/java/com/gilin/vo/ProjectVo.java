@@ -15,10 +15,11 @@ public class ProjectVo {
 	private String cretId;
 	private String updtDt;
 	private String updtId;
-	private Integer fdSumAmt; 
+	private String fdSumAmt; 
 	private String fdYn;
 	private String dDay;
-	
+	private double dDayPercent;
+	private Integer fdCnt;
 	public Integer getPjSeq() {
 		return pjSeq;
 	}
@@ -91,10 +92,10 @@ public class ProjectVo {
 	public void setUpdtId(String updtId) {
 		this.updtId = updtId;
 	}
-	public Integer getFdSumAmt() {
+	public String getFdSumAmt() {
 		return fdSumAmt;
 	}
-	public void setFdSumAmt(Integer fdSumAmt) {
+	public void setFdSumAmt(String fdSumAmt) {
 		this.fdSumAmt = fdSumAmt;
 	}
 	public String getFdYn() {
@@ -108,6 +109,18 @@ public class ProjectVo {
 	}
 	public void setdDay(String dDay) {
 		this.dDay = dDay;
+	}
+	public double getdDayPercent() {
+		return dDayPercent;
+	}
+	public void setdDayPercent(double dDayPercent) {
+		this.dDayPercent = dDayPercent;
+	}
+	public Integer getFdCnt() {
+		return fdCnt;
+	}
+	public void setFdCnt(Integer fdCnt) {
+		this.fdCnt = fdCnt;
 	}
 	
 	

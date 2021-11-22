@@ -109,7 +109,7 @@ function moveProjectUpdate(pjSeq){
 <body onload="pageLoad();">
   <%@ include file="../include/header.jsp" %>
 
-  <div class="sub mychannel">
+  <div class="section03  sub mychannel">
 
     <div class="sub_header02">
       <div class="inner">
@@ -123,9 +123,8 @@ function moveProjectUpdate(pjSeq){
          <a id="addViewBtn" href="javascript:void(0);" class="btn_style01 more" onClick="addViewProject();">프로젝트 더보기</a>
     </div>
   </div>
-  
+</div>
 	<%@ include file="../include/footer.jsp" %>
-
 
 </body>
 </html>

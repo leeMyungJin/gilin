@@ -40,7 +40,7 @@ function getMyFundingList(type){
 		     	
 		     	if(result.length > 0){
 		          	for(var i =0; i<result.length; i++){
-		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveFundingDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
+		   				innerHtml += (result[i].fdYn == "Y" ? '<div class="flex_box complite" onClick="moveProjectDtl('+result[i].pjSeq+');">' : '<div class="flex_box" onClick="moveProjectDtl('+result[i].pjSeq+');">')+
 		   								'<div class="img_wrap">'+
 						                  '<img src="'+result[i].pjImg+'" alt="">'+
 						                '</div>'+
@@ -89,8 +89,8 @@ function addViewProject(){
 	viewCount += pageCount;
 }
 
-function moveFundingDtl(pjSeq){
-	location.href="/funding/funding?pjSeq="+pjSeq;
+function moveProjectDtl(pjSeq){
+	location.href="/project/project?pjSeq="+pjSeq;
 }
 
 </script>
@@ -98,7 +98,7 @@ function moveFundingDtl(pjSeq){
 <body onload="pageLoad();">
   <%@ include file="../include/header.jsp" %>
 
-  <div class="sub myfunding">
+  <div class="section03 sub myfunding">
 
     <div class="sub_header02">
       <div class="inner">
@@ -110,12 +110,10 @@ function moveFundingDtl(pjSeq){
         <div id="myFunding" class="flex_wrap gallery gall03"></div>
         <a id="addViewBtn" href="javascript:void(0);" class="btn_style01 more" onClick="addViewProject();">프로젝트 더보기</a>
     </div>
-
-
-
   </div>
-  
+</div>  
 	<%@ include file="../include/footer.jsp" %>
+
 
 </body>
 </html>

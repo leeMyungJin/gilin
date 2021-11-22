@@ -1,10 +1,14 @@
 package com.gilin.vo;
 
 public class FundingVo {
-
+	
+	private Integer rownum;
 	private Integer pjSeq; 
 	private Integer fdAmt; 	
 	private String fdComment; 	
+	private String nickname;
+	private String profilePic;
+	private String delYn;
 	private String cretDt;
 	private String cretId;
 	private String updtDt;
@@ -50,6 +54,31 @@ public class FundingVo {
 	}
 	public void setUpdtId(String updtId) {
 		this.updtId = updtId;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getProfilePic() {
+		return profilePic;
+	}
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
+	
+	public String getDelYn() {
+		return delYn;
+	}
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
+	public Integer getRownum() {
+		return rownum;
+	}
+	public void setRownum(Integer rownum) {
+		this.rownum = rownum;
 	}
 	
 	

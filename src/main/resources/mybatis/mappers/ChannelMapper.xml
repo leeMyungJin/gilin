@@ -105,8 +105,8 @@
 						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 			, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
 						then (100-trunc((to_char(now()-c.ch_end_dt, 'dd')::numeric/to_char(c.ch_end_dt-c.ch_st_dt, 'dd')::numeric)*-100, 0)) * 3.84 --화면프로그래스바의 100%값이 384임
-						else 100 end as d_day_percent
-		from web.channel c left join (select p.ch_seq, count(p.pj_seq) as pj_cnt, sum(pf.fd_amt) as fd_sum_amt
+						else 384 end as d_day_percent
+		from web.channel c left join (select p.ch_seq, count(distinct p.pj_seq) as pj_cnt, sum(pf.fd_amt) as fd_sum_amt
 										from web.project p left join web.project_funding pf on pf.pj_seq = p.pj_seq 
 										group by p.ch_seq) p on c.ch_seq = p.ch_seq
 		where c.ch_seq = #{chSeq}::numeric

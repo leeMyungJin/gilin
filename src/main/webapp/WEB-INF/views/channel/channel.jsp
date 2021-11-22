@@ -12,7 +12,7 @@
 <script type="text/javascript">
 
 var memberId = "<%=session.getAttribute("id")%>";
-var memberAuth = "<%=session.getAttribute("auth")%>";
+var memberAuth = "<%=session.getAttribute("adminYn")%>";
 
 var viewCount = 0; //전체 리스트 조회 카운팅
 var pageCount = 12; //1페이지 단위
@@ -160,7 +160,7 @@ function getMyProjectList(){
 
 function moveProjectOpen(){
 	if(sessionCheck(memberId, memberAuth, 'main') && memberId != 'null'){
-		location.href="/project/projectOpen";
+		location.href="/project/projectOpen?chSeq="+chSeq;
 	}else{
 		alert("로그인이 필요한 서비스입니다.");
 	}

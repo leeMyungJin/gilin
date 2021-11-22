@@ -12,7 +12,7 @@
 <script type="text/javascript">
 
 var memberId = "<%=session.getAttribute("id")%>";
-var memberAuth = "<%=session.getAttribute("auth")%>";
+var memberAuth = "<%=session.getAttribute("adminYn")%>";
 
 var pageType = "${pageType}"; //채널개설 : channel_open , 채널수정 : mychannel_modi
 var chSeq = "${chSeq}"; 
@@ -77,16 +77,19 @@ function saveChannel(type){
 	var url;
 	var msg;
 	var msgA;
+	var locationUrl;
 	
 	if(type == "insert"){
 		msg = "개설하시겠습니까?";
 		url = "/channel/insertChannel";
 		msgA = "정상적으로 개설되었습니다.";
+		locationUrl = "/";
 		
 	}else if(type == "update"){
 		msg = "수정하시겠습니까?";
 		url = "/channel/updateChannel";
 		msgA = "정상적으로 수정되었습니다.";
+		locationUrl = "/member/mypage";
 	}
 	
 	if(confirm(msg)){
@@ -170,7 +173,7 @@ function saveChannel(type){
 	   	           data : params,
 	   	           success : function(data) {
 	   	           	alert(msgA);
-	   	         	location.href="/";
+	   	         	location.href = locationUrl;
 	   	           },
 	   	           error : function(request,status,error) {
 	   	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -302,7 +305,6 @@ function changeChOpenYn(type){
           <button id="updateC" class="btn_style01" onClick="saveChannel('update');" >수정</button>
           <button id="deleteC" class="btn_style01" onClick="deleteChannel();">삭제</button>
         </div>
-
       </div>
     </div>
 

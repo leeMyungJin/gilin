@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
 var memberId = "<%=session.getAttribute("id")%>";
-var memberAuth = "<%=session.getAttribute("auth")%>";
+var memberAuth = "<%=session.getAttribute("adminYn")%>";
 
 function pageLoad(){
 	sessionCheck(memberId, memberAuth, 'channel');
