@@ -413,39 +413,39 @@ function inviteProject(){
 	<%@ include file="../include/footer.jsp" %>
 
   <script>
-  $(window).resize(function(){
-	    if (window.innerWidth > 750) {
-	      var aside = $('.pjt_detail_wrap .funding_aside');
-	      $('.pjt_detail_wrap .cont').css({
-	        'min-height': aside.height() + 300,
-	      });
+    $(window).resize(function(){
+      if (window.innerWidth > 750) {
+        var aside = $('.pjt_detail_wrap .funding_aside');
+        $('.pjt_detail_wrap .cont').css({
+          'min-height': aside.height() + 300,
+        });
 
 
-	      var stickEl = $('.sticky'),
-	      stickyElTop = stickEl.offset().top,
-	      stickyLeft = $('.pjt_detail_wrap .cont').width(),
-	      stickyPosi = $('.pjt_detail_wrap .inner').offset().left;
+        var stickEl = $('.sticky'),
+                stickyElTop = stickEl.offset().top,
+                stickyLeft = $('.pjt_detail_wrap .cont').width(),
+                stickyPosi = $('.pjt_detail_wrap .inner').offset().left;
 
-	      var sticky = function(){
-	        var scrollTop = $(window).scrollTop();
+        var sticky = function(){
+          var scrollTop = $(window).scrollTop();
 
-	        if (stickyElTop < scrollTop+96) {
-	            stickEl.addClass('is-fixed');
-	            stickEl.css('left', stickyPosi + stickyLeft + 36);
-	        } else {
-	            stickEl.removeClass('is-fixed');
-	            stickEl.css({
-	              left:'auto',
-	              right:0,
-	            });
-	        }
+          if (stickyElTop < scrollTop+96) {
+            stickEl.addClass('is-fixed');
+            stickEl.css('left', stickyPosi + stickyLeft + 36);
+          } else {
+            stickEl.removeClass('is-fixed');
+            stickEl.css({
+              left:'auto',
+              right:0,
+            });
+          }
 
-	      };
-	      $(window).scroll(function() {
-	        sticky();
-	      });
-	    }
-	  }).resize();
+        };
+        $(window).scroll(function() {
+          sticky();
+        });
+      }
+    }).resize();
   </script>
 </body>
 </html>
