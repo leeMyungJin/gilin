@@ -279,7 +279,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 
   .project .inner{width:100%;padding:0 calc(var(--spacing) * 2);}
 
-  .project .header ,#project .footer{display:none;}
+  .project .header ,.project .footer{display:none;}
   .project .funding_aside{display:none;}
 
   .project .detail_info_wrap{border-bottom:none;padding-bottom:calc(var(--spacing) * 3);}
