@@ -120,7 +120,9 @@ function moveMypage(){
 }
 
 function moveAdminPage(){
-	
+	if (memberAuth == 't') {
+        location.href="/cms/user";
+    }
 }
 	
 </script>

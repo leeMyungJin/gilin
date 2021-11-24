@@ -4,6 +4,7 @@ package com.gilin.Cms.Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gilin.Cms.Service.*;
+import com.gilin.Cms.Util.Login;
 import com.gilin.Cms.Vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,9 @@ public class CmsController {
 
 
     @GetMapping("/cms/user")
-    public String index(Model model) throws JsonProcessingException {
+    public String index(Model model, HttpServletRequest request) throws JsonProcessingException {
+
+        if (!Login.isAdmin()) return "redirect:/";
 
         Map<String, Integer> userCount = cmsMemberService.getCount();
         String appVersion = appVersionService.getVersion();
@@ -91,6 +94,9 @@ public class CmsController {
 
     @GetMapping("/cms/terms")
     public String terms(Model model) throws JsonProcessingException {
+
+        if (!Login.isAdmin()) return "redirect:/";;
+
         List<CmsTermsVo> cmsTermsVo = termsService.getTerms();
         Map<String, String> contents = new HashMap<>();
         for (CmsTermsVo terms : cmsTermsVo) {
@@ -125,6 +131,8 @@ public class CmsController {
 
     @GetMapping("/cms/channel")
     public String channel(Model model) throws JsonProcessingException {
+
+        if (!Login.isAdmin()) return "redirect:/";;
 
 //        List<ChannelVo> channelVoList = channelService.getList();
         Map<String, Integer> channelCount = cmsChannelService.getCount();
@@ -236,6 +244,8 @@ public class CmsController {
 
     @GetMapping("/cms/project")
     public String project(Model model) throws JsonProcessingException {
+
+        if (!Login.isAdmin()) return "redirect:/";;
 
         List<CmsProjectVo> cmsProjectVoList = cmsProjectService.getProjectList();
         Map<String, Integer> projectCount = cmsProjectService.getProjectCount();
@@ -366,6 +376,7 @@ public class CmsController {
 
     @GetMapping("/cms/notice")
     public String notice(Model model) {
+        if (!Login.isAdmin()) return "redirect:/";;
         Map<String, Integer> count = cmsNoticeService.getCount();
         model.addAttribute("count", count);
         return "cms/notice";
