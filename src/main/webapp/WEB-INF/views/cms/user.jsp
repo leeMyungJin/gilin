@@ -97,7 +97,9 @@
 
 
 <div class="popup" id="image">
-    <div id="imgPath" onmousedown="closePop();"></div>
+    <div id="imgPath" onmousedown="closePop();">
+
+    </div>
 </div>
 
 <style>
@@ -116,18 +118,223 @@
     #setGridPager .selectPage {
         color: #ddd;
     }
+
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 0.9em;
+        visibility: hidden;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .popup_container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 620px;
+        min-height: 300px;
+        max-height: calc(100% - 120px);
+        background-color: #fff;
+        box-shadow: 3px 3px 12px rgba(44, 44, 44, 0.2);
+        overflow: auto;
+    }
+    .popup_head {
+        padding: 0 30px;
+        height: 60px;
+        color: #fff;
+        font-size: 1.5em;
+        font-weight: bold;
+        line-height: 60px;
+        background-color: #E98B73;
+    }
+    .popup_head .popup_close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 65px;
+        height: 65px;
+        font-size: 0;
+    }
+    .popup_head .popup_close:before, .popup_head .popup_close:after {
+        display: inline-block;
+        width: 1px;
+        height: 19px;
+        transform: rotate(45deg);
+        background-color: #fff;
+        content: "";
+    }
+    .popup_head .popup_close:after {
+        position: relative;
+        top: -9px;
+        left: -10px;
+        width: 19px;
+        height: 1px;
+    }
+    .popup_inner {
+        padding: 15px 30px;
+    }
+    .popup_inner dfn {
+        display: block;
+        padding: 8px 0;
+        color: #E98B73;
+        text-align: right;
+    }
+    .popup_inner table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    .popup_inner tr {
+        border-top: 1px solid #ddd;
+    }
+    .popup_inner tr:first-of-type {
+        border-top: 3px solid #E98B73;
+    }
+    .popup_inner th {
+        width: 130px;
+        text-align: left;
+        font-weight: 500;
+    }
+    .popup_inner td {
+        display: inline-block;
+        padding: 10px 6px 10px 0;
+    }
+    .popup_inner i {
+        color: #E98B73;
+    }
+    .popup_inner input, .popup_inner select, .popup_inner textarea {
+        border-radius: 3px;
+        border-color:transparent;
+        padding: 10px 12px;
+        min-width: 100px;
+        max-width: 300px;
+    }
+    .popup_inner textarea {
+        background-color: #f5f5f5;
+    }
+    .popup_inner .opt_img {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border: 1px solid #ddd;
+        overflow: hidden;
+    }
+    .popup_inner .type_img {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border: 1px solid #ddd;
+        overflow: hidden;
+    }
+    .popup_inner input {
+        background-color: #f5f5f5;
+    }
+    .popup_inner input.wide {
+        width: 560px;
+    }
+    .popup_inner input:-moz-read-only {
+        background-color: #e6e1e1;
+    }
+    .popup_inner input:read-only {
+        background-color: #dfdfdf;
+    }
+    .popup_inner input[type=radio], .popup_inner input[type=checkbox] {
+        display: none;
+    }
+    .popup_inner input[type=radio] + label, .popup_inner input[type=checkbox] + label {
+        display: inline-block;
+        position: relative;
+        margin-right: 10px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .popup_inner input[type=radio] + label:before, .popup_inner input[type=checkbox] + label:before {
+        display: inline-block;
+        margin-right: 5px;
+        border: 2px solid #b1b1b1;
+        border-radius: 3px;
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        content: "";
+    }
+    .popup_inner input[type=radio] + label:after, .popup_inner input[type=checkbox] + label:after {
+        display: inline-block;
+        position: absolute;
+        top: 6px;
+        left: 3px;
+        border: solid #fff;
+        border-width: 2px 2px 0 0;
+        width: 9px;
+        height: 4px;
+        transform: rotate(135deg);
+        content: "";
+    }
+    .popup_inner input[type=radio]:checked + label:before, .popup_inner input[type=checkbox]:checked + label:before {
+        background-color: #E98B73;
+        border-color: #E98B73;
+    }
+    .popup_grid {
+        margin: 12px 0;
+    }
+    .popup_grid_area .btn {
+        display: inline-block;
+        margin: 5px 0;
+        border: 1px solid #a8a8a8;
+        border-radius: 30px;
+        padding: 5px 12px;
+    }
+    .popup .btn{
+        margin:0;
+    }
+
+    .popup .btn.confirm, .popup .btn.fill {
+        width: 100%;
+        color: #fff;
+        background-color: #E98B73;
+        margin-top: 25px;
+    }
+    .popup .btn.stroke, .popup .btn.fill {
+        width: calc(50% - 10px); margin:0 4px;
+    }
+
+
+    /* 추가 */
+    .popup.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+
+    #imgPath {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        width: 620px;
+        min-height: 300px;
+        max-height: calc(100% - 120px);
+        box-shadow: 3px 3px 12px rgba(44, 44, 44, 0.2);
+    }
 </style>
 
 <script>
 
     var gridView, setGridPager, gridBindings, setGrid;
+
+    var countryMap = new wijmo.grid.row.DataMap(["Y", "N"], 'id', 'name');
+
     gridBindings = [
         {binding: 'id', header: 'ID', isReadOnly: true, width: 100, align: "center"},
         {binding: 'nickname', header: '닉네임', isReadOnly: true, width: 100, align: "center"},
         {
-            binding: 'profile_pic', header: '프로필사진', isReadOnly: true, width: 300, align: "center",
+            binding: 'profilePic', header: '프로필사진', isReadOnly: true, width: 300, align: "center",
             cellTemplate: wijmo.grid.cellmaker.CellMaker.makeImage({
-                click: (e, ctx) => showPop("image"),
+                click: (e, ctx) => showPop("image", ctx.item),
                 attributes: {
                     onerror:
                         "this.onerror=null; this.src='https://willchair.co.kr/img/icon_my_avatar.png';"
@@ -141,8 +348,8 @@
         {binding: 'appversion', header: '앱버전', isReadOnly: true, width: 150, align: "center"},
         {binding: 'mos', header: '모바일OS', isReadOnly: true, width: 200, align: "center"},
         {binding: 'minfo', header: '모바일정보', isReadOnly: true, width: 300, align: "center"},
-        {binding: 'cret_dt', header: '가입일', isReadOnly: true, width: 200, align: "center"},
-        {binding: 'cret_dt', header: '마지막 접속일', isReadOnly: true, width: 200, align: "center"},
+        {binding: 'cretDt', header: '가입일', isReadOnly: true, width: 200, align: "center"},
+        {binding: 'lateassDt', header: '마지막 접속일', isReadOnly: true, width: 200, align: "center"},
     ];
 
     var gridOption = loadGridUserList(gridBindings, 'userLayout');
@@ -153,22 +360,10 @@
 
 
     //팝업 오픈
-    function showPop(pop){
-
-        if(pop == "new_staff"){
-
-
-        }else if(pop == "modify_staff"){
-
-
-
-        }else if(pop == "image"){
-
-            var imgPath = setGrid.collectionView.currentItem["idprofile"]
-            var img = '<img class="comment_img" src="'+imgPath+'"alt="이미지">';
-            $('#imgPath').append(img)
-
-        }
+    function showPop(pop, item){
+        var imgPath = setGrid.collectionView.currentItem["profile_pic"]
+        var img = '<img class="comment_img" src="'+item.profilePic+'"alt="이미지">';
+        $('#imgPath').append(img)
 
         $('#'+pop).addClass('is-visible');
     }

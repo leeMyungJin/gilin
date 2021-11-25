@@ -12,15 +12,22 @@ public class CmsMemberVo {
     private String id;
     private String pass;
     private String nickname;
-    private String profile_pic;
+    private String profilePic;
     private String age;
     private String gender;
     private String email;
-    private boolean admin_yn;
-    private LocalDateTime cret_dt;
-    private String cret_id;
-    private LocalDateTime updt_dt;
-    private String updt_id;
+    private boolean adminYn;
+    private String lateassDt;
+    private String cretDt;
+    private String cretId;
+    private String updtDt;
+    private String updtId;
+
+    private String mos;
+    private String minfo;
+    private String appversion;
+    private String fcmToken;
+    private String snsToken;
 
     /* 조인 필드 */
     private String adminFlag;

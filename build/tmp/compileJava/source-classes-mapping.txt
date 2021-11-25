@@ -40,8 +40,8 @@ com/gilin/vo/MemberVo.java
  com.gilin.vo.MemberVo
 com/gilin/Controller/TermsController.java
  com.gilin.Controller.TermsController
-com/gilin/Cms/Vo/CmsMemberVo.java
- com.gilin.Cms.Vo.CmsMemberVo
+com/gilin/Cms/Util/Login.java
+ com.gilin.Cms.Util.Login
 com/gilin/vo/LoginVo.java
  com.gilin.vo.LoginVo
 com/gilin/Controller/ReportController.java
@@ -156,5 +156,5 @@ com/gilin/Service/ReportService.java
  com.gilin.Service.ReportService
 com/gilin/Cms/Controller/CmsController.java
  com.gilin.Cms.Controller.CmsController
-com/gilin/Cms/Util/Login.java
- com.gilin.Cms.Util.Login
+com/gilin/Cms/Vo/CmsMemberVo.java
+ com.gilin.Cms.Vo.CmsMemberVo
