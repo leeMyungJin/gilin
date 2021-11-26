@@ -326,8 +326,6 @@
 
     var gridView, setGridPager, gridBindings, setGrid;
 
-    var countryMap = new wijmo.grid.row.DataMap(["Y", "N"], 'id', 'name');
-
     gridBindings = [
         {binding: 'id', header: 'ID', isReadOnly: true, width: 100, align: "center"},
         {binding: 'nickname', header: '닉네임', isReadOnly: true, width: 100, align: "center"},
@@ -336,8 +334,8 @@
             cellTemplate: wijmo.grid.cellmaker.CellMaker.makeImage({
                 click: (e, ctx) => showPop("image", ctx.item),
                 attributes: {
-                    onerror:
-                        "this.onerror=null; this.src='https://willchair.co.kr/img/icon_my_avatar.png';"
+                    // onerror:
+                    //     "this.onerror=null; this.src='https://willchair.co.kr/img/icon_my_avatar.png';"
                 }
             })
         },
@@ -357,7 +355,35 @@
     setGridPager = gridOption.setGridPager;
     gridView = gridOption.gridView;
 
+    setGrid.cellEditEnded.addHandler((s, e) => {
 
+        let col = s.columns[e.col]
+        if (col.binding == 'adminFlag') {
+            if (!confirm("관리자 여부를 변경하시겠습니까?")) {
+                e.cancel = true;
+            }
+
+            let id = s.selectedItems[0].id;
+            let adminFlag = s.selectedItems[0].adminFlag == "Y" ? "true" : "false";
+
+            $.ajax({
+                type : 'post',
+                url : "/cms/user/adminFlagChange",
+                data : {
+                    id: id,
+                    adminFlag: adminFlag
+                },
+                success : function(result) {
+                    console.log(result);
+                    alert('관리자 권한을 변경했습니다.');
+                },
+                error: function(request, status, error) {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+        }
+
+    })
 
     //팝업 오픈
     function showPop(pop, item){

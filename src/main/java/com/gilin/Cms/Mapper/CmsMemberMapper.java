@@ -16,4 +16,6 @@ public interface CmsMemberMapper {
 
     public List<CmsMemberVo> getListSearch(HashMap<String, Object> params);
 
+    public void adminFlagChange(CmsMemberVo cmsMemberVo);
+
 }

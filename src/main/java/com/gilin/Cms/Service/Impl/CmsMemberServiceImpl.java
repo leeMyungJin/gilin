@@ -35,5 +35,10 @@ public class CmsMemberServiceImpl implements CmsMemberService {
         return cmsMemberMapper.getListSearch(params);
     }
 
+    @Override
+    public void adminFlagChange(CmsMemberVo cmsMemberVo) {
+        cmsMemberMapper.adminFlagChange(cmsMemberVo);
+    }
+
 
 }

@@ -534,4 +534,13 @@ public class CmsController {
         return "mobile/notice";
     }
 
+
+
+
+    @PostMapping("/cms/user/adminFlagChange")
+    @ResponseBody
+    public void adminFlagChange(CmsMemberVo cmsMemberVo) {
+        cmsMemberService.adminFlagChange(cmsMemberVo);
+    }
+
 }

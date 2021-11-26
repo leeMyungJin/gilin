@@ -282,6 +282,27 @@
     $from.val("").attr("required", false)
     $to.val("").attr("required", false)
 
+
+    _from.valueChanged.addHandler(function (s, e) {
+        if (_to.value <= s.value && _to.value != '' && s.value != null) {
+            alert('날짜를 다시 선택하세요');
+            const _date = new Date(_to.value);
+            s.value = new Date(_date.setDate(_date.getDate() - 1));
+            return false;
+        }
+    })
+
+    _to.valueChanged.addHandler(function (s, e) {
+        if (_from.value >= s.value && _from.value != '' && s.value != null) {
+            alert('날짜를 다시 선택하세요');
+            const _date = new Date(_from.value);
+            s.value = new Date(_date.setDate(_date.getDate() + 1));
+            return false;
+        }
+    })
+
+
+
     var gridBindings = [
         {binding: 'cretDt', header: '등록일자', isReadOnly: true, width: 200, align: "center"},
         {binding: 'nickname', header: '개설자 닉네임', isReadOnly: true, width: 150, align: "center"},
@@ -367,6 +388,26 @@
     function channelModify(f) {
 
         var submitType = f.submitType.value;
+
+        if (f.chName.value == "") {
+            alert("채널명을 입력해주세요");
+            return false;
+        }
+
+        if (f.chImg.value == "") {
+            alert("채널 대표 이미지를 첨부해주세요");
+            return false;
+        }
+
+        if (f.fundingDateRange.value == "") {
+            alert("펀딩 기간을 설정해주세요");
+            return false;
+        }
+
+        if (f.chDateRange.value == "") {
+            alert("채널 기간을 설정해주세요");
+            return false;
+        }
 
         if (!confirm(submitType + "하시겠습니까?")) {
             return false;

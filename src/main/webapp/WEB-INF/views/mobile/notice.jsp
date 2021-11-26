@@ -5,6 +5,12 @@
 <html lang="ko">
 <head>
 <%--    <%@ include file="../include/header.jsp" %>--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="기린">
+    <meta property="og:description" content="기린 공지사항입니다.">
+<%--    <meta property="og:image" content="image/ogimg.png">--%>
+    <meta property="og:url" content="https://gilin.co.kr/m/notice">
     <title>기린 공지사항</title>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script>
