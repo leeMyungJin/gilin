@@ -21,6 +21,25 @@ $(document).ready(function() {
     $('.mypage_menu').toggleClass('active');
   });
 
+
+  // 사이드 버튼
+  $(function() {
+      $(window).scroll(function() {
+          if ($(this).scrollTop() > 500) {
+              $('.side_btn_wrap .top').show(350);
+          } else {
+              $('.side_btn_wrap .top').hide(350);
+          }
+      });
+
+      $(".side_btn_wrap .top").click(function() {
+          $('html, body').animate({
+              scrollTop : 0
+          }, 400);
+          return false;
+      });
+    });
+
   // 로그인 모달창
   $(function() {
     $('.modal_btn').on('click', function() {
@@ -64,7 +83,7 @@ $(document).ready(function() {
   $('.sub .sub_header .bg').css('background-image', `url(${chn_img})`);
 
   // 서브헤더2
-  $(window).scroll(function(){
+  $(window).scroll(function() {
     if ($(window).scrollTop() > 400) {
       $('.sub_header02').addClass('active');
     } else {
@@ -78,32 +97,31 @@ $(document).ready(function() {
 
   // pjt_count
   let pjt_count = $('.channel_open .pjt_count .chk_btn');
-  $(pjt_count).click(function(){
-    if($(pjt_count).find('input#chk01').attr('checked')){
+  $(pjt_count).click(function() {
+    if ($(pjt_count).find('input#chk01').attr('checked')) {
       $('.channel_open .pjt_count .showbox').removeClass('active');
-    }else{
+    } else {
       $('.channel_open .pjt_count .showbox').addClass('active');
     }
   });
 
 
   // 채널 오픈
-  $('.chk_wrap').click(function(){
-    if($('.channel_open input[name="radio"]:checked').val() == 'public'){
+  $('.chk_wrap').click(function() {
+    if ($('.channel_open input[name="radio"]:checked').val() == 'public') {
       $('.channel_open .chk_wrap .showbox').removeClass('active');
-    }else{
+    } else {
       $('.channel_open .chk_wrap .showbox').addClass('active');
     }
   });
 
-  $('.chk_wrap').click(function(){
-    if($('.mychannel_modi input[name="radio"]:checked').val() == 'public'){
+  $('.chk_wrap').click(function() {
+    if ($('.mychannel_modi input[name="radio"]:checked').val() == 'public') {
       $('.mychannel_modi .chk_wrap .showbox').removeClass('active');
-    }else{
+    } else {
       $('.mychannel_modi .chk_wrap .showbox').addClass('active');
     }
   });
-
 
 
 });

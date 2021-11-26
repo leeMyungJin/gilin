@@ -65,4 +65,12 @@ public class LoginController {
 		session.invalidate();
     }  
     
+    /* 탈퇴 */
+    @RequestMapping(value = "/deleteMember")
+    @ResponseBody
+    public void deleteMember(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	loginService.deleteMember(params);
+    }   
+    
+    
 }

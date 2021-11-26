@@ -10,4 +10,6 @@ public interface LoginService {
 	public void insertMember( HashMap<String,String> params);
 	
 	public void updateLoginTime( HashMap<String,String> params);
+	
+	public void deleteMember( HashMap<String,String> params);
 }

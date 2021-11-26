@@ -36,5 +36,10 @@ public class LoginServiceImpl implements LoginService{
 	public void updateLoginTime(HashMap<String, String> params) {
 		loginMapper.updateLoginTime(params);
 	}
+	
+	@Override
+	public void deleteMember(HashMap<String, String> params) {
+		loginMapper.deleteMember(params);
+	}
 
 }

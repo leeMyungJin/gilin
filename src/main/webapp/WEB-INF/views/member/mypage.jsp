@@ -292,6 +292,28 @@ function changeFile(){
 	}
 }
 
+function deleteMember(){
+	var param = {
+			id : memberId
+		};
+		
+	var innerHtml = '';
+	$.ajax({
+	     type : 'POST',
+	     url : '/login/deleteMember',
+	     dataType : null,
+	     data : param,
+	     success : function(result) {
+	     	alert("회원탈퇴 되었습니다.");
+	     	logout();
+	     },
+	     error: function(request, status, error) {
+	     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	
+	     }
+	 }); 
+}
+
 </script>
 
 <body onload="pageLoad();">
@@ -321,7 +343,7 @@ function changeFile(){
 	                <input type="hidden" name="filePath" id="filePath" value= "" >
         			<input type="hidden" name="fileName" id="fileName" value = "" >
 	            </form>
-	            <button onClick="updateBaseImg('../img/myprofile.svg')">기본 이미지로 변경 <span class="material-icons" >chevron_right</span></button>
+	            <button onClick="updateBaseImg('https://gilin.co.kr/img/basedprofile/icon_my_avatar.png')">기본 이미지로 변경 <span class="material-icons" >chevron_right</span></button>
               </div>
             </div>
             <div class="my_info_txt">
@@ -329,7 +351,9 @@ function changeFile(){
                 <li><span>닉네임</span> <input type="text" id="nickname" value="<%=session.getAttribute("nickname")%>" class="nick"> <button class="btn_style02 nick_chg" onClick="updateNick()">수정</button></li>
                 <li><span>계정</span> <%=session.getAttribute("email")%> </li>
               </ul>
+              <a href="javascript:void(0);" onClick="deleteMember();" class="del_account">회원탈퇴</a>
             </div>
+            
           </div>
 
         </div>

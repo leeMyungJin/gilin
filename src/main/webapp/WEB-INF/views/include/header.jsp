@@ -125,6 +125,10 @@ function moveAdminPage(){
     }
 }
 	
+function moveNotice(){
+	location.href="/notice";
+}	
+	
 </script>
 
 <header class="header">
@@ -178,3 +182,10 @@ function moveAdminPage(){
       </div>
     </div>
   </header>
+ 
+    <!-- 수정추가 -->
+  <div class="side_btn_wrap">
+    <a href="javascript:void(0);" onClick="moveNotice()" class="notice"><span class="material-icons-outlined">chat</span>공지사항</a>
+    <a href="" class="top">TOP</a>
+  </div>
+  <!-- 수정추가 끝 -->
