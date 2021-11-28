@@ -281,10 +281,15 @@ function changeFile(){
 		const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
 		const time = new Date().toTimeString().split(" ")[0];
 		console.log("imgUpload.files.name: ", imgUpload.files[0].name);
+		
+		let fileNameLength = imgUpload.files[0].name.length;
+		let fileDot = imgUpload.files[0].name.lastIndexOf(".");
+		let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
 		  
-		chImg = 'https://gilin.co.kr/img/'+ date + '_' + time + '_' +imgUpload.files[0].name;
-		$('#filePath').val('/img');
-		$('#fileName').val(date + '_' + time + '_' +imgUpload.files[0].name);
+		chImg = 'https://gilin.co.kr/img/profile/'+ date + '_' + time + "." + fileType;
+		//chImg = 'https://gilin.co.kr/img/profile/'+ date + '_' + time + '_' +imgUpload.files[0].name;
+		$('#filePath').val('/img/profile');
+		$('#fileName').val(date + '_' + time + "." + fileType);
 		$("#imgForm").submit();
 		
 		updateBaseImg(chImg);
@@ -339,7 +344,7 @@ function deleteMember(){
               <div class="btn_wrap">
                 <form id="imgForm" action="https://211.37.179.144/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
 	             	<button type="button" onClick="clickFile();">사진 수정 <span class="material-icons">chevron_right</span></button>
-	                <input style="display:none;" type='file' name="file" id="file" onchange="changeFile()">
+	                <input style="display:none;" type='file' name="file" id="file" onchange="changeFile()" accept=".gif, .jpeg, .jpg, .png">
 	                <input type="hidden" name="filePath" id="filePath" value= "" >
         			<input type="hidden" name="fileName" id="fileName" value = "" >
 	            </form>

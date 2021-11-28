@@ -6,6 +6,11 @@
 
 <head>
   <%@ include file="../include/head.jsp" %>
+  <script src="../ckeditor5/build/ckeditor.js"></script>
+  <link rel="stylesheet" type="text/css" href="../ckeditor5/sample/styles.css">
+  <style type="text/css">
+        .ck-content {height: 80vh;}
+  </style>
 </head>
 
 <script type="text/javascript">
@@ -109,10 +114,15 @@ function saveProject(type){
 		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
 			 const time = new Date().toTimeString().split(" ")[0];
 			 console.log("imgUpload.files.name: ", imgUpload.files[0].name);
+			 
+			 let fileNameLength = imgUpload.files[0].name.length;
+			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
+			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
 			  
-			 pjImg = 'https://gilin.co.kr/img/'+ date + '_' + time + '_' +imgUpload.files[0].name;
-			 $('#filePath').val('/img');
-			 $('#fileName').val(date + '_' + time + '_' +imgUpload.files[0].name);
+			 //pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + '_' +imgUpload.files[0].name;
+			 pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + "." + fileType;
+			 $('#filePath').val('/img/project');
+			 $('#fileName').val(date + '_' + time + "." + fileType);
 			 $("#imgForm").submit();
 			 
 		  }else{

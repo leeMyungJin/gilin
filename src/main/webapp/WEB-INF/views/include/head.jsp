@@ -20,7 +20,8 @@
   <script src="../js/include/gilin.js"></script>
   <script src="../js/include/common.js"></script>
   
-  
+  <!-- 애플 로그인 -->
+  <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
   
   <!-- 카카오 로그인 -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

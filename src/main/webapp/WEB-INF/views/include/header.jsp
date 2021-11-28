@@ -68,10 +68,22 @@ function logout(){
 			 }); 
 		})
 		
-    }else if(false){
-    	//애플 토큰 확인
     }else{
-    	location.href="/";
+    	$.ajax({
+		     type : 'POST',
+		     url : '/login/logout',
+		     async : false, // 비동기모드 : true, 동기식모드 : false
+		     dataType : null,
+		     success : function(result) {
+		     	console.log("logout success");
+		     	location.href="/";
+		     },
+		     error: function(request, status, error) {
+		     	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		
+		     }
+		 }); 
+    	//location.href="/";
     }
 }  
 	
@@ -128,7 +140,62 @@ function moveAdminPage(){
 function moveNotice(){
 	location.href="/notice";
 }	
+
+function loginInit(){
+	AppleID.auth.init({
+        clientId : 'kr.co.gilin.gilin001',
+        scope : 'name email',
+        redirectURI: 'https://gilin.co.kr/',
+        state : 'gilinAppleLogin',
+        usePopup : true
+    });
+}
+
+function appleLogin(){
 	
+	//애플로 로그인 성공 시.
+	document.addEventListener('AppleIDSignInOnSuccess', (data) => {
+	    /* //샘플 유저 정보 
+	    var detail = JSON.parse('{"authorization": {"code": "c5dc09c3c45a04e88a4dfb02b1f2cebb3.0.rywy.gFoM2VQZm4dXuv1zgtGy7w","id_token": "eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoia3IuY28uZ2lsaW4uZ2lsaW4wMDEiLCJleHAiOjE2MzgxODc3NDcsImlhdCI6MTYzODEwMTM0Nywic3ViIjoiMDAwODY4LmE2ZmUzMGUzZGMzYzRkMmZiNjU3NGI4NjcwMzNlYWY2LjExMjQiLCJjX2hhc2giOiJrTHlmMHUyZm1tLU5TMkZZR1FZdzRBIiwiZW1haWwiOiJ3aGl0YWtlcmNvbXBhbnlAbmF2ZXIuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjM4MTAxMzQ3LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.L3l0S23MmAZMuZoMI7N9JGGF-Ke0h0I9RujvKjSsyEqTIgqQSIuX48qdvb2XJdEW4AWTZWJCS0yp3HJdeB23AK2p0xtV008jrMCyy5YnMBxMvA6bskr5aFE5-3qawVJGilbG8GeMvf2_WJhcKjTnXh48f46GFb6DLFK7nOlvcT3sXBp7wLJ3Dm88907bArZPh18AGKEEgVDVO6TM9_wYyGUmIPIHWxnL7jFkwlqQ2wokRVMtATgVj8zy8JI6bXVODSbv-0avzIkutjA4WIGa_NYVVd9zCYXsup-Ix0cq_jpbhZP0xwc6yMaqyQOimZAA1u-x0eOAhs6grHdnvuDD2Q","state": "gilinAppleLogin"},"user": {"name": {"firstName": "휘테커","lastName": "벤"},"email": "whitakercompany@naver.com"}}');
+	 	var id_token = detail.authorization.id_token;
+	 	var name = detail.user.name.lastName+detail.user.name.firstName;
+	 	console.log("name : " + name); */
+		
+	     //console.log(data);
+		 var name = '';
+	     if(data.detail.user != undefined){
+	    	 console.log(data.detail.user.name.firstName+data.detail.name.user.lastName);
+	    	 name = data.detail.user.name.firstName + data.detail.name.user.lastName;
+	     }
+	 	console.log("name : " + name);
+	 	
+	 	var id_token = data.detail.authorization.id_token;
+	 	var id_token_str = id_token.split('.');
+	 	var id_token_decode = JSON.parse(atob(id_token_str[1]));
+	 	
+	 	var params = {
+	 			  id : id_token_decode.sub
+	 			  , email : id_token_decode.email
+	 			  , gender : '-'
+	 			  , age : '-'
+	 			  , nickname : (name == '' ? null : name)
+	 			  , profilePic : 'https://gilin.co.kr/img/basedprofile/icon_my_avatar.png'
+	 	  }
+	 	
+	 	webLogin(params);
+	});
+	
+	//애플로 로그인 실패 시.
+	document.addEventListener('AppleIDSignInOnFailure', (error) => {
+	     //handle error.
+	     alert("애플로그인에 실패하였습니다.")
+	     console.log(error);
+	     //todo fail logic
+	});
+		
+}
+
+
 </script>
 
 <header class="header">
@@ -145,7 +212,7 @@ function moveNotice(){
         
         <!-- 로그인 전 -->
         <div id="b_login" style="display:none;">
-	        <a href="#" class="login_btn modal_btn" data-modal-link="login_modal">LOGIN</a>
+	        <a href="javascript:void(0);" onClick="loginInit()" class="login_btn modal_btn" data-modal-link="login_modal">LOGIN</a>
 	        <div class="modal login_modal">
 	          <div class="modal_bg"></div>
 	          <div class="modal_cont flex_wrap">
@@ -160,7 +227,9 @@ function moveNotice(){
 	              <h2>로그인</h2>
 	              <p>간편로그인으로 기린 시작하기</p>
 	              <a class="kakao modal_login_btn" href="javascript:void(0);" onClick="kakaoLogin()"><img src="../img/icon_kakao.svg">카카오로 로그인</a>
-	              <a class="apple modal_login_btn" href="javascript:void(0);" onClick="kakaoUnlink()"><img src="../img/icon_apple.svg">Apple로 로그인</a>
+	              <a class="apple modal_login_btn" href="javascript:void(0);" onClick="appleLogin()" id="appleid-signin"><img src="../img/icon_apple.svg">Apple로 로그인</a>
+	            	
+	            
 	            </div>
 	          </div>
 	        </div>

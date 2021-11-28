@@ -121,7 +121,7 @@ public class PushServiceImpl implements PushService{
             RestTemplate rt = new RestTemplate();            
             
             // FCM Push메세지 발송
-            ResponseEntity<String> res = rt.exchange("https://fcm.googleapis.com/v1/projects/cuppahouse-ca484/messages:send"
+            ResponseEntity<String> res = rt.exchange("https://fcm.googleapis.com/v1/projects/gilin001-a2308/messages:send"
                     , HttpMethod.POST
                     , httpEntity
                     , String.class);
@@ -140,8 +140,7 @@ public class PushServiceImpl implements PushService{
     @Override
     public String getUserToken(HashMap<String, String> params) {
         // TODO Auto-generated method stub
-//        return loginMapper.getUserToken(params);
-        return "";
+       return loginMapper.getUserToken(params);
     }
     
 }

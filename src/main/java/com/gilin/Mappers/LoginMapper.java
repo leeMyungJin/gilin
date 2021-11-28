@@ -17,4 +17,6 @@ public interface LoginMapper  {
 	public void updateLoginTime( HashMap<String,String> params);
 	
 	public void deleteMember( HashMap<String,String> params);
+	
+	public String getUserToken(HashMap<String, String> params);
 }

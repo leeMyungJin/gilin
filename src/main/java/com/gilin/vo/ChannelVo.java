@@ -9,8 +9,6 @@ public class ChannelVo {
 	private String chMemo;
 	private String chStDt;
 	private String chEndDt;
-	private String chFdStDt;
-	private String chFdEndDt;
 	private String chPass;
 	private boolean chOpenYn;
 	private String finYn;
@@ -65,18 +63,6 @@ public class ChannelVo {
 	}
 	public void setChEndDt(String chEndDt) {
 		this.chEndDt = chEndDt;
-	}
-	public String getChFdStDt() {
-		return chFdStDt;
-	}
-	public void setChFdStDt(String chFdStDt) {
-		this.chFdStDt = chFdStDt;
-	}
-	public String getChFdEndDt() {
-		return chFdEndDt;
-	}
-	public void setChFdEndDt(String chFdEndDt) {
-		this.chFdEndDt = chFdEndDt;
 	}
 	public String getChPass() {
 		return chPass;

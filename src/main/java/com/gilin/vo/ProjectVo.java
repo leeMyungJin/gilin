@@ -20,6 +20,10 @@ public class ProjectVo {
 	private String dDay;
 	private double dDayPercent;
 	private Integer fdCnt;
+	private String finYn;
+	private String chStDt;
+	private String chEndDt;
+	
 	public Integer getPjSeq() {
 		return pjSeq;
 	}
@@ -121,6 +125,24 @@ public class ProjectVo {
 	}
 	public void setFdCnt(Integer fdCnt) {
 		this.fdCnt = fdCnt;
+	}
+	public String getFinYn() {
+		return finYn;
+	}
+	public void setFinYn(String finYn) {
+		this.finYn = finYn;
+	}
+	public String getChStDt() {
+		return chStDt;
+	}
+	public void setChStDt(String chStDt) {
+		this.chStDt = chStDt;
+	}
+	public String getChEndDt() {
+		return chEndDt;
+	}
+	public void setChEndDt(String chEndDt) {
+		this.chEndDt = chEndDt;
 	}
 	
 	

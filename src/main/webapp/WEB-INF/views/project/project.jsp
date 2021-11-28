@@ -54,6 +54,7 @@ var memberAuth = "<%=session.getAttribute("adminYn")%>";
 
 var pjSeq = "${pjSeq}";
 var fdYn = "${projectVo.fdYn}"; //펀딩 완료여부
+var finYn = "${projectVo.finYn}"; //채널 완료여부 
 
 var totalData = 0;    // 총 데이터 수
 var totalPage = 0;	// 총 페이지 수
@@ -209,6 +210,10 @@ function saveFunding(){
 		alert("이미 펀딩 완료 된 프로젝트입니다. 펀딩은 1회만 가능합니다.");
 		return;
 		
+	}else if( finYn == "Y" ){
+		alert("종료 된 채널은 펀딩이 불가능합니다.");
+		return;
+		
 	}else if($('#fdAmt').val() == "" ){
 		alert("펀딩 금액은 필수 입력사항입니다.");
 		return;
@@ -349,8 +354,8 @@ function inviteProject(){
               <p class="item_txt">${projectVo.fdCnt}개</p>
             </div>
             <div class="item">
-              <p class="item_tit">펀딩기간</p>
-              <p class="item_txt">${projectVo.fdStDt}~${projectVo.fdEndDt}</p>
+              <p class="item_tit">채널기간</p>
+              <p class="item_txt">${projectVo.chStDt}~${projectVo.chEndDt}</p>
             </div>
           </div>
         </div>

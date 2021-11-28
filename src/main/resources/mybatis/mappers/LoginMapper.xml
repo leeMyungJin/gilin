@@ -60,4 +60,8 @@
 		where id = #{id}
 	</update>
 	
+	<select id="getUserToken" parameterType="hashMap" resultType="String">
+		select fcm_token from web.member where id = #{id}
+	</select>
+	
 </mapper>

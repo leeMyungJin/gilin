@@ -9,17 +9,15 @@
 				, p.pj_img 
 				, p.pj_memo 
 				, p.pj_content 
-				, to_char(c.ch_fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
-				, to_char(c.ch_fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
 				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
 				, p.cret_id 
 				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
 				, p.updt_id 
 				, coalesce(pf.fd_amt, 0) as fd_sum_amt
 				, case when pfc.pj_seq is not null then 'Y' else 'N' end as fd_yn --펀딩완료여부
-				, case when to_char(now()-c.ch_fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
-						then 'D' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric
-						else 'D+' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric end as d_day
+				, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-c.ch_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 		from web.project p left join (select pj_seq, sum(fd_amt) as fd_amt
 										from web.project_funding
 										group by pj_seq) pf on pf.pj_seq = p.pj_seq 
@@ -51,17 +49,15 @@
 				, p.pj_img 
 				, p.pj_memo 
 				, p.pj_content 
-				, to_char(c.ch_fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
-				, to_char(c.ch_fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
 				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
 				, p.cret_id 
 				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
 				, p.updt_id 
 				, coalesce(pf.fd_amt, 0) as fd_sum_amt
 				, case when pfc.pj_seq is not null then 'Y' else 'N' end as fd_yn --펀딩완료여부
-				, case when to_char(now()-c.ch_fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
-						then 'D' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric
-						else 'D+' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric end as d_day
+				, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-c.ch_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 		from web.project p left join (select pj_seq, sum(fd_amt) as fd_amt
 										from web.project_funding
 										group by pj_seq) pf on pf.pj_seq = p.pj_seq 
@@ -83,8 +79,6 @@
 				, p.pj_img 
 				, p.pj_memo 
 				, p.pj_content 
-				, to_char(c.ch_fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
-				, to_char(c.ch_fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
 				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
 				, p.cret_id 
 				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
@@ -92,11 +86,14 @@
 				, to_char(coalesce(pf.fd_amt, 0), 'fm9,999,999,990') as fd_sum_amt
 				, coalesce(pf.fd_cnt, 0) as fd_cnt
 				, case when pfc.pj_seq is not null then 'Y' else 'N' end as fd_yn --펀딩완료여부
-				, case when to_char(now()-c.ch_fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
-						then 'D' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric
-						else 'D+' || to_char(now()-c.ch_fd_end_dt, 'dd')::numeric end as d_day
-				, case when to_char(now()-c.ch_fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
-						then (100-trunc((to_char(now()-c.ch_fd_end_dt, 'dd')::numeric/to_char(c.ch_fd_end_dt-c.ch_fd_st_dt, 'dd')::numeric)*-100, 0)) * 3.84 --화면프로그래스바의 100%값이 384임
+				, to_char(c.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt 
+				, to_char(c.ch_end_dt , 'YYYY-MM-DD') as ch_end_dt 
+				, case when to_char(c.ch_end_dt, 'yyyymmdd') <![CDATA[<]]> to_char(now(), 'yyyymmdd') then 'Y' else 'N' end as fin_yn
+				, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-c.ch_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
+				, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then (100-trunc((to_char(now()-c.ch_end_dt, 'dd')::numeric/to_char(c.ch_end_dt-c.ch_fd_st_dt, 'dd')::numeric)*-100, 0)) * 3.84 --화면프로그래스바의 100%값이 384임
 						else 384 end as d_day_percent
 		from web.project p left join (select pj_seq, sum(fd_amt) as fd_amt, count(distinct cret_id) as fd_cnt
 										from web.project_funding

@@ -59,8 +59,6 @@ function getChannelInfo(){
    				$('#chMemo').val(data.chMemo);
    				$('#chStDt').val(data.chStDt);
    				$('#chEndDt').val(data.chEndDt);
-   				$('#chFdStDt').val(data.chFdStDt);
-   				$('#chFdEndDt').val(data.chFdEndDt);
    				$("input:radio[name='chOpenYn']:radio[value='"+( data.chOpenYn ? 'Y' : 'N' )+"']").prop('checked', true); 
    				$('#chPass').val(data.chPass);
    				if(!data.chOpenYn){
@@ -98,7 +96,7 @@ function saveChannel(type){
 		
 		//필수값 체크
 		if($('#chName').val() == '' || $('#chMemo').val() == '' 
-				|| $('#chStDt').val() == '' || $('#chEndDt').val() == '' || $('#chFdStDt').val() == '' || $('#chFdEndDt').val() == '' 
+				|| $('#chStDt').val() == '' || $('#chEndDt').val() == ''
 				|| ($("input[name='chOpenYn']:checked").val() == 'N' && $('#chPass').val() == '' ) ){
 			alert("모든 항목을 입력해야합니다.");
 			return;
@@ -107,18 +105,6 @@ function saveChannel(type){
 		//날짜 벨리데이션 체크
 		if( $('#chStDt').val() > $('#chEndDt').val() ){
 			alert("채널 시작일은 종료일보다 빨리야합니다.");
-			return;
-			
-		}else if( $('#chFdStDt').val() > $('#chFdEndDt').val() ){
-			alert("펀딩 시작일은 종료일보다 빨리야합니다.");
-			return;
-			
-		}else if( $('#chStDt').val() > $('#chFdStDt').val() ){
-			alert("채널 시작일은 펀딩 시작일보다 빨리야합니다.");
-			return;
-			
-		}else if( $('#chEndDt').val() < $('#chFdEndDt').val() ){
-			alert("펀딩 종일일은 채널 종료일보다 빨리야합니다.");
 			return;
 			
 		}
@@ -139,10 +125,15 @@ function saveChannel(type){
 		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
 			 const time = new Date().toTimeString().split(" ")[0];
 			 console.log("imgUpload.files.name: ", imgUpload.files[0].name);
+			 
+			 let fileNameLength = imgUpload.files[0].name.length;
+			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
+			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
 			  
-			 chImg = 'https://gilin.co.kr/img/'+ date + '_' + time + '_' +imgUpload.files[0].name;
-			 $('#filePath').val('/img');
-			 $('#fileName').val(date + '_' + time + '_' +imgUpload.files[0].name);
+			 chImg = 'https://gilin.co.kr/img/channel/'+ date + '_' + time + "." + fileType;
+			 //chImg = 'https://gilin.co.kr/img/channel/'+ date + '_' + time + '_' +imgUpload.files[0].name;
+			 $('#filePath').val('/img/channel');
+			 $('#fileName').val(date + '_' + time + "." + fileType);
 			 $("#imgForm").submit();
 			 
 		  }else{
@@ -156,8 +147,6 @@ function saveChannel(type){
    				, chMemo : $('#chMemo').val()
    				, chStDt :  $('#chStDt').val()
    				, chEndDt : $('#chEndDt').val()
-   				, chFdStDt : $('#chFdStDt').val()
-   				, chFdEndDt : $('#chFdEndDt').val()
    				, chPass : ( $("input[name='chOpenYn']:checked").val() == 'Y' ? '' : $('#chPass').val() )
    				, chOpenYn : ( $("input[name='chOpenYn']:checked").val() == 'Y' ? true : false )
    				, cretId : memberId
@@ -288,14 +277,6 @@ function changeChOpenYn(type){
               <input id="chStDt" type="date" class="datepicker" onfocusout="_fnisDate(this.value, this.id);">
               <span class="to">-</span>
               <input id="chEndDt" type="date" class="datepicker" onfocusout="_fnisDate(this.value, this.id);">
-            </td>
-          </tr>
-          <tr>
-            <th>펀딩 기간</th>
-            <td>
-              <input id="chFdStDt" type="date" class="datepicker" onfocusout="_fnisDate(this.value, this.id);">
-              <span class="to">-</span>
-              <input id="chFdEndDt" type="date" class="datepicker" onfocusout="_fnisDate(this.value, this.id);">
             </td>
           </tr>
         </table>
