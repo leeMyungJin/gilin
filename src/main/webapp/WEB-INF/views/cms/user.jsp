@@ -320,6 +320,12 @@
         max-height: calc(100% - 120px);
         box-shadow: 3px 3px 12px rgba(44, 44, 44, 0.2);
     }
+
+    .comment_img {
+        max-width: 70%;
+    }
+
+
 </style>
 
 <script>

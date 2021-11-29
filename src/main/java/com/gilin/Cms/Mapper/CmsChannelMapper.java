@@ -19,4 +19,6 @@ public interface CmsChannelMapper {
     public void create(CmsChannelVo cmsChannelVo);
     public CmsChannelVo validationByName(String chName);
 
+    public List<CmsChannelVo> getSchedulerList();
+
 }

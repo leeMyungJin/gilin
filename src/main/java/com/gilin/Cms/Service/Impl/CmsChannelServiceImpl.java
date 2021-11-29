@@ -61,5 +61,10 @@ public class CmsChannelServiceImpl implements CmsChannelService {
         return cmsChannelMapper.validationByName(chName);
     }
 
+    @Override
+    public List<CmsChannelVo> getSchedulerList() {
+        return cmsChannelMapper.getSchedulerList();
+    }
+
 
 }

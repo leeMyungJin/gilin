@@ -18,4 +18,6 @@ public interface CmsChannelService {
     public void create(CmsChannelVo cmsChannelVo);
     public CmsChannelVo validationByName(String chName);
 
+    public List<CmsChannelVo> getSchedulerList();
+
 }

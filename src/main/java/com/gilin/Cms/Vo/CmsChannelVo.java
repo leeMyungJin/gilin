@@ -35,6 +35,7 @@ public class CmsChannelVo {
     private String active;
     private String fundingCount;
     private String sumFunding;
+    private String projectCretIds;
 
     /* 사진업데이트필드 */
     private MultipartFile chImgFileUpload;

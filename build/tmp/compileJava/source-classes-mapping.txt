@@ -108,8 +108,8 @@ com/gilin/vo/MainVo.java
  com.gilin.vo.MainVo
 com/gilin/Mappers/ChannelMapper.java
  com.gilin.Mappers.ChannelMapper
-com/gilin/ServletInitializer.java
- com.gilin.ServletInitializer
+com/gilin/Controller/ChannelController.java
+ com.gilin.Controller.ChannelController
 com/gilin/Mappers/ReportMapper.java
  com.gilin.Mappers.ReportMapper
 com/gilin/Cms/Service/AppVersionService.java
@@ -146,15 +146,17 @@ com/gilin/Controller/ReportController.java
  com.gilin.Controller.ReportController
 com/gilin/Controller/ProjectController.java
  com.gilin.Controller.ProjectController
-com/gilin/Controller/ChannelController.java
- com.gilin.Controller.ChannelController
-com/gilin/Cms/Service/CmsChannelService.java
- com.gilin.Cms.Service.CmsChannelService
+com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
+ com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
 com/gilin/Cms/Vo/CmsChannelVo.java
  com.gilin.Cms.Vo.CmsChannelVo
+com/gilin/ServletInitializer.java
+ com.gilin.ServletInitializer
+com/gilin/Cms/Service/CmsChannelService.java
+ com.gilin.Cms.Service.CmsChannelService
 com/gilin/Cms/Mapper/CmsChannelMapper.java
  com.gilin.Cms.Mapper.CmsChannelMapper
 com/gilin/Cms/Controller/CmsController.java
  com.gilin.Cms.Controller.CmsController
-com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
- com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
+com/gilin/Cms/Scheduler/ChannelScheduler.java
+ com.gilin.Cms.Scheduler.ChannelScheduler
