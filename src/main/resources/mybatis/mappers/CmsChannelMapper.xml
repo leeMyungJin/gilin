@@ -39,27 +39,37 @@
 
     <select id="getListBySearch" parameterType="hashMap" resultType="CmsChannelVo">
         select
-           t1.ch_seq,
-           t1.ch_name,
-           t1.ch_img,
-           t1.ch_active_yn,
-           t1.ch_memo,
-           to_char(t1.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt,
-           to_char(t1.ch_end_dt, 'YYYY-MM-DD') as ch_end_dt,
-           to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt,
-           t1.ch_fd_end_dt,
-           t1.ch_pass,
-           t1.ch_open_yn,
-           to_char(t1.cret_dt, 'YYYY-MM-DD') as cret_dt,
-           t1.cret_id,
-           to_char(t1.updt_dt, 'YYYY-MM-DD') as updt_dt,
-           t1.updt_id,
-           concat(to_char(t1.ch_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_end_dt, 'YYYY-MM-DD')) as ch_date_range,
-           concat(to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_fd_end_dt, 'YYYY-MM-DD')) as funding_date_range,
-           (case when t1.ch_active_yn = true then 'Y' else 'N' end) as active,
-           t2.nickname
+            t1.ch_seq,
+            t1.ch_name,
+            t1.ch_img,
+            t1.ch_active_yn,
+            t1.ch_memo,
+            to_char(t1.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt,
+            to_char(t1.ch_end_dt, 'YYYY-MM-DD') as ch_end_dt,
+            to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt,
+            t1.ch_fd_end_dt,
+            t1.ch_pass,
+            t1.ch_open_yn,
+            to_char(t1.cret_dt, 'YYYY-MM-DD') as cret_dt,
+            t1.cret_id,
+            to_char(t1.updt_dt, 'YYYY-MM-DD') as updt_dt,
+            t1.updt_id,
+            concat(to_char(t1.ch_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_end_dt, 'YYYY-MM-DD')) as ch_date_range,
+            concat(to_char(t1.ch_fd_st_dt, 'YYYY-MM-DD'),'~',to_char(t1.ch_fd_end_dt, 'YYYY-MM-DD')) as funding_date_range,
+            (case when t1.ch_active_yn = true then 'Y' else 'N' end) as active,
+            t2.nickname,
+            t3.projectCount,
+            t3.fundingCount,
+            t3.sumFunding
         from web.channel t1
         left outer join web.member t2 on t1.cret_id = t2.id
+        left outer join
+        (
+            select t1.ch_seq, count(t1.pj_seq) as projectCount, t2.fundingCount, t2.sumFunding from web.project t1
+            left outer join
+            (select pj_seq, count(pj_seq) as fundingCount, sum(fd_amt) as sumFunding from web.project_funding group by pj_seq)
+                t2 on t1.pj_seq = t2.pj_seq group by t1.ch_seq, fundingCount, t2.sumFunding)
+        t3 on t1.ch_seq = t3.ch_seq
         where 1=1
         <if test="inq != ''">
             AND

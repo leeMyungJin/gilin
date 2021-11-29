@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,9 @@ public class CmsController {
 
         model.addAttribute("count", userCount);
         model.addAttribute("version", appVersion);
+
+        System.out.println("시간");
+        System.out.println(LocalDateTime.now());
 
         return "cms/user";
     }

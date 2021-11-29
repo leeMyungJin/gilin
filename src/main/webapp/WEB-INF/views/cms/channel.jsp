@@ -313,7 +313,7 @@
         {binding: 'chDateRange', header: '채널 기간',  width: 350, align: "center"},
         {binding: 'fundingDateRange', header: '펀딩 기간',  width: 350, align: "center"},
         {binding: 'projectCount', header: '프로젝트 개수',  width: 100, align: "center"},
-        {binding: 'fundingTotalPrice', header: '전체 펀딩 금액',  width: 100, align: "center"},
+        {binding: 'sumFunding', header: '전체 펀딩 금액',  width: 100, align: "center"},
         {binding: 'chPass', header: '비밀번호',  width: 100, align: "center"},
         {binding: 'report', header: '결과 보고서', width: 100, align:"center",
             cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({

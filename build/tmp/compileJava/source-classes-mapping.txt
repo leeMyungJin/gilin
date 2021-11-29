@@ -1,7 +1,7 @@
 com/gilin/Mappers/FundingMapper.java
  com.gilin.Mappers.FundingMapper
-com/gilin/Cms/Service/CmsChannelService.java
- com.gilin.Cms.Service.CmsChannelService
+com/gilin/Cms/Service/CmsNoticeService.java
+ com.gilin.Cms.Service.CmsNoticeService
 com/gilin/vo/ReportVo.java
  com.gilin.vo.ReportVo
 com/gilin/Cms/Service/Impl/AppVersionServiceImpl.java
@@ -10,8 +10,8 @@ com/gilin/Service/FundingService.java
  com.gilin.Service.FundingService
 com/gilin/Cms/Mapper/AppVersionMapper.java
  com.gilin.Cms.Mapper.AppVersionMapper
-com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
- com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
+com/gilin/Mappers/ProjectMapper.java
+ com.gilin.Mappers.ProjectMapper
 com/gilin/Cms/Vo/CmsProjectVo.java
  com.gilin.Cms.Vo.CmsProjectVo
 com/gilin/Controller/FileController.java
@@ -116,10 +116,10 @@ com/gilin/Cms/Service/AppVersionService.java
  com.gilin.Cms.Service.AppVersionService
 com/gilin/Controller/MemberController.java
  com.gilin.Controller.MemberController
-com/gilin/Cms/Vo/CmsChannelVo.java
- com.gilin.Cms.Vo.CmsChannelVo
-com/gilin/Cms/Mapper/CmsChannelMapper.java
- com.gilin.Cms.Mapper.CmsChannelMapper
+com/gilin/Cms/Service/Impl/CmsNoticeServiceImpl.java
+ com.gilin.Cms.Service.Impl.CmsNoticeServiceImpl
+com/gilin/Cms/Mapper/CmsNoticeMapper.java
+ com.gilin.Cms.Mapper.CmsNoticeMapper
 com/gilin/Service/impl/PushServiceImpl.java
  com.gilin.Service.impl.PushServiceImpl
 com/gilin/Cms/Service/CmsMemberService.java
@@ -148,13 +148,13 @@ com/gilin/Controller/ProjectController.java
  com.gilin.Controller.ProjectController
 com/gilin/Controller/ChannelController.java
  com.gilin.Controller.ChannelController
-com/gilin/Mappers/ProjectMapper.java
- com.gilin.Mappers.ProjectMapper
-com/gilin/Cms/Service/CmsNoticeService.java
- com.gilin.Cms.Service.CmsNoticeService
-com/gilin/Cms/Mapper/CmsNoticeMapper.java
- com.gilin.Cms.Mapper.CmsNoticeMapper
-com/gilin/Cms/Service/Impl/CmsNoticeServiceImpl.java
- com.gilin.Cms.Service.Impl.CmsNoticeServiceImpl
+com/gilin/Cms/Service/CmsChannelService.java
+ com.gilin.Cms.Service.CmsChannelService
+com/gilin/Cms/Vo/CmsChannelVo.java
+ com.gilin.Cms.Vo.CmsChannelVo
+com/gilin/Cms/Mapper/CmsChannelMapper.java
+ com.gilin.Cms.Mapper.CmsChannelMapper
 com/gilin/Cms/Controller/CmsController.java
  com.gilin.Cms.Controller.CmsController
+com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
+ com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
