@@ -525,16 +525,21 @@ public class CmsController {
 
     @GetMapping("/m/notice")
     public String mobileNotice(Model model) {
-        List<CmsNoticeVo> noticeList = cmsNoticeService.getList();
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("offset", 0);
+        List<CmsNoticeVo> noticeList = cmsNoticeService.getListPaging(params);
         List<CmsNoticeVo> mustList = cmsNoticeService.getMustList();
-        System.out.println(mustList.toString());
 
         model.addAttribute("CmsNoticeVo", noticeList);
         model.addAttribute("mustList", mustList);
         return "mobile/notice";
     }
 
-
+    @GetMapping("/m/getNotice")
+    @ResponseBody
+    public List<CmsNoticeVo> mobileGetNotice(@RequestParam HashMap<String,Object> params) {
+        return cmsNoticeService.getListPaging(params);
+    }
 
 
     @PostMapping("/cms/user/adminFlagChange")

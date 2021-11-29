@@ -48,11 +48,11 @@
     <insert id="create" parameterType="hashMap">
         insert into web.notice
         (
-            nt_title, must_yn, active_yn, content, cret_dt, cret_id, updt_dt, updt_id
+            nt_title, must_yn, active_yn, content, cret_dt, cret_id
         )
         values
         (
-            #{ntTitle}, ${mustYn}, ${activeYn}, #{content}, #{cretDt}::timestamp, #{cretId}, #{updtDt}::timestamp, #{updtId}
+            #{ntTitle}, ${mustYn}, ${activeYn}, #{content}, now(), #{cretId}
         )
     </insert>
 
@@ -60,7 +60,7 @@
         update web.notice
         set
             nt_title = #{ntTitle}, must_yn = ${mustYn}, active_yn = ${activeYn}, content = #{content},
-            cret_dt = #{cretDt}::timestamp, cret_id = #{cretId}, updt_dt = #{updtDt}::timestamp, updt_id = #{updtId}
+            updt_dt = now(), updt_id = #{updtId}
         where
             nt_seq = ${ntSeq}
     </update>
@@ -68,6 +68,12 @@
     <delete id="delete" parameterType="map">
         delete from web.notice where nt_seq = ${ntSeq}
     </delete>
+
+
+    <select id="getListPaging" parameterType="map" resultType="CmsNoticeVo">
+        select * from web.notice order by cret_dt DESC
+        limit 10 offset #{offset}::integer
+    </select>
 
 
 

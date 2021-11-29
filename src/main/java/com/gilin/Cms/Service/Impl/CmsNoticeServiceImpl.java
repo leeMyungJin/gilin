@@ -2,6 +2,7 @@ package com.gilin.Cms.Service.Impl;
 
 import com.gilin.Cms.Mapper.CmsNoticeMapper;
 import com.gilin.Cms.Service.CmsNoticeService;
+import com.gilin.Cms.Util.Login;
 import com.gilin.Cms.Vo.CmsNoticeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,17 +39,24 @@ public class CmsNoticeServiceImpl implements CmsNoticeService {
 
     @Override
     public void create(HashMap<String, Object> params) {
+        params.put("cretId", Login.getId());
         noticeMapper.create(params);
     }
 
     @Override
     public void update(HashMap<String, Object> params) {
+        params.put("updtId", Login.getId());
         noticeMapper.update(params);
     }
 
     @Override
     public void delete(HashMap<String, Object> params) {
         noticeMapper.delete(params);
+    }
+
+    @Override
+    public List<CmsNoticeVo> getListPaging(HashMap<String, Object> params) {
+        return noticeMapper.getListPaging(params);
     }
 
 

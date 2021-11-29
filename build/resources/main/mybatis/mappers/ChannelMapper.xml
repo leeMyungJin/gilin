@@ -11,8 +11,6 @@
 			, c.ch_memo 
 			, c.ch_st_dt 
 			, c.ch_end_dt 
-			, c.ch_fd_st_dt 
-			, c.ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -51,8 +49,6 @@
 			, c.ch_memo 
 			, c.ch_st_dt 
 			, c.ch_end_dt 
-			, c.ch_fd_st_dt 
-			, c.ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -89,8 +85,6 @@
 			, c.ch_memo 
 			, to_char(c.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt 
 			, to_char(c.ch_end_dt , 'YYYY-MM-DD') as ch_end_dt 
-			, to_char(c.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt 
-			, to_char(c.ch_fd_end_dt, 'YYYY-MM-DD') as ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -119,8 +113,6 @@
 			, ch_memo
 			, ch_st_dt
 			, ch_end_dt
-			, ch_fd_st_dt
-			, ch_fd_end_dt
 			, ch_pass
 			, ch_open_yn
 			, cret_dt
@@ -131,8 +123,6 @@
 			, #{chMemo}
 			, #{chStDt}::timestamp
 			, #{chEndDt}::timestamp
-			, #{chFdStDt}::timestamp
-			, #{chFdEndDt}::timestamp
 			, #{chPass}
 			, #{chOpenYn}::bool
 			, NOW()
@@ -147,8 +137,6 @@
 			, ch_memo = #{chMemo}
 			, ch_st_dt = #{chStDt}::timestamp
 			, ch_end_dt = #{chEndDt}::timestamp
-			, ch_fd_st_dt = #{chFdStDt}::timestamp
-			, ch_fd_end_dt = #{chFdEndDt}::timestamp
 			, ch_pass = #{chPass}
 			, ch_open_yn = #{chOpenYn}::bool
 			, updt_dt = NOW()

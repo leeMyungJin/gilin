@@ -22,6 +22,14 @@ public class Login {
         }
     }
 
+    public static String getId() {
+        ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession httpSession = servletRequestAttribute.getRequest().getSession(true);
+        return httpSession.getAttribute("id") != null
+                ? (String) httpSession.getAttribute("id")
+                : "";
+    }
+
 
 
 }

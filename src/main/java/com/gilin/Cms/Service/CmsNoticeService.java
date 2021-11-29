@@ -18,5 +18,6 @@ public interface CmsNoticeService {
     public void create(HashMap<String, Object> params);
     public void update(HashMap<String, Object> params);
     public void delete(HashMap<String, Object> params);
+    public List<CmsNoticeVo> getListPaging(HashMap<String, Object> params);
 
 }

@@ -15,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script>
         let isEnd = false;
+        let offset = 1;
 
         $(function(){
             $(".accr_cont").hide();
@@ -46,19 +47,22 @@
         }
 
         let fetchList = function(){
-            if(isEnd == true){
-                return;
-            }
+            // if(isEnd == true){
+            //     return;
+            // }
 
             let lastNo = $('#notice li').last().data('no')||0;
             console.log("데이터번호" + lastNo)
-            let params = {lastNo : lastNo};
+            let params = {offset : offset*10};
             $.ajax({
                 type : 'GET',
                 url : '/m/getNotice',
                 data : params,
                 dataType : null,
                 success : function(result) {
+
+                    console.log(result);
+
                     let length = result.length;
                     if(length <= 5){
                         isEnd = true;
@@ -66,6 +70,7 @@
                     $.each(result,function(index,vo){
                         renderList(false, vo);
                     })
+                    offset++;
                 },
                 error: function(request, status, error) {
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -74,11 +79,11 @@
             });
 
             let renderList = function(mode, vo){
-                let html = "<li class='accr_box' data-no='"+vo.index+"'>"
+                let html = "<li class='accr_box' data-no='"+vo.nt_seq+"'>"
                     + "<h2 class='title' onclick='show(this);'>"
                     + "<i>" + "</i>"
                     + "<span class='day'>"+vo.cretDt+"</span>"
-                    + "<span class='tit'>"+vo.title+"</span>"
+                    + "<span class='tit'>"+vo.ntTitle+"</span>"
                     + "</h2>"
                     + "<div class='accr_cont'>"
                     + vo.content
@@ -92,6 +97,7 @@
                 }
             }
         }
+
 
     </script>
 </head>
@@ -127,6 +133,8 @@
         </c:forEach>
     </ul>
 </div>
+
+<%--<button type="button" onclick="fetchList();">테스트</button>--%>
 <style>
 
 

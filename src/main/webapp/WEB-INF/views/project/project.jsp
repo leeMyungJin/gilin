@@ -316,7 +316,7 @@ function inviteProject(){
 
 </script>
 
-<body onload="pageLoad();" class="project">
+<body onload="pageLoad();" id="project_page" class="project">
   <%@ include file="../include/header.jsp" %>
 
   <div class="sub project">
