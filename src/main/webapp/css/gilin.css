@@ -385,3 +385,13 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .arrow_icon.rotate{transform: rotate(180deg);}
 .accordion-header.active{background:#f4f4f4;}
 .accordion-no-bar{border-bottom: 0;}
+
+
+/* 전승희 */
+@media (max-width:750px) {
+
+  .side_btn_wrap {
+    display: none;
+  }
+
+}
