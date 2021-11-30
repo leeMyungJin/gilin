@@ -34,6 +34,7 @@ public class ChannelScheduler {
     Environment environment;
 
     @Scheduled(cron = "0 0 12 * * *")
+//    @Scheduled(cron = "0/5 * * * * *")
     public void run() throws Exception {
 
         /* --------------------------- 12시 스케줄링 시작 --------------------------- */
@@ -99,7 +100,7 @@ public class ChannelScheduler {
         if(userToken != null) {
             params.put("userToken", pushService.getUserToken(params)); // 사용자 토큰 추가
             params.put("firebaseKeyPath", environment.getProperty("firebase.path.key")); // key파일 path 가져오기
-            result = pushService.sendPush(params);
+            result = cmsPushService.sendPush(params);
         }
         return result;
 

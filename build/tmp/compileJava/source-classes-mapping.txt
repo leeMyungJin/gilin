@@ -152,13 +152,13 @@ com/gilin/Cms/Vo/CmsUserVo.java
  com.gilin.Cms.Vo.CmsUserVo
 com/gilin/Cms/Service/Impl/CmsMemberServiceImpl.java
  com.gilin.Cms.Service.Impl.CmsMemberServiceImpl
+com/gilin/Cms/Mapper/CmsPushMapper.java
+ com.gilin.Cms.Mapper.CmsPushMapper
 com/gilin/Cms/Service/Impl/CmsPushServiceImpl.java
  com.gilin.Cms.Service.Impl.CmsPushServiceImpl
 com/gilin/Cms/Service/CmsPushService.java
  com.gilin.Cms.Service.CmsPushService
 com/gilin/Cms/Controller/CmsController.java
  com.gilin.Cms.Controller.CmsController
-com/gilin/Cms/Mapper/CmsPushMapper.java
- com.gilin.Cms.Mapper.CmsPushMapper
 com/gilin/Cms/Scheduler/ChannelScheduler.java
  com.gilin.Cms.Scheduler.ChannelScheduler
