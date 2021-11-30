@@ -28,7 +28,7 @@ public class CmsPushServiceImpl implements CmsPushService {
     }
 
     @Override
-    public void create(HashMap<String, Object> params) {
+    public void create(HashMap<String, String> params) {
         cmsPushMapper.create(params);
     }
 

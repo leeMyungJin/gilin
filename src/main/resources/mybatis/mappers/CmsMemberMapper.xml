@@ -53,5 +53,12 @@
 	</update>
 
 
+	<update id="alarmUpdateY" parameterType="map">
+		update web.member
+			set alram_push_yn = 'Y'
+			where id = #{id}
+	</update>
+
+
 
 </mapper>

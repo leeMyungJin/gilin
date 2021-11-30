@@ -15,4 +15,6 @@ public interface CmsMemberService {
 
     public void adminFlagChange(CmsMemberVo cmsMemberVo);
 
+    public void alarmUpdateY(HashMap<String, String> params);
+
 }

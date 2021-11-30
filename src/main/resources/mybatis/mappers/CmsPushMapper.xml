@@ -18,4 +18,10 @@
         order by send_dt desc
     </select>
 
+
+    <insert id="create" parameterType="map">
+        insert into web.push_history (push_title, push_body, push_notice_idx, send_dt)
+                    values (#{push_title}, #{push_body}, #{push_notice_idx}, now())
+    </insert>
+
 </mapper>

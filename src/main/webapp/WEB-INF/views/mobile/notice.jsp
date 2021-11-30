@@ -79,10 +79,14 @@
             });
 
             let renderList = function(mode, vo){
+
+                let cretDt = vo.cretDt.split(" ")[0];
+                console.log(cretDt);
+
                 let html = "<li class='accr_box' data-no='"+vo.nt_seq+"'>"
                     + "<h2 class='title' onclick='show(this);'>"
                     + "<i>" + "</i>"
-                    + "<span class='day'>"+vo.cretDt+"</span>"
+                    + "<span class='day'>"+cretDt+"</span>"
                     + "<span class='tit'>"+vo.ntTitle+"</span>"
                     + "</h2>"
                     + "<div class='accr_cont'>"
@@ -98,7 +102,6 @@
             }
         }
 
-
     </script>
 </head>
 <body>
@@ -109,7 +112,7 @@
             <li class="accr_box" id="must">
                 <h2 class="title">
                     <i></i>
-                    <span class="day">${mustList.cretDt}</span>
+                    <span class="day">${mustList.cretDt.split(" ")[0]}</span>
                     <span class="tit">[필독]${mustList.ntTitle}</span>
                 </h2>
                 <div class="accr_cont">
@@ -123,7 +126,7 @@
             <li class="accr_box" data-no="${CmsNoticeVo.ntSeq}">
                 <h2 class="title">
                     <i></i>
-                    <span class="day">${CmsNoticeVo.cretDt}</span>
+                    <span class="day">${CmsNoticeVo.cretDt.split(" ")[0]}</span>
                     <span class="tit">${CmsNoticeVo.ntTitle}</span>
                 </h2>
                 <div class="accr_cont">
@@ -134,7 +137,7 @@
     </ul>
 </div>
 
-<%--<button type="button" onclick="fetchList();">테스트</button>--%>
+
 <style>
 
 
@@ -164,6 +167,9 @@
     .accr_cont{display:none; height:100%; padding:8px 20px; background-color: #fafafa;}
     .accr_cont p, .accr_cont li  {padding:4px;}
     #must {background:#FFCB46;}
+    img {
+        max-width: 100%;
+    }
 
 
 

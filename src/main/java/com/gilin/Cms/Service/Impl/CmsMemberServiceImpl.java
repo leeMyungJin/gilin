@@ -40,5 +40,10 @@ public class CmsMemberServiceImpl implements CmsMemberService {
         cmsMemberMapper.adminFlagChange(cmsMemberVo);
     }
 
+    @Override
+    public void alarmUpdateY(HashMap<String, String> params) {
+        cmsMemberMapper.alarmUpdateY(params);
+    }
+
 
 }

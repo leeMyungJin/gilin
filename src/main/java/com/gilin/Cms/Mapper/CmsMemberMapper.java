@@ -18,4 +18,6 @@ public interface CmsMemberMapper {
 
     public void adminFlagChange(CmsMemberVo cmsMemberVo);
 
+    public void alarmUpdateY(HashMap<String, String> params);
+
 }
