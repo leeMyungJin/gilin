@@ -23,10 +23,10 @@ var pjSeq = "${pjSeq}";
 var chSeq = "${chSeq}"; 
 var fileChange = false;
 
+console.log(pjSeq);
+
 function pageLoad(){
 	sessionCheck(memberId, memberAuth, 'projectOpen');
-	
-	console.log(pageType);
 	
 	if(pageType == "project_open"){
 		$('#insertC').show();
@@ -41,12 +41,15 @@ function pageLoad(){
 	if(pjSeq != ''){
 		getProjectInfo();
 		$('#pageTitle').text('MY 프로젝트관리');
+		
+	}else{
+		setProjectContent('');
 	}
 }
 
 function getProjectInfo(){
 	var params = {
-			   chSeq : chSeq
+			   pjSeq : pjSeq
 	     	};
 	  		
 	$.ajax({
@@ -62,12 +65,140 @@ function getProjectInfo(){
    				$('#pjImg').text(data.pjImg);
    				$('#pjMemo').val(data.pjMemo);
    				$('#chSeq').val(data.chSeq);
+   				setProjectContent(data.pjContent);
            },
            error : function(request,status,error) {
              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
            }
   	});
 }
+
+var editor1;
+function setProjectContent(pjContent){
+	ClassicEditor
+	.create( document.querySelector( '#editor' ), {
+		
+		toolbar: {
+            items: [
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'outdent',
+                'indent',
+                '|',
+                'imageUpload',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                'undo',
+                'redo',
+                'htmlEmbed',
+                'horizontalLine',
+                'fontSize',
+                'fontColor',
+                'fontBackgroundColor',
+                'alignment',
+            ],
+            shouldNotGroupWhenFull: true
+        },
+        language: 'ko',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:inline',
+                'imageStyle:block',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        extraPlugins: [MyCustomUploadAdapterPlugin],
+        licenseKey: '',
+		
+	} )
+	.then( editor => {
+		editor.plugins.get('FileRepository').createUploadAdapter = (loader)=>{
+            return new UploadAdapter(loader);
+        };
+		editor1 = editor;
+		editor1.setData(pjContent);
+	} )
+	.catch( error => {
+		console.error( 'Oops, something went wrong!' );
+		console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+		console.warn( 'Build id: eed83e2ex4oz-pejoxvy7ffif' );
+		console.error( error );
+	} );
+}
+
+function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+        return new UploadAdapter(loader)
+    }
+}
+
+//이미지업로드
+class UploadAdapter {
+    constructor(loader) {
+        this.loader = loader;
+    }
+
+    upload() {
+        return this.loader.file.then( file => new Promise((async (resolve, reject) => {
+            await this._initRequest();
+            await this._initListeners(resolve, reject, file);
+            await this._sendRequest(file);
+        })))
+    }
+
+    abort() {
+        if ( this.xhr ) { this.xhr.abort(); }
+    }
+
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+        xhr.open('POST', '/project/contentImgUpload', true);
+        xhr.responseType = 'json';
+    }
+
+    async _initListeners(resolve, reject, file) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = '파일을 업로드 할 수 없습니다. \n파일용량은 3MB를 초과할수 없습니다.'
+
+        await xhr.addEventListener('error', () => {reject(genericErrorText)})
+        await xhr.addEventListener('abort', () => reject())
+        await xhr.addEventListener('load', () => {
+            const maxSize = 3500000;
+            const response = xhr.response
+
+            if(!response || response.error ||file.size > maxSize) {
+                return reject( response && response.error ? response.error.message : genericErrorText );
+            }
+
+            resolve({
+                default: response.url //업로드된 파일 주소
+            })
+        })
+    }
+
+    _sendRequest(file) {
+        const data = new FormData()
+        data.append('file', file);
+        this.xhr.send(data)
+    }
+}
+
 
 function saveProject(type){
 	var url;
@@ -131,6 +262,7 @@ function saveProject(type){
 
 		  
 		  console.log(chSeq);
+		  console.log(editor1.getData());
 		  // 프로젝트 insert or update
 		  var params = {
 				 chSeq : (chSeq == "" ? $('#chSeq').val() : chSeq)
@@ -138,6 +270,7 @@ function saveProject(type){
    			    , pjName : $('#pjName').val()
    				, pjImg : pjImg  //window.location.origin+'/img/'+imgUpload.files[0].name
    				, pjMemo : $('#pjMemo').val()
+   				, pjContent : editor1.getData()
    				, cretId : memberId
    				, updtId : memberId
    	     	};
@@ -250,7 +383,7 @@ function changeChOpenYn(type){
           <tr>
             <td colspan="2">
               <div class="editor">
-                에디터 영역
+                <textarea name="editor" id="editor"></textarea>
               </div>
 
             </td>

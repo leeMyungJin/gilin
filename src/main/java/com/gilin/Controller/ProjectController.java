@@ -1,18 +1,24 @@
 package com.gilin.Controller;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gilin.Service.ProjectService;
 import com.gilin.vo.ProjectVo;
@@ -104,6 +110,51 @@ public class ProjectController {
     public void deleteProject(@RequestParam HashMap<String,String> params, HttpServletRequest req){
     	projectService.deleteProject(params);
     }   
+    
+    @PostMapping("/contentImgUpload")
+    @ResponseBody
+    public Map<String, String> uploadImage(@RequestParam("file") MultipartFile multi, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        Map<String, String> result = new HashMap<>();
+
+        try {
+
+            String uploadpath = "/var/upload/img/editor/";
+            String originFilename = multi.getOriginalFilename();
+            String extName = originFilename.substring(originFilename.lastIndexOf("."),originFilename.length());
+            long size = multi.getSize();
+            String saveFileName = "";
+
+            Calendar calendar = Calendar.getInstance();
+            saveFileName += calendar.get(Calendar.YEAR);
+            saveFileName += calendar.get(Calendar.MONTH);
+            saveFileName += calendar.get(Calendar.DATE);
+            saveFileName += calendar.get(Calendar.HOUR);
+            saveFileName += calendar.get(Calendar.MINUTE);
+            saveFileName += calendar.get(Calendar.SECOND);
+            saveFileName += calendar.get(Calendar.MILLISECOND);
+            saveFileName += extName;
+
+            if(!multi.isEmpty())
+            {
+                File file = new File(uploadpath, saveFileName);
+                if(!file.exists()) // 해당 경로가 없을 경우
+                    file.mkdirs();  // 폴더 생성
+                multi.transferTo(file);
+                String url = "https://gilin.co.kr/img/editor/"+saveFileName;
+                result.put("url", url);
+                result.put("code", "1");
+            }
+
+
+        }catch(Exception e)
+        {
+            result.put("code", "2");
+            System.out.println(e);
+        }
+
+        return result;
+    }
    
     
 }

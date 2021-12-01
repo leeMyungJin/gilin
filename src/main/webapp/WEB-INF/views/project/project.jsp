@@ -6,6 +6,11 @@
 
 <head>
   <%@ include file="../include/head.jsp" %>
+  <script src="../ckeditor5/build/ckeditor.js"></script>
+  <link rel="stylesheet" type="text/css" href="../ckeditor5/sample/styles.css">
+  <style type="text/css">
+        .ck-content {height: 80vh;}
+  </style>
   <style>
         html, body, div, span, applet, object, iframe,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -44,6 +49,7 @@
             .terms_wrp{padding:15px;}
             .terms_tit{margin:-15px -15px 15px; padding:10px 15px;}
         }
+        
     </style>
 </head>
 
@@ -55,6 +61,7 @@ var memberAuth = "<%=session.getAttribute("adminYn")%>";
 var pjSeq = "${pjSeq}";
 var fdYn = "${projectVo.fdYn}"; //펀딩 완료여부
 var finYn = "${projectVo.finYn}"; //채널 완료여부 
+var pjContent = '${projectVo.pjContent}';
 
 var totalData = 0;    // 총 데이터 수
 var totalPage = 0;	// 총 페이지 수
@@ -66,6 +73,7 @@ function pageLoad(){
 	sessionCheck(memberId, memberAuth, 'project');
 	
 	getFundingCommentPageInfo();
+	setProjectContent();
 	
 }
 
@@ -314,6 +322,30 @@ function inviteProject(){
 	alert("APP 에서만 가능합니다.");
 }
 
+function setProjectContent(){
+	ClassicEditor
+	.create( document.querySelector( '#editor' ), {
+        language: 'ko',
+	} )
+	.then( editor => {
+		editor.plugins.get('FileRepository').createUploadAdapter = (loader)=>{
+            return new UploadAdapter(loader);
+        };
+        
+        const toolbarElement = editor.ui.view.toolbar.element;
+        toolbarElement.style.display = 'none';
+        
+        editor.isReadOnly = true;
+		editor.setData(pjContent);
+	} )
+	.catch( error => {
+		console.error( 'Oops, something went wrong!' );
+		console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+		console.warn( 'Build id: eed83e2ex4oz-pejoxvy7ffif' );
+		console.error( error );
+	} );
+}
+
 </script>
 
 <body onload="pageLoad();" id="project_page" class="project">
@@ -365,7 +397,7 @@ function inviteProject(){
     <div class="pjt_detail_wrap">
       <div class="inner">
         <div id="pjContent" class="cont">
-          ${projectVo.pjContent}
+          <textarea name="editor" id="editor"></textarea>
         </div>
         <aside class="funding_aside sticky">
           <div class="item_wrap">
