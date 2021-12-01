@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Component
-public class ChannelScheduler {
+public class ChannelEndScheduler {
 
     @Autowired
     CmsChannelService cmsChannelService;
@@ -34,16 +34,16 @@ public class ChannelScheduler {
     Environment environment;
 
 
-    /* 채널 종료 하루 전 스케줄러 */
-    @Scheduled(cron = "0 0 12 * * *")
-//    @Scheduled(cron = "0/5 * * * * *")
+    /* 채널종료 당일 스케줄러 */
+//    @Scheduled(cron = "0 0 12 * * *")
+    @Scheduled(cron = "0/5 * * * * *")
     public void run() throws Exception {
 
         /* --------------------------- 12시 스케줄링 시작 --------------------------- */
         System.out.println("------------- " + LocalDateTime.now() + " :: 12시 스케줄링 시작 -------------");
 
         /* 종료하루 전 채널목록 + 채널에 속한 프로젝트 개설자 정보(구분자,) 들고옴 */
-        List<CmsChannelVo> cmsChannelVos = cmsChannelService.getSchedulerList();
+        List<CmsChannelVo> cmsChannelVos = cmsChannelService.getChannelEndSchedulerList();
 
         for (CmsChannelVo vo: cmsChannelVos) {
 
@@ -55,14 +55,14 @@ public class ChannelScheduler {
 
             cmsMemberService.alarmUpdateY(params1);
 
-            params1.put("title", vo.getChName() + " 채널이 내일 종료됩니다.");
-            params1.put("body", vo.getChName() + " 채널이 내일 종료됩니다.");
+            params1.put("title", vo.getChName() + " 채널이 금일 종료됩니다.");
+            params1.put("body", vo.getChName() + " 채널이 금일 종료됩니다.");
             params1.put("idx", Long.toString(vo.getChSeq()));
             /* 채널개설자 푸시보내기 */
             push(params1);
             /* 채널개설자 히스토리남기기 */
-            params1.put("push_title", vo.getChName() + " 채널이 내일 종료됩니다.");
-            params1.put("push_body", vo.getChName() + " 채널이 내일 종료됩니다.");
+            params1.put("push_title", vo.getChName() + " 채널이 금일 종료됩니다.");
+            params1.put("push_body", vo.getChName() + " 채널이 금일 종료됩니다.");
             params1.put("push_notice_idx", Long.toString(vo.getChSeq()));
             cmsPushService.create(params1);
 
@@ -77,15 +77,15 @@ public class ChannelScheduler {
                         params2.put("id", projectIds[i]);
                         cmsMemberService.alarmUpdateY(params2);
 
-                        params2.put("title", vo.getChName() + " 채널이 내일 종료됩니다.");
-                        params2.put("body", vo.getChName() + " 채널이 내일 종료됩니다.");
+                        params2.put("title", vo.getChName() + " 채널이 금일 종료됩니다.");
+                        params2.put("body", vo.getChName() + " 채널이 금일 종료됩니다.");
                         params2.put("idx", Long.toString(vo.getChSeq()));
 
                         /* 프로젝트개설자 푸시보내기 */
                         push(params2);
                         /* 프로젝트개설자 히스토리남기기 */
-                        params2.put("push_title", vo.getChName() + " 채널이 내일 종료됩니다.");
-                        params2.put("push_body", vo.getChName() + " 채널이 내일 종료됩니다.");
+                        params2.put("push_title", vo.getChName() + " 채널이 금일 종료됩니다.");
+                        params2.put("push_body", vo.getChName() + " 채널이 금일 종료됩니다.");
                         params2.put("push_notice_idx", Long.toString(vo.getChSeq()));
                         cmsPushService.create(params2);
                     }

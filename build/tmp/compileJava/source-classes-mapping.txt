@@ -1,7 +1,7 @@
 com/gilin/Mappers/FundingMapper.java
  com.gilin.Mappers.FundingMapper
-com/gilin/Cms/Service/CmsChannelService.java
- com.gilin.Cms.Service.CmsChannelService
+com/gilin/Cms/Service/Impl/CmsPushServiceImpl.java
+ com.gilin.Cms.Service.Impl.CmsPushServiceImpl
 com/gilin/vo/ReportVo.java
  com.gilin.vo.ReportVo
 com/gilin/Cms/Service/Impl/AppVersionServiceImpl.java
@@ -10,8 +10,8 @@ com/gilin/Service/ChannelService.java
  com.gilin.Service.ChannelService
 com/gilin/Cms/Mapper/AppVersionMapper.java
  com.gilin.Cms.Mapper.AppVersionMapper
-com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
- com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
+com/gilin/Cms/Mapper/CmsPushMapper.java
+ com.gilin.Cms.Mapper.CmsPushMapper
 com/gilin/Service/ProjectService.java
  com.gilin.Service.ProjectService
 com/gilin/Controller/FileController.java
@@ -118,8 +118,8 @@ com/gilin/Controller/MemberController.java
  com.gilin.Controller.MemberController
 com/gilin/Cms/Vo/CmsChannelVo.java
  com.gilin.Cms.Vo.CmsChannelVo
-com/gilin/Cms/Mapper/CmsChannelMapper.java
- com.gilin.Cms.Mapper.CmsChannelMapper
+com/gilin/Cms/Service/CmsPushService.java
+ com.gilin.Cms.Service.CmsPushService
 com/gilin/Cms/Util/Login.java
  com.gilin.Cms.Util.Login
 com/gilin/Cms/Service/Impl/CmsProjectServiceImpl.java
@@ -152,13 +152,15 @@ com/gilin/Cms/Vo/CmsUserVo.java
  com.gilin.Cms.Vo.CmsUserVo
 com/gilin/Cms/Service/Impl/CmsMemberServiceImpl.java
  com.gilin.Cms.Service.Impl.CmsMemberServiceImpl
-com/gilin/Cms/Mapper/CmsPushMapper.java
- com.gilin.Cms.Mapper.CmsPushMapper
-com/gilin/Cms/Service/Impl/CmsPushServiceImpl.java
- com.gilin.Cms.Service.Impl.CmsPushServiceImpl
-com/gilin/Cms/Service/CmsPushService.java
- com.gilin.Cms.Service.CmsPushService
-com/gilin/Cms/Controller/CmsController.java
- com.gilin.Cms.Controller.CmsController
 com/gilin/Cms/Scheduler/ChannelScheduler.java
  com.gilin.Cms.Scheduler.ChannelScheduler
+com/gilin/Cms/Service/CmsChannelService.java
+ com.gilin.Cms.Service.CmsChannelService
+com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
+ com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
+com/gilin/Cms/Mapper/CmsChannelMapper.java
+ com.gilin.Cms.Mapper.CmsChannelMapper
+com/gilin/Cms/Controller/CmsController.java
+ com.gilin.Cms.Controller.CmsController
+com/gilin/Cms/Scheduler/ChannelEndScheduler.java
+ com.gilin.Cms.Scheduler.ChannelEndScheduler

@@ -20,5 +20,6 @@ public interface CmsChannelMapper {
     public CmsChannelVo validationByName(String chName);
 
     public List<CmsChannelVo> getSchedulerList();
+    public List<CmsChannelVo> getChannelEndSchedulerList();
 
 }

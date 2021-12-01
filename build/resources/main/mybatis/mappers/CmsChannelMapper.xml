@@ -183,4 +183,21 @@
     </select>
 
 
+    <select id="getChannelEndSchedulerList" resultType="CmsChannelVo">
+        select
+            t1.ch_seq,
+            t1.ch_name,
+            t1.ch_end_dt,
+            t1.cret_id,
+            t2.projectCretIds
+        from
+            web.channel t1
+                left join
+            (select ch_seq, string_agg(distinct cret_id, ',') as projectCretIds from web.project group by ch_seq) t2 on t1.ch_seq = t2.ch_seq
+        where (t1.ch_end_dt &lt;= to_char(now(), 'YYYY-MM-DD 23:59:59.999')::timestamp and t1.ch_end_dt &gt;= to_char(now(), 'YYYY-MM-DD 00:00:00.000')::timestamp )
+          and t1.ch_active_yn = true
+        order by t1.cret_dt desc
+    </select>
+
+
 </mapper>
