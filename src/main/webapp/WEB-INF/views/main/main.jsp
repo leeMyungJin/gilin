@@ -56,7 +56,6 @@ function getAllChannelList(type){
      data : param,
      success : function(result) {
      	console.log("getAllChannelList success");
-     	console.log(viewCount);
      	
      	if(result.length > 0){
    			var maxLength = (viewCount+pageCount < result.length ? viewCount+pageCount : result.length);
