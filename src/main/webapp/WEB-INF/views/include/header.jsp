@@ -3,7 +3,7 @@
 <script type="text/javascript">
 
 Kakao.init('968d0faff8cf6b9a122fd3245d712fbf'); //카카오 javascript키
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//console.log(Kakao.isInitialized()); // sdk초기화여부판단
 	
 function enterkeyHeader(type) {
     if (window.event.keyCode == 13) {
@@ -26,11 +26,11 @@ function kakaoLogin(){
           success: function (response) {
         	  var params = {
         			  id : response.id
-        			  , email : response.kakao_account.email
-        			  , gender : response.kakao_account.gender
-        			  , age : response.kakao_account.age_range
-        			  , nickname : response.kakao_account.profile.nickname
-        			  , profilePic : response.kakao_account.profile.thumbnail_image_url
+        			  , email : ( response.kakao_account.email != 'null'? response.kakao_account.email : '-' )
+        			  , gender : ( response.kakao_account.gender != 'null'? response.kakao_account.gender : '-' )
+        			  , age : ( response.kakao_account.age_range != 'null'? response.kakao_account.age_range : '-' )
+        			  , nickname : ( response.kakao_account.profile.nickname != 'null'? response.kakao_account.profile.nickname : '-' )
+        			  , profilePic : ( response.kakao_account.profile.thumbnail_image_url != 'null'? response.kakao_account.profile.thumbnail_image_url : '-' )
         	  }
         	  webLogin(params);
           },
@@ -155,19 +155,20 @@ function appleLogin(){
 	
 	//애플로 로그인 성공 시.
 	document.addEventListener('AppleIDSignInOnSuccess', (data) => {
-	    /* //샘플 유저 정보 
+	    /* //테스트 유저 정보 (로컬에서는 애플 로그인 테스트가 불가하기에 아래 셈플 데이터로 확인)
 	    var detail = JSON.parse('{"authorization": {"code": "c5dc09c3c45a04e88a4dfb02b1f2cebb3.0.rywy.gFoM2VQZm4dXuv1zgtGy7w","id_token": "eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoia3IuY28uZ2lsaW4uZ2lsaW4wMDEiLCJleHAiOjE2MzgxODc3NDcsImlhdCI6MTYzODEwMTM0Nywic3ViIjoiMDAwODY4LmE2ZmUzMGUzZGMzYzRkMmZiNjU3NGI4NjcwMzNlYWY2LjExMjQiLCJjX2hhc2giOiJrTHlmMHUyZm1tLU5TMkZZR1FZdzRBIiwiZW1haWwiOiJ3aGl0YWtlcmNvbXBhbnlAbmF2ZXIuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjM4MTAxMzQ3LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.L3l0S23MmAZMuZoMI7N9JGGF-Ke0h0I9RujvKjSsyEqTIgqQSIuX48qdvb2XJdEW4AWTZWJCS0yp3HJdeB23AK2p0xtV008jrMCyy5YnMBxMvA6bskr5aFE5-3qawVJGilbG8GeMvf2_WJhcKjTnXh48f46GFb6DLFK7nOlvcT3sXBp7wLJ3Dm88907bArZPh18AGKEEgVDVO6TM9_wYyGUmIPIHWxnL7jFkwlqQ2wokRVMtATgVj8zy8JI6bXVODSbv-0avzIkutjA4WIGa_NYVVd9zCYXsup-Ix0cq_jpbhZP0xwc6yMaqyQOimZAA1u-x0eOAhs6grHdnvuDD2Q","state": "gilinAppleLogin"},"user": {"name": {"firstName": "휘테커","lastName": "벤"},"email": "whitakercompany@naver.com"}}');
 	 	var id_token = detail.authorization.id_token;
 	 	var name = detail.user.name.lastName+detail.user.name.firstName;
 	 	console.log("name : " + name); */
 		
-	     //console.log(data);
-		 var name = '';
+	 	
+		/*//이름은 항상 Gilin 으로 셋팅하기로 함.
+		var name = '';
 	     if(data.detail.user != undefined){
 	    	 console.log(data.detail.user.name.firstName+data.detail.name.user.lastName);
 	    	 name = data.detail.user.name.firstName + data.detail.name.user.lastName;
 	     }
-	 	console.log("name : " + name);
+	 	console.log("name : " + name); */
 	 	
 	 	var id_token = data.detail.authorization.id_token;
 	 	var id_token_str = id_token.split('.');
@@ -178,7 +179,7 @@ function appleLogin(){
 	 			  , email : id_token_decode.email
 	 			  , gender : '-'
 	 			  , age : '-'
-	 			  , nickname : (name == '' ? null : name)
+	 			  , nickname : 'Gilin'
 	 			  , profilePic : 'https://gilin.co.kr/img/basedprofile/icon_my_avatar.png'
 	 	  }
 	 	
@@ -188,8 +189,7 @@ function appleLogin(){
 	//애플로 로그인 실패 시.
 	document.addEventListener('AppleIDSignInOnFailure', (error) => {
 	     //handle error.
-	     alert("애플로그인에 실패하였습니다.")
-	     console.log(error);
+	     alert("애플로그인에 실패하였습니다.");
 	     //todo fail logic
 	});
 		
