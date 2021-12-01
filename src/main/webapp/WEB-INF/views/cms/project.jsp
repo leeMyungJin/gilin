@@ -25,7 +25,7 @@
             </div>
             <div class="item">
                 <p class="over_tit">마감된 프로젝트</p>
-                <p class="over_txt">${count.totalCount - count.activeCount}</p>
+                <p class="over_txt">${count.totalcount - count.activecount}</p>
             </div>
 
             <div class="item btn_wrap">

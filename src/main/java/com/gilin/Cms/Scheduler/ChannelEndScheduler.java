@@ -35,8 +35,8 @@ public class ChannelEndScheduler {
 
 
     /* 채널종료 당일 스케줄러 */
-//    @Scheduled(cron = "0 0 12 * * *")
-    @Scheduled(cron = "0/5 * * * * *")
+    @Scheduled(cron = "0 0 12 * * *")
+//    @Scheduled(cron = "0/5 * * * * *")
     public void run() throws Exception {
 
         /* --------------------------- 12시 스케줄링 시작 --------------------------- */

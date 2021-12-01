@@ -36,7 +36,8 @@
     <select id="getProjectCount" resultType="hashMap">
         select
             count(*) as totalCount,
-            (select count(*) as activeCount from web.project where fd_st_dt &lt;= now() and fd_end_dt &gt;= now()) as activeCount
+            (select count(*) as activeCount from web.project where fd_st_dt &lt;= now() and fd_end_dt &gt;= now()) as activeCount,
+            (select count(*) as activeCount from web.project where fd_end_dt &lt; now()) as inactiveCount
         from web.project
     </select>
 
