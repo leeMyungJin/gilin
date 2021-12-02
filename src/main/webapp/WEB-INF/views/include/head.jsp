@@ -7,10 +7,10 @@
   <meta name="description" content="대학생 창업교육 개발 및 진행, Gilin 기린">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gilin 기린">
-  <meta property="og:image" content="http://강아지/images/common/og.jpg">
+  <meta property="og:image" content="/img/common/ogimg.png">
   <meta property="og:description" content="대학생 창업교육 개발 및 진행, Gilin 기린">
   <meta property="og:url" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/img/common/favicon.ico">
   <link rel="canonical" href="">
   <title>GILIN</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
