@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gilin.Cms.Service.*;
 import com.gilin.Cms.Util.Login;
 import com.gilin.Cms.Vo.*;
+import com.gilin.Service.PushService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +49,12 @@ public class CmsController {
 
     @Autowired
     CmsPushService cmsPushService;
+
+    @Autowired
+    PushService pushService;
+
+    @Autowired
+    Environment environment;
 
 
     private String path = "/var/upload/img/";
@@ -550,6 +558,30 @@ public class CmsController {
     @ResponseBody
     public void adminFlagChange(CmsMemberVo cmsMemberVo) {
         cmsMemberService.adminFlagChange(cmsMemberVo);
+    }
+
+
+    @PostMapping("/cms/notice/push")
+    @ResponseBody
+    public String adminPush(@RequestParam HashMap<String, String> params) throws Exception {
+
+        List<CmsMemberVo> cmsUserVos = cmsMemberService.getList();
+
+        String result ="fail";
+        params.put("title", params.get("title"));
+        params.put("body", params.get("body"));
+        params.put("idx", params.get("idx"));
+
+        for (CmsMemberVo vo: cmsUserVos) {
+            String userToken = vo.getFcmToken(); // DB에서 사용자 토큰 가져오기
+            if(userToken != null) {
+                params.put("userToken", userToken); // 사용자 토큰 추가
+                params.put("firebaseKeyPath", environment.getProperty("firebase.path.key")); // key파일 path 가져오기
+                result = cmsPushService.sendPush(params);
+            }
+        }
+
+        return result;
     }
 
 }

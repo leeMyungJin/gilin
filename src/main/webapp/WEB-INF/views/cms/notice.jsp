@@ -248,50 +248,50 @@
             <div class="modal_bg"></div>
             <div class="modal_cont">
                 <span class="material-icons-outlined close_btn" onclick="modalToggle('modalPush')">close</span>
+                <form action="" onsubmit="return sendPush(this)">
+                    <h2>푸쉬보내기</h2>
+                    <p class="required_wrap">필수항목</p>
+                    <table class="modal_table">
+                        <tr>
+                            <th></th>
+                            <td>
+                                <div class="chk_wrap">
+                                    <div class="chk_btn" style="margin-right:12px;">
+                                        <input id="public" name="radio" type="radio" value="public">
+                                        <label for="public">일반</label>
+                                        <div class="chk_btn_circle"></div>
+                                    </div>
+                                    <div class="chk_btn">
+                                        <input id="private" name="radio" type="radio" value="private" checked>
+                                        <label for="private">공지</label>
+                                        <div class="chk_btn_circle"></div>
+                                    </div>
+                                    <div class="showbox active">
 
-                <h2>푸쉬보내기</h2>
-                <p class="required_wrap">필수항목</p>
-                <table class="modal_table">
-                    <tr>
-                        <th></th>
-                        <td>
-                            <div class="chk_wrap">
-                                <div class="chk_btn" style="margin-right:12px;">
-                                    <input id="public" name="radio" type="radio" value="public">
-                                    <label for="public">일반</label>
-                                    <div class="chk_btn_circle"></div>
+                                    </div>
                                 </div>
-                                <div class="chk_btn">
-                                    <input id="private" name="radio" type="radio" value="private" checked>
-                                    <label for="private">공지</label>
-                                    <div class="chk_btn_circle"></div>
-                                </div>
-                                <div class="showbox active">
+                            </td>
+                        </tr>
+                        <tr class="showbox active">
+                            <th>공지번호 <span>*</span></th>
+                            <td><input type="text" id="search" name="search" value="" placeholder="" class="search"></td>
+                        </tr>
+                        <tr>
+                            <th>제목 <span>*</span></th>
+                            <td><input type="text" id="search" name="search" value="" placeholder="" class="search"></td>
+                        </tr>
+                        <tr>
+                            <th>내용 <span>*</span></th>
+                            <td>
+                                <textarea name="name" rows="8" cols="80"></textarea>
+                            </td>
+                        </tr>
+                    </table>
 
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="showbox active">
-                        <th>공지번호 <span>*</span></th>
-                        <td><input type="text" id="search" name="search" value="" placeholder="" class="search"></td>
-                    </tr>
-                    <tr>
-                        <th>제목 <span>*</span></th>
-                        <td><input type="text" id="search" name="search" value="" placeholder="" class="search"></td>
-                    </tr>
-                    <tr>
-                        <th>내용 <span>*</span></th>
-                        <td>
-                            <textarea name="name" rows="8" cols="80"></textarea>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class="btn_wrap">
-                    <button class="btn_style01">보내기</button>
-                </div>
-
+                    <div class="btn_wrap">
+                        <button class="btn_style01">보내기</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -300,7 +300,28 @@
 
 </div>
 
+<script>
+    function sendPush(f)
+    {
+        console.log($(f).serialize())
 
+        $.ajax({
+            type : 'GET',
+            url : '/cms/notice/push',
+            data : $(f).serialize(),
+            success : function(result) {
+
+
+
+            },
+            error: function(request, status, error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+
+        return false;
+    }
+</script>
 
 <style>
     .setGrid.wj-flexgrid .wj-cell {

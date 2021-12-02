@@ -170,7 +170,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .gallery .img_wrap img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:100%;transition:.3s;}
 .gallery .flex_box:hover .img_wrap img{transform:translate(-50%,-50%) scale(1.1);}
 .gallery .chn_tit{font-size:18px;margin:calc(var(--spacing) * 2) 0 var(--spacing);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;height:48px;}
-.gallery .chn_txt{line-height:1.4;color:var(--txt-color);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;}
+.gallery .chn_txt{line-height:1.4;color:var(--txt-color);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis; height: 42px;}
 .gallery .detail_info{display:flex;align-items:center;justify-content:space-between;margin-top:var(--spacing);padding-top:var(--spacing);border-top:1px solid var(--bor-color);}
 .gallery .detail_info .budget{background:url('../img/budget_icon.svg') 0 center no-repeat;padding-left:calc(var(--spacing) * 2);font-size:18px;}
 .gallery .detail_info .dday{color:var(--txt-color);}

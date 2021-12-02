@@ -160,7 +160,7 @@ com/gilin/Cms/Service/Impl/CmsChannelServiceImpl.java
  com.gilin.Cms.Service.Impl.CmsChannelServiceImpl
 com/gilin/Cms/Mapper/CmsChannelMapper.java
  com.gilin.Cms.Mapper.CmsChannelMapper
-com/gilin/Cms/Controller/CmsController.java
- com.gilin.Cms.Controller.CmsController
 com/gilin/Controller/ProjectController.java
  com.gilin.Controller.ProjectController
+com/gilin/Cms/Controller/CmsController.java
+ com.gilin.Cms.Controller.CmsController
