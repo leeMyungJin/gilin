@@ -269,15 +269,3 @@ function appleLogin(){
         font-size: 11px;
     }
 </style>
-
-
-<script>
-    // $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").html("test")
-    // console.log($("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text"));
-    //
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").text("test")
-    //
-    //     $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").text("test")
-    // })
-</script>
