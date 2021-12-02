@@ -135,7 +135,7 @@
 			, pj_content = #{pjContent} 
 			, updt_dt = now()
 			, updt_id = #{updtId}
-		from pj_seq = #{pjSeq}::numeric
+		where pj_seq = #{pjSeq}::numeric
 	</update>
 	
 	<delete id="deleteProject" parameterType="hashMap">

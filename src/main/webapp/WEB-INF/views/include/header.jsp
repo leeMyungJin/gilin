@@ -227,8 +227,13 @@ function appleLogin(){
 	              <h2>로그인</h2>
 	              <p>간편로그인으로 기린 시작하기</p>
 	              <a class="kakao modal_login_btn" href="javascript:void(0);" onClick="kakaoLogin()"><img src="../img/icon_kakao.svg">카카오로 로그인</a>
-	              <a class="apple modal_login_btn" href="javascript:void(0);" onClick="appleLogin()" id="appleid-signin"><img src="../img/icon_apple.svg">Apple로 로그인</a>
-	            	
+                   <div class="apple-login-wrap" style="position: relative">
+                      <a class="apple modal_login_btn" style="position:absolute; opacity: 0" href="javascript:void(0);" onClick="appleLogin()" id="appleid-signin"><img src="../img/icon_apple.svg">Apple로 로그인</a>
+                        <!-- 수정추가 -->
+                        <a class="apple modal_login_btn" href="javascript:void(0);" ><img src="img/icon_apple.svg" alt="">Apple로 로그인</a>
+                        <!-- 수정끝 -->
+                   </div>
+
 	            
 	            </div>
 	          </div>
@@ -258,3 +263,21 @@ function appleLogin(){
     <a href="" class="top">TOP</a>
   </div>
   <!-- 수정추가 끝 -->
+
+<style>
+    #appleid-signin > div > div:nth-child(1) > svg > g > svg > text {
+        font-size: 11px;
+    }
+</style>
+
+
+<script>
+    // $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").html("test")
+    // console.log($("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text"));
+    //
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").text("test")
+    //
+    //     $("#appleid-signin > div > div:nth-child(1) > svg > g > svg > text").text("test")
+    // })
+</script>

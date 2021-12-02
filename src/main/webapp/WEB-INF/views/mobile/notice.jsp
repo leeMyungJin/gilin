@@ -166,7 +166,7 @@
     .accr_box .title.on i {transform: rotate(-45deg);}
     .accr_cont{display:none; height:100%; padding:8px 20px; background-color: #fafafa;}
     .accr_cont p, .accr_cont li  {padding:4px;}
-    #must {background:#FFCB46;}
+    #must {background:#eee;}
     img {
         max-width: 100%;
     }

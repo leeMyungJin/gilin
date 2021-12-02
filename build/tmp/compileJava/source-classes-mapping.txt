@@ -146,8 +146,8 @@ com/gilin/Controller/MainController.java
  com.gilin.Controller.MainController
 com/gilin/Service/LoginService.java
  com.gilin.Service.LoginService
-com/gilin/Controller/ProjectController.java
- com.gilin.Controller.ProjectController
+com/gilin/Cms/Scheduler/ChannelEndScheduler.java
+ com.gilin.Cms.Scheduler.ChannelEndScheduler
 com/gilin/Cms/Vo/CmsUserVo.java
  com.gilin.Cms.Vo.CmsUserVo
 com/gilin/Cms/Service/Impl/CmsMemberServiceImpl.java
@@ -162,5 +162,5 @@ com/gilin/Cms/Mapper/CmsChannelMapper.java
  com.gilin.Cms.Mapper.CmsChannelMapper
 com/gilin/Cms/Controller/CmsController.java
  com.gilin.Cms.Controller.CmsController
-com/gilin/Cms/Scheduler/ChannelEndScheduler.java
- com.gilin.Cms.Scheduler.ChannelEndScheduler
+com/gilin/Controller/ProjectController.java
+ com.gilin.Controller.ProjectController
