@@ -229,6 +229,33 @@ function saveProject(type){
 			return;
 		}
 		
+		//프로젝트 대표 이미지 서버 업로드
+  		 var imgUpload = $("#file")[0];
+  		 var pjImg = '';
+  		 
+  		 if(type == "insert"){
+  			 if(imgUpload.files.length === 0){
+  			    alert("프로젝트이미지를 선택해주세요");
+  			    return;
+  			  }
+  		 }
+  		 
+  		 if($("#file").val() != ''){
+  		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+  			 const time = new Date().toTimeString().split(" ")[0];
+  			 
+  			 let fileNameLength = imgUpload.files[0].name.length;
+  			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
+  			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
+  			  
+  			 pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + "." + fileType;
+  			 $('#filePath').val('/img/project');
+  			 $('#fileName').val(date + '_' + time + "." + fileType);
+  			 $("#imgForm").submit();
+  			 
+  		 }else{
+  			  pjImg = $('#pjImg').text()
+  		 }
 	
    	  	 //에디터 이미지 temp > 본폴더로 이동 및 temp 삭제
    	  	 var memberIdArr = memberId.split('.');
@@ -248,34 +275,6 @@ function saveProject(type){
    	        		  return false;
    	        	  }
    	        	  
-   	        	//프로젝트 대표 이미지 서버 업로드
-	   	  		 var imgUpload = $("#file")[0];
-	   	  		 var pjImg = '';
-	   	  		 
-	   	  		 if(type == "insert"){
-	   	  			 if(imgUpload.files.length === 0){
-	   	  			    alert("프로젝트이미지를 선택해주세요");
-	   	  			    return;
-	   	  			  }
-	   	  		 }
-	   	  		 
-	   	  		 if($("#file").val() != ''){
-	   	  		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-	   	  			 const time = new Date().toTimeString().split(" ")[0];
-	   	  			 
-	   	  			 let fileNameLength = imgUpload.files[0].name.length;
-	   	  			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
-	   	  			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
-	   	  			  
-	   	  			 pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + "." + fileType;
-	   	  			 $('#filePath').val('/img/project');
-	   	  			 $('#fileName').val(date + '_' + time + "." + fileType);
-	   	  			 $("#imgForm").submit();
-	   	  			 
-	   	  		 }else{
-	   	  			  pjImg = $('#pjImg').text()
-	   	  		 }
-   	        	   
    	        	  // 프로젝트정보 insert or update
 	   	  		  var params = {
 	   	  				 chSeq : (chSeq == "" ? $('#chSeq').val() : chSeq)
@@ -378,7 +377,7 @@ function changeChOpenYn(type){
           <tr>
             <th>프로젝트 이미지</th>
             <td>
-              <form id="imgForm" action="https://211.37.179.144/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
+              <form id="imgForm" action="https://gilin.co.kr/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
 	              <div class='file_input'>
 	                <input class="btn" type='file' name="file" id="file" onchange="changeFile()">
 	                <div class="btn">파일선택</div>

@@ -132,12 +132,13 @@ function saveChannel(type){
 			  
 			 chImg = 'https://gilin.co.kr/img/channel/'+ date + '_' + time + "." + fileType;
 			 //chImg = 'https://gilin.co.kr/img/channel/'+ date + '_' + time + '_' +imgUpload.files[0].name;
+			 
 			 $('#filePath').val('/img/channel');
 			 $('#fileName').val(date + '_' + time + "." + fileType);
 			 $("#imgForm").submit();
 			 
 		  }else{
-			  chImg = $('#chImg').text()
+			  chImg = $('#chImg').text();
 		  }
 
 		  // 채널 insert or update
@@ -236,7 +237,7 @@ function changeChOpenYn(type){
           <tr>
             <th>채널 이미지</th>
             <td>
-            	<form id="imgForm" action="https://211.37.179.144/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
+            	<form id="imgForm" action="https://gilin.co.kr/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
 	              <div class='file_input'>
 	                <input class="btn" type='file' name="file" id="file" onchange="changeFile()">
 	                <div class="btn">파일선택</div>
