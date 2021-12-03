@@ -24,10 +24,7 @@ var chSeq = "${chSeq}";
 var fileChange = false;
 
 // 에디터 이미지 저장 key로 사용 (프로젝트번호+아이디+시간)
-var openTime = new Date().toTimeString().split(" ")[0];
-
-
-console.log(pjSeq);
+var openTime = new Date().toTimeString().split(" ")[0].replaceAll(':', '');
 
 function pageLoad(){
 	sessionCheck(memberId, memberAuth, 'projectOpen');

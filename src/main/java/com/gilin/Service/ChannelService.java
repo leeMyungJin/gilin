@@ -20,4 +20,6 @@ public interface ChannelService {
 	
 	public void deleteChannel( HashMap<String,String> params);
 	
+	public void insertChannerVisitHist( HashMap<String,String> params);
+	
 }

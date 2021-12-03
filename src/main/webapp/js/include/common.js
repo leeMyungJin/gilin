@@ -346,7 +346,7 @@ function sessionCheck(id, auth, view){
     	$('#a_login').hide();
         $('#b_login').show();
 		
-		if(view == "channelOpen" || view == "projectOpen"){
+		if(view == "channelOpen" || view == "projectOpen" || view == "mypage"){
         	alert("세션이 종료되어 메인화면으로 이동합니다.");
             location.href = "/";
             return false;

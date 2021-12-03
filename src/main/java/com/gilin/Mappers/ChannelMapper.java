@@ -24,4 +24,6 @@ public interface ChannelMapper  {
 	public void updateChannel( HashMap<String,String> params);
 	
 	public void deleteChannel( HashMap<String,String> params);
+	
+	public void insertChannerVisitHist( HashMap<String,String> params);
 }

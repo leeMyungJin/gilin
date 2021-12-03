@@ -30,6 +30,32 @@ function pageLoad(){
 	//getChannelInfo();
 	getMyProjectList();
 	getAllProjectList();
+	insertChannerVisitHist();
+}
+
+//체널방문 히스토리 저장
+function insertChannerVisitHist(){
+	console.log("memberId : "+memberId);
+	
+	var params = {
+			chSeq : chSeq
+			, cretId : (memberId == 'null' ? 'notLoginUser' : memberId)
+	     	};
+	  		
+	$.ajax({
+           url : '/channel/insertChannerVisitHist',
+           async : false, // 비동기모드 : true, 동기식모드 : false
+           type : 'POST',
+           cache : false,
+           dataType : null,
+           data : params,
+           success : function(data) {
+        	   console.log(data);
+           },
+           error : function(request,status,error) {
+             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           }
+  	});
 }
 
 //전체 프로젝트 조회

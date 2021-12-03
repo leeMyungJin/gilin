@@ -107,6 +107,13 @@ public class ChannelController {
     public void deleteChannel(@RequestParam HashMap<String,String> params, HttpServletRequest req){
     	channelService.deleteChannel(params);
     }   
+    
+    /* 채널 방문 히스토리 등록 */
+    @RequestMapping(value = "/insertChannerVisitHist")
+    @ResponseBody
+    public void insertChannerVisitHist(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	channelService.insertChannerVisitHist(params);
+    }  
    
     
 }

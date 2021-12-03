@@ -13,7 +13,7 @@ var memberId = "<%=session.getAttribute("id")%>";
 var memberAuth = "<%=session.getAttribute("adminYn")%>";
 
 function pageLoad(){
-	sessionCheck(memberId, memberAuth, 'channel');
+	sessionCheck(memberId, memberAuth, 'mypage');
 	
 	//getChannelInfo();
 	getMyProjectList();

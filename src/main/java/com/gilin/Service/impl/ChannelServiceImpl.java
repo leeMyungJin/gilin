@@ -62,5 +62,9 @@ public class ChannelServiceImpl implements ChannelService{
 		channelMapper.deleteChannel(params);
 	}
 	
+	@Override
+	public void insertChannerVisitHist(HashMap<String, String> params) {
+		channelMapper.insertChannerVisitHist(params);
+	}
 	
 }
