@@ -2,9 +2,12 @@ package com.gilin.Controller;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,18 +126,13 @@ public class ProjectController {
             String uploadpath = "/var/upload/img/editor_temp/";
             String originFilename = multi.getOriginalFilename();
             String extName = originFilename.substring(originFilename.lastIndexOf("."),originFilename.length());
-            long size = multi.getSize();
-            String saveFileName = "";
 
-            Calendar calendar = Calendar.getInstance();
+            Date dDate = new Date();
+            SimpleDateFormat dSdf = new SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA);
+            String nowStr = dSdf.format(dDate);
+            String saveFileName = "";
             saveFileName += key;
-            saveFileName += "_"+calendar.get(Calendar.YEAR);
-            saveFileName += calendar.get(Calendar.MONTH);
-            saveFileName += calendar.get(Calendar.DATE);
-            saveFileName += calendar.get(Calendar.HOUR);
-            saveFileName += calendar.get(Calendar.MINUTE);
-            saveFileName += calendar.get(Calendar.SECOND);
-            saveFileName += calendar.get(Calendar.MILLISECOND);
+            saveFileName += "_"+nowStr;
             saveFileName += extName;
 
             if(!multi.isEmpty())
