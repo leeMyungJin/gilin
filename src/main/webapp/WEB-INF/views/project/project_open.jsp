@@ -23,6 +23,10 @@ var pjSeq = "${pjSeq}";
 var chSeq = "${chSeq}"; 
 var fileChange = false;
 
+// 에디터 이미지 저장 key로 사용 (프로젝트번호+아이디+시간)
+var openTime = new Date().toTimeString().split(" ")[0];
+
+
 console.log(pjSeq);
 
 function pageLoad(){
@@ -179,7 +183,7 @@ class UploadAdapter {
         await xhr.addEventListener('error', () => {reject(genericErrorText)})
         await xhr.addEventListener('abort', () => reject())
         await xhr.addEventListener('load', () => {
-            const maxSize = 3500000;
+            const maxSize = 3000000;
             const response = xhr.response
 
             if(!response || response.error ||file.size > maxSize) {
@@ -193,9 +197,10 @@ class UploadAdapter {
     }
 
     _sendRequest(file) {
+    	var memberIdArr = memberId.split('.');
         const data = new FormData()
         data.append('file', file);
-        data.append('key', '1111111');
+        data.append('key', pjSeq + memberIdArr[0] + openTime);
         this.xhr.send(data)
     }
 }
@@ -221,78 +226,91 @@ function saveProject(type){
 	}
 	
 	if(confirm(msg)){
-		
-		console.log("$('#pjImg').text() : "+ $('#pjImg').text());
-		
 		//필수값 체크
 		if($('#pjName').val() == '' || $('#pjMemo').val() == '' ){
 			alert("모든 항목을 입력해야합니다.");
 			return;
 		}
 		
-		//이미지 업로드
-		 var imgUpload = $("#file")[0];
-		 var pjImg = '';
-		 
-		 if(type == "insert"){
-			 if(imgUpload.files.length === 0){
-			    alert("프로젝트이미지를 선택해주세요");
-			    return;
-			  }
-		 }
-		 
-
-		  if($("#file").val() != ''){
-		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-			 const time = new Date().toTimeString().split(" ")[0];
-			 console.log("imgUpload.files.name: ", imgUpload.files[0].name);
-			 
-			 let fileNameLength = imgUpload.files[0].name.length;
-			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
-			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
-			  
-			 //pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + '_' +imgUpload.files[0].name;
-			 pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + "." + fileType;
-			 $('#filePath').val('/img/project');
-			 $('#fileName').val(date + '_' + time + "." + fileType);
-			 $("#imgForm").submit();
-			 
-		  }else{
-			  pjImg = $('#pjImg').text()
-		  }
-
-		  
-		  console.log(chSeq);
-		  console.log(editor1.getData());
-		  // 프로젝트 insert or update
-		  var params = {
-				 chSeq : (chSeq == "" ? $('#chSeq').val() : chSeq)
-	   			, pjSeq : pjSeq
-   			    , pjName : $('#pjName').val()
-   				, pjImg : pjImg  //window.location.origin+'/img/'+imgUpload.files[0].name
-   				, pjMemo : $('#pjMemo').val()
-   				, pjContent : editor1.getData()
-   				, cretId : memberId
-   				, updtId : memberId
-   	     	};
-		  
-		  console.log(params);
-   	  		
-   	  		$.ajax({
-	   	           url : url,
-	   	           type : 'POST',
-	   	           cache : false,
-	   	           dataType : null,
-	   	           data : params,
-	   	           success : function(data) {
-	   	           	alert(msgA);
-	   	         	location.href = locationUrl;
-	   	           },
-	   	           error : function(request,status,error) {
-	   	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	   	           }
-   	     	});
-		
+	
+   	  	 //에디터 이미지 temp > 본폴더로 이동 및 temp 삭제
+   	  	 var memberIdArr = memberId.split('.');
+   	  	 var params = {
+			    key : pjSeq + memberIdArr[0] + openTime
+  	     	};
+  	  		
+ 	  		$.ajax({
+   	           url : '/project/moveContentImg',
+   	           type : 'POST',
+   	           cache : false,
+   	           dataType : null,
+   	           data : params,
+   	           success : function(data) {
+   	        	  if(data != 'ok'){
+   	        		  alert(data);
+   	        		  return false;
+   	        	  }
+   	        	  
+   	        	//프로젝트 대표 이미지 서버 업로드
+	   	  		 var imgUpload = $("#file")[0];
+	   	  		 var pjImg = '';
+	   	  		 
+	   	  		 if(type == "insert"){
+	   	  			 if(imgUpload.files.length === 0){
+	   	  			    alert("프로젝트이미지를 선택해주세요");
+	   	  			    return;
+	   	  			  }
+	   	  		 }
+	   	  		 
+	   	  		 if($("#file").val() != ''){
+	   	  		     const date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+	   	  			 const time = new Date().toTimeString().split(" ")[0];
+	   	  			 
+	   	  			 let fileNameLength = imgUpload.files[0].name.length;
+	   	  			 let fileDot = imgUpload.files[0].name.lastIndexOf(".");
+	   	  			 let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
+	   	  			  
+	   	  			 pjImg = 'https://gilin.co.kr/img/project/'+ date + '_' + time + "." + fileType;
+	   	  			 $('#filePath').val('/img/project');
+	   	  			 $('#fileName').val(date + '_' + time + "." + fileType);
+	   	  			 $("#imgForm").submit();
+	   	  			 
+	   	  		 }else{
+	   	  			  pjImg = $('#pjImg').text()
+	   	  		 }
+   	        	   
+   	        	  // 프로젝트정보 insert or update
+	   	  		  var params = {
+	   	  				 chSeq : (chSeq == "" ? $('#chSeq').val() : chSeq)
+	   	  	   			, pjSeq : pjSeq
+	   	     			    , pjName : $('#pjName').val()
+	   	     				, pjImg : pjImg 
+	   	     				, pjMemo : $('#pjMemo').val()
+	   	     				, pjContent : editor1.getData().replaceAll('https://gilin.co.kr/img/editor_temp', 'https://gilin.co.kr/img/editor')
+	   	     				, cretId : memberId
+	   	     				, updtId : memberId
+	   	     	     	};
+	   	     	  		
+	   	     	  		$.ajax({
+	   	  	   	           url : url,
+	   	  	   	           type : 'POST',
+	   	  	   	           cache : false,
+	   	  	   	           dataType : null,
+	   	  	   	           data : params,
+	   	  	   	           success : function(data) {
+	   	  	   	           	alert(msgA);
+	   	  	   	         	location.href = locationUrl;
+	   	  	   	           },
+	   	  	   	           error : function(request,status,error) {
+	   	  	   	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   	  	   	           }
+	   	     	     	});
+	   	     	  		
+   	           },
+   	           error : function(request,status,error) {
+   	        		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   	           }
+ 	     });
   	}
 }
 

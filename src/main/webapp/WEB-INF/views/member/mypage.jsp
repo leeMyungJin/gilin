@@ -274,6 +274,34 @@ function clickFile(){
 }
 
 function changeFile(){
+	
+	//기본이미지, 카톡기본프로필이 아닌 경우 이전프로필 이미지 서버에서 삭제
+	var oldPicSrc = $('#profilePic').attr("src");
+	var oldPicSrcArr = oldPicSrc.split('/');
+	if(oldPicSrc.indexOf("basedprofile") == -1 && oldPicSrc.indexOf("kakaocdn") == -1){
+		var param = {
+				filePath : '/img/profile'
+				, fileName : oldPicSrcArr[oldPicSrcArr.length-1]
+			};
+			
+		var innerHtml = '';
+		$.ajax({
+		     type : 'POST',
+		     url : '/file/deleteFile',
+		     dataType : null,
+		     data : param,
+		     success : function(result) {
+		    	 console.log(result);
+		     },
+		     error: function(request, status, error) {
+		     	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		
+		     }
+		 }); 
+		
+	}
+	
+	// 프로필 등록
 	var imgUpload = $("#file")[0];
 	var chImg = '';
 	
@@ -296,6 +324,7 @@ function changeFile(){
 		$('#imgForm')[0].reset();
 	}
 }
+
 
 function deleteMember(){
 	var param = {

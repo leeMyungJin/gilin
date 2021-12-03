@@ -1,6 +1,7 @@
 package com.gilin.Controller;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -116,19 +117,18 @@ public class ProjectController {
     public Map<String, String> uploadImage(@RequestParam("file") MultipartFile multi, @RequestParam("key") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         Map<String, String> result = new HashMap<>();
-        
-        System.out.println(key);
 
         try {
 
-            String uploadpath = "/var/upload/img/editor/";
+            String uploadpath = "/var/upload/img/editor_temp/";
             String originFilename = multi.getOriginalFilename();
             String extName = originFilename.substring(originFilename.lastIndexOf("."),originFilename.length());
             long size = multi.getSize();
             String saveFileName = "";
 
             Calendar calendar = Calendar.getInstance();
-            saveFileName += calendar.get(Calendar.YEAR);
+            saveFileName += key;
+            saveFileName += "_"+calendar.get(Calendar.YEAR);
             saveFileName += calendar.get(Calendar.MONTH);
             saveFileName += calendar.get(Calendar.DATE);
             saveFileName += calendar.get(Calendar.HOUR);
@@ -143,7 +143,7 @@ public class ProjectController {
                 if(!file.exists()) // 해당 경로가 없을 경우
                     file.mkdirs();  // 폴더 생성
                 multi.transferTo(file);
-                String url = "https://gilin.co.kr/img/editor/"+saveFileName;
+                String url = "https://gilin.co.kr/img/editor_temp/"+saveFileName;
                 result.put("url", url);
                 result.put("code", "1");
             }
@@ -157,6 +157,45 @@ public class ProjectController {
 
         return result;
     }
+    
+    
+    /* 프로젝트 컨텐츠 이미지 경로 이동 */
+    @RequestMapping(value = "/moveContentImg")
+    @ResponseBody
+    public String moveContentImg(@RequestParam HashMap<String,String> params, HttpServletRequest req){
+    	String tempUrl = "/var/upload/img/editor_temp";
+    	String moveUrl = "/var/upload/img/editor";
+    	
+    	File tempDir = new File(tempUrl); 
+    	File moveDir = new File(moveUrl);
+    	
+    	FileFilter filter = new FileFilter() {
+    	    public boolean accept(File f) {
+    	        return f.getName().startsWith(params.get("key"));
+    	    }
+    	};
+    	
+    	if(tempDir.exists()) { 
+    		//파일 리스트 추출
+    		File[] fileNames = tempDir.listFiles(filter);
+    		
+    		for(int i=0; i< fileNames.length; i++) { 
+    			if(fileNames[i].isFile() && fileNames[i].exists() && moveDir.exists()) { 
+    				File MoveFile = new File(moveDir, fileNames[i].getName()); 
+    				// 이동될 파일 경로 및 파일 이름 
+    				fileNames[i].renameTo(MoveFile); 
+    				
+    			}else{
+    				return "프로젝트 내용 저장에 실패하였습니다. (이미지 or 이미지폴더 없음)";
+    			}
+    		}
+
+    	}else{
+    		return "프로젝트 내용 저장에 실패하였습니다. (이미지 Temp폴더 없음)";
+    	}
+
+    	return "ok";
+    }   
    
     
 }
