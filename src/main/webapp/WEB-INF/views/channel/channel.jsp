@@ -19,6 +19,7 @@ var pageCount = 12; //1페이지 단위
 var chkPjSeq = ''; //선택 된 프로젝트
 
 var chSeq = "${chSeq}"; //채널
+var chFinYn = "${channelVo.finYn}"
 
 function pageLoad(){
 	sessionCheck(memberId, memberAuth, 'channel');
@@ -159,6 +160,11 @@ function getMyProjectList(){
 
 
 function moveProjectOpen(){
+	if(chFinYn == "Y"){
+		alert("마감 된 프로젝트입니다.");
+		return false;	
+	}
+	
 	if(sessionCheck(memberId, memberAuth, 'main') && memberId != 'null'){
 		location.href="/project/projectOpen?chSeq="+chSeq;
 	}else{

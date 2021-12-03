@@ -113,9 +113,11 @@ public class ProjectController {
     
     @PostMapping("/contentImgUpload")
     @ResponseBody
-    public Map<String, String> uploadImage(@RequestParam("file") MultipartFile multi, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Map<String, String> uploadImage(@RequestParam("file") MultipartFile multi, @RequestParam("key") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         Map<String, String> result = new HashMap<>();
+        
+        System.out.println(key);
 
         try {
 

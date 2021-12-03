@@ -195,6 +195,7 @@ class UploadAdapter {
     _sendRequest(file) {
         const data = new FormData()
         data.append('file', file);
+        data.append('key', '1111111');
         this.xhr.send(data)
     }
 }
