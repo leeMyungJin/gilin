@@ -19,9 +19,16 @@
     </select>
 
 
-    <insert id="create" parameterType="map">
+    <select id="create" parameterType="map" resultType="int">
         insert into web.push_history (push_title, push_body, push_notice_idx, send_dt)
                     values (#{push_title}, #{push_body}, #{push_notice_idx}, now())
-    </insert>
+                    RETURNING idx;
+    </select>
+
+    <select id="create_detail" parameterType="map" resultType="int">
+        insert into web.push_history_detail (user_id, push_idx)
+        values (#{user_id}, #{push_idx}::integer)
+            RETURNING idx;
+    </select>
 
 </mapper>

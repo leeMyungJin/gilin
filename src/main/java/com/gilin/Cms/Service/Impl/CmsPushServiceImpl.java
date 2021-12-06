@@ -38,8 +38,8 @@ public class CmsPushServiceImpl implements CmsPushService {
     }
 
     @Override
-    public void create(HashMap<String, String> params) {
-        cmsPushMapper.create(params);
+    public int create(HashMap<String, String> params) {
+        return cmsPushMapper.create(params);
     }
 
     @Override
@@ -118,5 +118,11 @@ public class CmsPushServiceImpl implements CmsPushService {
         }
         return result;
     }
+
+    @Override
+    public int create_detail(HashMap<String, String> params) {
+        return cmsPushMapper.create_detail(params);
+    }
+
 
 }

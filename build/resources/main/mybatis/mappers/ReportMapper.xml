@@ -52,7 +52,7 @@
 	      where p.ch_seq = #{chSeq}::numeric
 	      and p.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totPjtCnt
 	      
-	   , ( select sum(pf.fd_amt)
+	   , ( select coalesce(sum(pf.fd_amt), 0)
 	      from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
 	                           left join web.channel c on p.ch_seq = c.ch_seq
 	      where c.ch_seq = #{chSeq}::numeric

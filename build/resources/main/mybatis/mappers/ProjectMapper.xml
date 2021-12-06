@@ -31,10 +31,10 @@
 				order by p.pj_name
 			</when>
 			<when test="state == 'orderMaxAmt'">
-				order by pf.fd_amt, p.pj_name
+				order by fd_sum_amt desc, p.pj_name
 			</when>
 			<when test="state == 'orderMinAmt'">
-				order by pf.fd_amt desc, p.pj_name
+				order by fd_sum_amt, p.pj_name
 			</when>
 			<when test="state == 'latest'">
 				order by p.cret_dt desc

@@ -149,5 +149,17 @@
 		where ch_seq = #{chSeq}::numeric
 	</delete>
 	
+	<insert id="insertChannerVisitHist" parameterType="hashMap">
+		INSERT INTO web.channer_visit_hist(
+			ch_seq
+			, cret_dt
+			, cret_id
+		)VALUES(
+			#{chSeq}::numeric
+			, NOW()
+			, #{cretId}
+		);
+	</insert>
+	
 	
 </mapper>
