@@ -87,16 +87,11 @@ public class ChannelScheduler {
                         params2.put("body", vo.getChName() + " 채널이 내일 종료됩니다.");
                         params2.put("idx", Long.toString(vo.getChSeq()));
                         push(params2);
-                        /* 프로젝트개설자 히스토리남기기 */
-//                        params2.put("push_title", vo.getChName() + " 채널이 내일 종료됩니다.");
-//                        params2.put("push_body", vo.getChName() + " 채널이 내일 종료됩니다.");
-//                        params2.put("push_notice_idx", Long.toString(vo.getChSeq()));
-//                        cmsPushService.create(params2);
 
                         /* 프로젝트개설자 히스토리디테일남기기 */
                         params2.put("user_id", projectIds[i]);
                         params2.put("push_idx", Integer.toString(index));
-                        cmsPushService.create_detail(params2);
+                        int detail_index = cmsPushService.create_detail(params2);
                     }
                 }
             }

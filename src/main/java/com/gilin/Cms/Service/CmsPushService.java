@@ -1,6 +1,7 @@
 package com.gilin.Cms.Service;
 
 
+import com.gilin.Cms.Vo.CmsMemberVo;
 import com.gilin.Cms.Vo.CmsPushVo;
 
 import java.util.HashMap;
@@ -12,5 +13,6 @@ public interface CmsPushService {
     public void update(CmsPushVo PushVo);
     public int create(HashMap<String, String> params);
     public String sendPush(HashMap<String, String> params) throws Exception;
+    public String sendPushForEach(HashMap<String, String> params, List<CmsMemberVo> cmsUserVos) throws Exception;
     public int create_detail(HashMap<String, String> params);
 }

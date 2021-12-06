@@ -20,8 +20,8 @@
 
 
     <select id="create" parameterType="map" resultType="int">
-        insert into web.push_history (push_title, push_body, push_notice_idx, send_dt)
-                    values (#{push_title}, #{push_body}, #{push_notice_idx}, now())
+        insert into web.push_history (push_title, push_body, push_notice_idx, notice_flag, web_sender, send_dt)
+                    values (#{push_title}, #{push_body}, #{push_notice_idx}, #{notice_flag}, #{web_sender}, now())
                     RETURNING idx;
     </select>
 

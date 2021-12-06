@@ -21,10 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class CmsController {
@@ -566,21 +563,18 @@ public class CmsController {
     public String adminPush(@RequestParam HashMap<String, String> params) throws Exception {
 
         List<CmsMemberVo> cmsUserVos = cmsMemberService.getList();
+        params.put("title", params.get("push_title"));
+        params.put("body", params.get("push_body"));
+        params.put("idx", params.get("push_notice_idx"));
 
-        String result ="fail";
-        params.put("title", params.get("title"));
-        params.put("body", params.get("body"));
-        params.put("idx", params.get("idx"));
-
-        for (CmsMemberVo vo: cmsUserVos) {
-            String userToken = vo.getFcmToken(); // DB에서 사용자 토큰 가져오기
-            if(userToken != null) {
-                params.put("userToken", userToken); // 사용자 토큰 추가
-                params.put("firebaseKeyPath", environment.getProperty("firebase.path.key")); // key파일 path 가져오기
-                result = cmsPushService.sendPush(params);
-            }
-        }
-
+        params.put("push_title", params.get("push_title"));
+        params.put("push_body", params.get("push_body"));
+        params.put("push_notice_idx", params.get("push_notice_idx"));
+        params.put("notice_flag", params.get("notice_flag"));
+        params.put("web_sender", Login.getId());
+        int index = cmsPushService.create(params);
+        params.put("history_idx", Integer.toString(index));
+        String result = cmsPushService.sendPushForEach(params, cmsUserVos);
         return result;
     }
 
