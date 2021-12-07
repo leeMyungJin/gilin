@@ -296,7 +296,7 @@ function enterkey(type) {
         <span class="material-icons-outlined close_btn" onClick="closePop();">close</span>
         <p class="tit">채널 비밀번호 입력</p>
         <div class="input_wrap">
-          <input id="pass" type="password" placeholder="숫자 4자리" maxlength="4" class="alert" onkeyup="enterkey('chkPass');">
+          <input id="pass" type="password" placeholder="숫자 4자리" maxlength="4" class="alert" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" onkeyup="enterkey('chkPass');">
           <p id="passError" class="input_alert">잘못된 비밀번호입니다</p>
         </div>
 

@@ -230,15 +230,16 @@ function saveFunding(){
 		alert("응원댓글은 필수 입력사항입니다.");
 		return;
 		
-	}else if( Number($('#fdAmt').val()) > 5000000 ){
+	}else if( Number(uncomma($('#fdAmt').val())) > 5000000 ){
 		alert("프로젝트 당 최대 펀딩 금액은 5,000,000 원 입니다.");
 		return;
 		
 	}
 	
-	var params = {
+	if(confirm("펀딩하시겠습니까?")){
+		var params = {
 			pjSeq : pjSeq
-			, fdAmt : $('#fdAmt').val()
+			, fdAmt : uncomma($('#fdAmt').val())
 		    , fdComment : $('#fdComment').val()
 			, cretId : memberId
 			, updtId : memberId
@@ -253,24 +254,25 @@ function saveFunding(){
    	           success : function(data) {
    	           	alert("펀딩이 완료되었습니다.");
    	         	fdYn = 'Y';
+   	         	$("#fdComment").val("");
+   	         	$("#fdAmt").val("");
    	         	getFundingCommentPageInfo();
    	           },
    	           error : function(request,status,error) {
    	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
    	           }
      	});
+	}
 	
 }
 
 function updateComment(cretId, rownum){
-	
-	console.log( $('#commentTxt'+rownum).val() );
-	
 	if($('#commentTxt'+rownum).val() == ''){
 		alert("수정 댓글을 입력하세요.");
 	}
 	
-	var params = {
+	if(confirm("댓글을 수정하시겠습니까?")){
+		var params = {
 			pjSeq : pjSeq
 		    , fdComment : $('#commentTxt'+rownum).val()
 			, commentId : cretId
@@ -291,11 +293,13 @@ function updateComment(cretId, rownum){
    	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
    	           }
      	});
+	}
 }
 
 
 function deleteComment(cretId, rownum){
-	var params = {
+	if(confirm("댓글을 삭제하시겠습니까?")){
+		var params = {
 			pjSeq : pjSeq
 			, commentId : cretId
 			, updtId : memberId
@@ -315,6 +319,7 @@ function deleteComment(cretId, rownum){
    	             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
    	           }
      	});
+	}
 }
 
 
@@ -344,6 +349,20 @@ function setProjectContent(){
 		console.warn( 'Build id: eed83e2ex4oz-pejoxvy7ffif' );
 		console.error( error );
 	} );
+}
+
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
 }
 
 </script>
@@ -404,7 +423,7 @@ function setProjectContent(){
             <div class="item budget">
               <p class="tit">펀딩금액</p>
               <div class="funding_budget_wrap">
-                <input id="fdAmt" type="text" placeholder="최대 5,000,000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input id="fdAmt" type="text"  placeholder="최대 5,000,000" maxlength="9"  onkeyup="inputNumberFormat(this)" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <p class="notice">
                   *프로젝트 당 최대 펀딩 금액 : 5,000,000 원<br>
                   *펀딩은 1회 한정이며 수정이 불가능합니다.

@@ -38,6 +38,9 @@
 			<when test="state == 'fin'">
 				and to_char(c.ch_end_dt, 'yyyymmdd') <![CDATA[<]]> to_char(now(), 'yyyymmdd')
 			</when>
+			<otherwise>
+				order by c.cret_dt desc
+			</otherwise>
 		</choose>
 	</select>
 	
@@ -69,6 +72,7 @@
 		<if test="name != null and name != ''">
 		and	c.ch_name LIKE '%' || #{name} || '%'
 		</if>
+		order by c.cret_dt desc
 	</select>
 	
 	<select id="getChannelPassChk" parameterType="hashMap" resultType="String">
@@ -145,8 +149,15 @@
 	</update>
 	
 	<delete id="deleteChannel" parameterType="hashMap">
+		delete from web.project_funding pf using web.project p
+		where pf.pj_seq = p.pj_seq
+		and p.ch_seq = #{chSeq}::numeric;
+		
+		delete from web.project
+		where ch_seq = #{chSeq}::numeric;
+		
 		delete from web.channel
-		where ch_seq = #{chSeq}::numeric
+		where ch_seq = #{chSeq}::numeric;
 	</delete>
 	
 	<insert id="insertChannerVisitHist" parameterType="hashMap">

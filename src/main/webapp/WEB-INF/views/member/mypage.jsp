@@ -315,7 +315,6 @@ function changeFile(){
 		let fileType = imgUpload.files[0].name.substring(fileDot+1, fileNameLength);
 		  
 		chImg = 'https://gilin.co.kr/img/profile/'+ date + '_' + time + "." + fileType;
-		//chImg = 'https://gilin.co.kr/img/profile/'+ date + '_' + time + '_' +imgUpload.files[0].name;
 		$('#filePath').val('/img/profile');
 		$('#fileName').val(date + '_' + time + "." + fileType);
 		$("#imgForm").submit();
@@ -371,7 +370,7 @@ function deleteMember(){
                 <img id="profilePic" src="<%=session.getAttribute("profilePic")%>" alt="" class="default">
               </div>
               <div class="btn_wrap">
-                <form id="imgForm" action="https://211.37.179.144/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
+                <form id="imgForm" action="https://gilin.co.kr/file/uploadFile" method="post" enctype="multipart/form-data" target="imgIframe">
 	             	<button type="button" onClick="clickFile();">사진 수정 <span class="material-icons">chevron_right</span></button>
 	                <input style="display:none;" type='file' name="file" id="file" onchange="changeFile()" accept=".gif, .jpeg, .jpg, .png">
 	                <input type="hidden" name="filePath" id="filePath" value= "" >

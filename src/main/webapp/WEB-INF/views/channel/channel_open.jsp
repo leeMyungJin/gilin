@@ -90,24 +90,31 @@ function saveChannel(type){
 		locationUrl = "/member/mypage";
 	}
 	
+	//필수값 체크
+	if($('#chName').val() == '' || $('#chMemo').val() == '' 
+			|| $('#chStDt').val() == '' || $('#chEndDt').val() == ''
+			|| ($("input[name='chOpenYn']:checked").val() == 'N' && $('#chPass').val() == '' ) ){
+		alert("모든 항목을 입력해야합니다.");
+		return;
+	}
+	
+	//날짜 벨리데이션 체크
+	if( $('#chStDt').val() > $('#chEndDt').val() ){
+		alert("채널 시작일은 종료일보다 빨리야합니다.");
+		return;
+		
+	}
+	
+	var inputDate = new Date($('#chStDt').val());
+    var curtDate = new Date();
+    curtDate.setDate(curtDate.getDate() - 1)
+    console.log(curtDate);
+    if (curtDate-1 > inputDate) {
+        alert("과거일자를 입력하셨습니다. \n과거일자는 채널 개설이 불가합니다.");
+        return false;
+    }
+	
 	if(confirm(msg)){
-		
-		console.log("$('#chImg').text() : "+ $('#chImg').text());
-		
-		//필수값 체크
-		if($('#chName').val() == '' || $('#chMemo').val() == '' 
-				|| $('#chStDt').val() == '' || $('#chEndDt').val() == ''
-				|| ($("input[name='chOpenYn']:checked").val() == 'N' && $('#chPass').val() == '' ) ){
-			alert("모든 항목을 입력해야합니다.");
-			return;
-		}
-		
-		//날짜 벨리데이션 체크
-		if( $('#chStDt').val() > $('#chEndDt').val() ){
-			alert("채널 시작일은 종료일보다 빨리야합니다.");
-			return;
-			
-		}
 		
 		//이미지 업로드
 		 var imgUpload = $("#file")[0];
@@ -267,7 +274,7 @@ function changeChOpenYn(type){
                   <div class="chk_btn_circle"></div>
                 </div>
                 <div id="chPassShowbox" class="showbox">
-                  <input id="chPass" type="text" placeholder="4자리 비밀번호" maxlength="4">
+                  <input id="chPass" type="text" placeholder="4자리 비밀번호" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                 </div>
               </div>
             </td>

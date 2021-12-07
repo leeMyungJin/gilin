@@ -140,7 +140,10 @@
 	
 	<delete id="deleteProject" parameterType="hashMap">
 		delete from web.project 
-		where pj_seq = #{pjSeq}::numeric
+		where pj_seq = #{pjSeq}::numeric;
+		
+		delete from web.project_funding 
+		where pj_seq = #{pjSeq}::numeric;
 	</delete>
 	
 
