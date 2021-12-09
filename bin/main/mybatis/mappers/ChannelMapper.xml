@@ -11,8 +11,6 @@
 			, c.ch_memo 
 			, c.ch_st_dt 
 			, c.ch_end_dt 
-			, c.ch_fd_st_dt 
-			, c.ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -40,6 +38,9 @@
 			<when test="state == 'fin'">
 				and to_char(c.ch_end_dt, 'yyyymmdd') <![CDATA[<]]> to_char(now(), 'yyyymmdd')
 			</when>
+			<otherwise>
+				order by c.cret_dt desc
+			</otherwise>
 		</choose>
 	</select>
 	
@@ -51,8 +52,6 @@
 			, c.ch_memo 
 			, c.ch_st_dt 
 			, c.ch_end_dt 
-			, c.ch_fd_st_dt 
-			, c.ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -73,6 +72,7 @@
 		<if test="name != null and name != ''">
 		and	c.ch_name LIKE '%' || #{name} || '%'
 		</if>
+		order by c.cret_dt desc
 	</select>
 	
 	<select id="getChannelPassChk" parameterType="hashMap" resultType="String">
@@ -89,8 +89,6 @@
 			, c.ch_memo 
 			, to_char(c.ch_st_dt, 'YYYY-MM-DD') as ch_st_dt 
 			, to_char(c.ch_end_dt , 'YYYY-MM-DD') as ch_end_dt 
-			, to_char(c.ch_fd_st_dt, 'YYYY-MM-DD') as ch_fd_st_dt 
-			, to_char(c.ch_fd_end_dt, 'YYYY-MM-DD') as ch_fd_end_dt 
 			, c.ch_open_yn 
 			, c.cret_id
 			, to_char(c.cret_dt , 'YYYY-MM-DD') as cret_id 
@@ -105,8 +103,8 @@
 						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 			, case when to_char(now()-c.ch_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
 						then (100-trunc((to_char(now()-c.ch_end_dt, 'dd')::numeric/to_char(c.ch_end_dt-c.ch_st_dt, 'dd')::numeric)*-100, 0)) * 3.84 --화면프로그래스바의 100%값이 384임
-						else 100 end as d_day_percent
-		from web.channel c left join (select p.ch_seq, count(p.pj_seq) as pj_cnt, sum(pf.fd_amt) as fd_sum_amt
+						else 384 end as d_day_percent
+		from web.channel c left join (select p.ch_seq, count(distinct p.pj_seq) as pj_cnt, sum(pf.fd_amt) as fd_sum_amt
 										from web.project p left join web.project_funding pf on pf.pj_seq = p.pj_seq 
 										group by p.ch_seq) p on c.ch_seq = p.ch_seq
 		where c.ch_seq = #{chSeq}::numeric
@@ -119,8 +117,6 @@
 			, ch_memo
 			, ch_st_dt
 			, ch_end_dt
-			, ch_fd_st_dt
-			, ch_fd_end_dt
 			, ch_pass
 			, ch_open_yn
 			, cret_dt
@@ -131,8 +127,6 @@
 			, #{chMemo}
 			, #{chStDt}::timestamp
 			, #{chEndDt}::timestamp
-			, #{chFdStDt}::timestamp
-			, #{chFdEndDt}::timestamp
 			, #{chPass}
 			, #{chOpenYn}::bool
 			, NOW()
@@ -147,8 +141,6 @@
 			, ch_memo = #{chMemo}
 			, ch_st_dt = #{chStDt}::timestamp
 			, ch_end_dt = #{chEndDt}::timestamp
-			, ch_fd_st_dt = #{chFdStDt}::timestamp
-			, ch_fd_end_dt = #{chFdEndDt}::timestamp
 			, ch_pass = #{chPass}
 			, ch_open_yn = #{chOpenYn}::bool
 			, updt_dt = NOW()
@@ -157,9 +149,28 @@
 	</update>
 	
 	<delete id="deleteChannel" parameterType="hashMap">
+		delete from web.project_funding pf using web.project p
+		where pf.pj_seq = p.pj_seq
+		and p.ch_seq = #{chSeq}::numeric;
+		
+		delete from web.project
+		where ch_seq = #{chSeq}::numeric;
+		
 		delete from web.channel
-		where ch_seq = #{chSeq}::numeric
+		where ch_seq = #{chSeq}::numeric;
 	</delete>
+	
+	<insert id="insertChannerVisitHist" parameterType="hashMap">
+		INSERT INTO web.channer_visit_hist(
+			ch_seq
+			, cret_dt
+			, cret_id
+		)VALUES(
+			#{chSeq}::numeric
+			, NOW()
+			, #{cretId}
+		);
+	</insert>
 	
 	
 </mapper>

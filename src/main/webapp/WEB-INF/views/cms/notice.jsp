@@ -11,7 +11,7 @@
 <div id="cms" class="main_dashboard">
     <%@ include file="./include/aside.jsp" %>
 
-    <div class="cms_cont cms_channel">
+    <div class="cms_cont cms_notice">
         <h1 class="cms_tit"><span class="material-icons-round">campaign</span> 공지관리</h1>
 
         <div class="overview_area flex_wrap fb4">

@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gilin.Mappers.ChannelMapper">
+<mapper namespace="com.gilin.Mappers.MainMapper">
+	<select id="getNoticeList" parameterType="hashMap" resultType="MainVo">
+		select nt_seq 
+			,case when must_yn = true then '[필독] ' || nt_title else nt_title end as nt_title
+			, must_yn
+			, active_yn
+			, "content" 
+			, to_char(cret_dt, 'YYYY. MM. DD') cret_dt 
+			, cret_id 
+			, to_char(updt_dt , 'YYYY. MM. DD') updt_dt 
+			, updt_id 
+		from web.notice
+		where active_yn = true 
+		order by must_yn desc, cret_dt desc
+		limit 10
+	</select>
 
 
 </mapper>

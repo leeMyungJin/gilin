@@ -1,7 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gilin.Mappers.ChannelMapper">
-
+<mapper namespace="com.gilin.Mappers.FundingMapper">
+	<select id="getMyFundingList" parameterType="hashMap" resultType="ProjectVo">
+		select p.pj_seq
+				, p.ch_seq 
+				, p.pj_name 
+				, p.pj_img 
+				, p.pj_memo 
+				, p.pj_content 
+				, to_char(p.fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
+				, to_char(p.fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
+				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
+				, p.cret_id 
+				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
+				, p.updt_id 
+				, pf.fd_amt as fd_sum_amt
+				, case when to_char(now()-p.fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-p.fd_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-p.fd_end_dt, 'dd')::numeric end as d_day
+		from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq 
+		where 1=1
+		<if test="chSeq != null and chSeq != ''">
+			and p.ch_seq = #{chSeq}::numeric
+		</if>
+		and pf.cret_id = #{memberId}
+	</select>
+	
+	<insert id="saveFunding" parameterType="hashMap">
+		insert into web.project_funding(
+			pj_seq
+			, fd_amt 
+			, fd_comment 
+			, cret_dt 
+			, cret_id 
+		)values(
+			#{pjSeq}::numeric
+			, #{fdAmt}::numeric
+			, #{fdComment} 
+			, now()
+			, #{cretId} 
+		)
+	</insert>
+	
+	<select id="getFundingCommentList" parameterType="hashMap" resultType="FundingVo">
+		select (ROW_NUMBER() OVER()) AS ROWNUM 
+			, *
+		from ( select pf.pj_seq 
+				, pf.fd_amt
+				, pf.fd_comment
+				, m.nickname 
+				, m.profile_pic 
+				, pf.cret_id
+				, to_char(pf.cret_dt  , 'YYYY.MM.DD') as cret_dt 
+				, pf.del_yn
+			from web.project_funding pf left join web."member" m on pf.cret_id = m.id 
+			where pf.pj_seq = #{pjSeq}::numeric
+			<choose>
+				<when test="memberId != null and memberId != ''">
+					order by pf.cret_id = #{memberId} desc, pf.cret_dt desc
+				</when>
+				<otherwise>
+					order by pf.cret_dt desc
+				</otherwise>
+			</choose>
+		) a
+		limit #{pageUnit}::numeric offset #{sPage}::numeric -- offset 부터 limit 갯수만
+	</select>
+	
+	<select id="getFundingCommentPageInfo" parameterType="hashMap" resultType="hashMap">
+		select  coalesce(count(*), 0) as totCnt
+				,ceil(count(*) / #{pageUnit}::numeric) as totPage
+		from web.project_funding
+		where pj_seq = #{pjSeq}::numeric
+	</select>	
+	
+	<update id="deleteComment" parameterType="hashMap">
+		update web.project_funding set
+			fd_comment = '삭제된 댓글입니다.'
+			, del_yn = 'Y'
+			, updt_id = #{updtId}
+			, updt_dt = now()
+		where pj_seq = #{pjSeq}::numeric
+		and cret_id = #{commentId}
+	</update>
+	
+	<update id="updateComment" parameterType="hashMap">
+		update web.project_funding set
+			fd_comment = #{fdComment}
+			, updt_id = #{updtId}
+			, updt_dt = now()
+		where pj_seq = #{pjSeq}::numeric
+		and cret_id = #{commentId}
+	</update>
 
 </mapper>

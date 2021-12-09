@@ -6,6 +6,7 @@
 		select * 
 		from web.member
 		where id = #{id}
+		and nickname != '탈퇴회원'
 	</select>
 	
 	<insert id="insertMember" parameterType="hashMap">
@@ -18,6 +19,7 @@
 			, email 
 			, cret_dt 
 			, cret_id 
+			, lateass_dt
 		)values(
 			#{id}
 			, #{nickname}
@@ -27,7 +29,17 @@
 			, #{email} 
 			, NOW()
 			, #{id}
+			, NOW()
 		)
+		ON CONFLICT (id) DO UPDATE SET 
+			nickname = #{nickname}
+			, profile_pic = #{profilePic} 
+			, age = #{age}
+			, gender = #{gender} 
+			, email = #{email} 
+			, updt_dt = NOW()
+			, updt_id = #{id}
+			, lateass_dt = NOW()
 	</insert>
 	
 	<update id="updateLoginTime" parameterType = "MemberVo">
@@ -35,5 +47,21 @@
 		lateass_dt = now()
 		where id = #{id}
 	</update>
+	
+	<update id="deleteMember" parameterType = "MemberVo">
+		update web.member set
+			nickname = '탈퇴회원'
+			, profile_pic = 'https://gilin.co.kr/img/basedprofile/icon_my_avatar.png'
+			, age = '-'
+			, gender = '-' 
+			, email = '-' 
+			, updt_dt = NOW()
+			, updt_id = #{id}
+		where id = #{id}
+	</update>
+	
+	<select id="getUserToken" parameterType="hashMap" resultType="String">
+		select fcm_token from web.member where id = #{id}
+	</select>
 	
 </mapper>

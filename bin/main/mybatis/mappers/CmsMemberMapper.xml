@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Cms.Mapper.CmsMemberMapper">
+
+	<select id="getList" resultType="CmsMemberVo">
+		select
+		       *,
+			   (case when admin_yn = true then 'Y' else 'N' end) as adminFlag
+		from web.member
+	</select>
+
+	<select id="getCount" resultType="map">
+		select
+			count(case when admin_yn = 'Y' then 1 else null end) as admin_count,
+			count(case when admin_yn = 'N' then 1 else null end) as user_count
+		from web.member
+	</select>
+
+	<select id="getListSearch" parameterType="hashMap" resultType="CmsMemberVo">
+		select
+		   *,
+		   (case when admin_yn = true then 'Y' else 'N' end) as adminFlag
+		from web.member
+		where 1=1
+		<if test="inq != null">
+			AND
+			<choose>
+				<when test="con != ''">
+					<foreach collection="inq" item="item"
+							 index="index" open="(" close=")" separator="or">
+						${con} LIKE '%' || #{item} || '%'
+					</foreach>
+				</when>
+				<otherwise>
+					<foreach collection="inq" item="item"
+							 index="index" open="(" close=")" separator="or">
+						nickname LIKE '%' || #{item} || '%'
+						or id LIKE '%' || #{item} || '%'
+						or email LIKE '%' || #{item} || '%'
+					</foreach>
+				</otherwise>
+			</choose>
+		</if>
+		order by cret_dt
+	</select>
+
+
+	<update id="adminFlagChange" parameterType="CmsMemberVo">
+		update web.member
+			set admin_yn = ${adminFlag}
+			where id = #{id}
+	</update>
+
+
+	<update id="alarmUpdateY" parameterType="map">
+		update web.member
+			set alram_push_yn = 'Y'
+			where id = #{id}
+	</update>
+
+
+
+</mapper>

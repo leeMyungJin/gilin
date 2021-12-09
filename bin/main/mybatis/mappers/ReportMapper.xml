@@ -1,7 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gilin.Mappers.ChannelMapper">
-
-
+<mapper namespace="com.gilin.Mappers.ReportMapper">
+	<select id="getReportChart" parameterType="hashMap" resultType="ReportVo">
+		<choose>
+			<when test="type == 'totPjtCntChart'">
+				--1. 날짜별 프로젝트 갯수      
+				select to_char(p.cret_dt, 'yy.mm.dd') as date, count(*) as val
+				from web.project p left join web.channel c on p.ch_seq = c.ch_seq 
+				where p.ch_seq = #{chSeq}::numeric
+				and p.cret_dt between c.ch_st_dt and c.ch_end_dt
+				group by to_char(p.cret_dt, 'yy.mm.dd')
+				order by to_char(p.cret_dt, 'yy.mm.dd')
+			</when>
+			<when test="type == 'totFdAmtChart'">
+				--2. 총 펀딩금액
+				select to_char(pf.cret_dt, 'yy.mm.dd') as date, sum(pf.fd_amt) as val
+				from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
+				                     left join web.channel c on p.ch_seq = c.ch_seq
+				where c.ch_seq = #{chSeq}::numeric
+				and pf.cret_dt between c.ch_st_dt and c.ch_end_dt
+				group by to_char(pf.cret_dt, 'yy.mm.dd')
+				order by to_char(pf.cret_dt, 'yy.mm.dd')
+			</when>
+			<when test="type == 'totChVisitCntChart'">
+				--3. 채널 방문자수
+				select to_char(cvh.cret_dt, 'yy.mm.dd') as date, count(*) as val
+				from web.channer_visit_hist cvh left join web.channel c on cvh.ch_seq = c.ch_seq 
+				where cvh.ch_seq = #{chSeq}::numeric
+				and cvh.cret_dt between c.ch_st_dt and c.ch_end_dt
+				group by to_char(cvh.cret_dt, 'yy.mm.dd')
+				order by to_char(cvh.cret_dt, 'yy.mm.dd')
+			</when>
+			<when test="type == 'totCmtCntChart'">
+				--4. 댓글수 
+				select to_char(pf.cret_dt, 'yy.mm.dd') as date, count(*) as val
+				from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
+				                     left join web.channel c on p.ch_seq = c.ch_seq
+				where c.ch_seq = #{chSeq}::numeric
+				and pf.cret_dt between c.ch_st_dt and c.ch_end_dt
+				group by to_char(pf.cret_dt, 'yy.mm.dd')
+				order by to_char(pf.cret_dt, 'yy.mm.dd')
+			</when>
+		</choose>		
+	</select>
+	
+	<select id="getTotReportInfo" parameterType="hashMap" resultType="hashMap">
+	select 
+	   ( select count(*) 
+	      from web.project p left join web.channel c on p.ch_seq = c.ch_seq 
+	      where p.ch_seq = #{chSeq}::numeric
+	      and p.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totPjtCnt
+	      
+	   , ( select coalesce(sum(pf.fd_amt), 0)
+	      from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
+	                           left join web.channel c on p.ch_seq = c.ch_seq
+	      where c.ch_seq = #{chSeq}::numeric
+	      and pf.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totFdAmt
+	   
+	   , ( select count(*)
+	      from web.channer_visit_hist cvh left join web.channel c on cvh.ch_seq = c.ch_seq 
+	      where cvh.ch_seq = #{chSeq}::numeric
+	      and cvh.cret_dt between c.ch_st_dt and c.ch_end_dt) as totChVisitCnt
+	   
+	   , ( select count(*)
+	      from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
+	                           left join web.channel c on p.ch_seq = c.ch_seq
+	      where c.ch_seq = #{chSeq}::numeric
+	      and pf.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totCmtCnt
+	</select>
 </mapper>

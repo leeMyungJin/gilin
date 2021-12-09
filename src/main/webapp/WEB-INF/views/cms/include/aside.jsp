@@ -20,19 +20,6 @@
     </div>
     <a href="/" class="cms_exit"><span class="material-icons-outlined">logout</span> <span>관리자모드 나가기</span> </a>
 </aside>
-
-<style>
-    .terms_area {
-        position: absolute;
-        bottom: 80px;
-    }
-    .terms_area a {
-        margin: 5px 0 0 0px;
-        opacity: 0.6;
-        display: block;
-        font-size: 0.9em;
-    }
-</style>
 <script>
 
     /* CMS 메뉴 active */

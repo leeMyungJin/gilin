@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Cms.Mapper.CmsNoticeMapper">
+
+    <select id="getList" resultType="CmsNoticeVo">
+        select * from web.notice order by cret_dt DESC
+    </select>
+
+    <select id="getMustList" resultType="CmsNoticeVo">
+        select * from web.notice where must_yn = true order by cret_dt DESC
+    </select>
+
+
+    <select id="getCount" resultType="map">
+        select
+            (select count(*) from web.notice) as totalCount,
+            (select count(*) from web.notice where must_yn = true) as mustCount
+    </select>
+
+    <select id="getListBySearch" parameterType="hashMap" resultType="CmsNoticeVo">
+        select
+               nt_seq,
+               nt_title,
+               must_yn,
+               active_yn,
+               content,
+               to_char(cret_dt, 'YYYY-MM-DD') as cret_dt,
+               cret_id,
+               to_char(updt_dt, 'YYYY-MM-DD') as updt_dt,
+               updt_id,
+               (case when must_yn = true then 'Y' else 'N' end) as mustBool,
+               (case when active_yn = true then 'Y' else 'N' end) as activeBool
+        from web.notice
+        where 1=1
+        <if test="from != ''">
+            AND
+            cret_dt &gt;= #{from}::date
+        </if>
+
+        <if test="to != ''">
+            AND
+            cret_dt &lt;= #{to}::date
+        </if>
+        order by nt_seq desc
+    </select>
+
+    <insert id="create" parameterType="hashMap">
+        insert into web.notice
+        (
+            nt_title, must_yn, active_yn, content, cret_dt, cret_id
+        )
+        values
+        (
+            #{ntTitle}, ${mustYn}, ${activeYn}, #{content}, now(), #{cretId}
+        )
+    </insert>
+
+    <update id="update" parameterType="map">
+        update web.notice
+        set
+            nt_title = #{ntTitle}, must_yn = ${mustYn}, active_yn = ${activeYn}, content = #{content},
+            updt_dt = now(), updt_id = #{updtId}
+        where
+            nt_seq = ${ntSeq}
+    </update>
+
+    <delete id="delete" parameterType="map">
+        delete from web.notice where nt_seq = ${ntSeq}
+    </delete>
+
+
+    <select id="getListPaging" parameterType="map" resultType="CmsNoticeVo">
+        select * from web.notice order by cret_dt DESC
+        limit 10 offset #{offset}::integer
+    </select>
+
+
+
+</mapper>

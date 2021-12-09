@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gilin.Cms.Mapper.CmsTermsMapper">
+
+    <select id="getTerms" resultType="CmsTermsVo">
+        select
+            *
+        from web.terms
+    </select>
+
+    <select id="termsUpdate" parameterType="CmsTermsVo">
+        update web.terms
+            set content = #{content}
+            where no = #{no}
+    </select>
+
+</mapper>
