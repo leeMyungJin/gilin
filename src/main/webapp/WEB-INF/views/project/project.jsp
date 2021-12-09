@@ -420,6 +420,10 @@ function uncomma(str) {
         </div>
         <aside class="funding_aside sticky">
           <div class="item_wrap">
+			<div class="invite_wrap" onClick="inviteProject();">
+				<a href="" ><span class="material-icons-outlined">attach_email</span> 프로젝트 초대하기</a>
+			  </div>
+			  
             <div class="item budget">
               <p class="tit">펀딩금액</p>
               <div class="funding_budget_wrap">
@@ -452,10 +456,6 @@ function uncomma(str) {
               </div>
             </div>
 
-
-            <div class="invite_wrap" onClick="inviteProject();">
-              <a href="" ><span class="material-icons-outlined">attach_email</span> 프로젝트 초대하기</a>
-            </div>
           </div>
         </aside>
 

@@ -255,7 +255,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .pjt_detail_wrap .item.comment .comment_item .btn_wrap{width:60%;display:flex;gap:8px;margin-top:4px;}
 .pjt_detail_wrap .item.comment .comment_item .btn_wrap button{height:24px;font-size:12px;}
 
-.pjt_detail_wrap .invite_wrap{width:100%;border-top:1px solid var(--bor-color);border-top:1px solid var(--bor-color);padding:var(--spacing);display:flex;align-items:center;justify-content:center;}
+.pjt_detail_wrap .invite_wrap{width:100%;border-bottom:1px solid var(--bor-color);padding:var(--spacing);display:flex;align-items:center;justify-content:center;}
 .pjt_detail_wrap .invite_wrap a{display:flex;align-items:center;}
 .pjt_detail_wrap .invite_wrap a span{margin-right:var(--spacing);}
 
