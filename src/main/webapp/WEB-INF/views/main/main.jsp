@@ -250,7 +250,7 @@ function enterkey(type) {
     <div class="inner">
       <h2>대학생 창업교육 개발 및 진행</h2>
       <div class="search">
-        <input id="mainSearch" type="text" name="input" class="input" placeholder="채널 검색" onkeyup="enterkey('mainSearch');">
+        <input id="mainSearch" type="text" name="input" class="input" placeholder="채널명만 검색 가능합니다." onkeyup="enterkey('mainSearch');">
         <span class="material-icons-outlined search_icon" onClick="viewCount=0;getMyChannelList();getAllChannelList();">search</span>
         <div class="close"></div>
       </div>

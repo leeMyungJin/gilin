@@ -205,7 +205,7 @@ function appleLogin(){
       </a>
       <div class="nav_wrap login">
         <div id="topSearchDiv" class="search">
-          <input id="topSearch" type="text" name="input" class="input" placeholder="채널명만 검색가능합니다." onkeyup="enterkeyHeader('search');">
+          <input id="topSearch" type="text" name="input" class="input" placeholder="채널명만 검색 가능합니다." onkeyup="enterkeyHeader('search');">
           <span class="material-icons-outlined search_icon" onClick="">search</span>
           <div class="close"></div>
         </div>
