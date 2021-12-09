@@ -34,7 +34,7 @@ function getNoticeList(){
 	   				innerHtml += '<div class="accordion-wrap" onClick="clickAcco(this);">'+
 					   		        '<div class="accordion-item">'+
 					   		        '<div class="accordion-header">'+
-					   		         '<p>'+result[i].ntTitle+' <span class="date">'+result[i].cretDt+'</span></p> <span class="material-icons-outlined arrow_icon">expand_more</span>'+
+					   		        '<p><span class="tit">'+result[i].ntTitle+'</span><span class="date">'+result[i].cretDt+'</span></p> <span class="material-icons-outlined arrow_icon">expand_more</span>'+
 					   		        '</div>'+
 					   		        '</div>'+
 					   		        '<div class="accordion-text">'+
@@ -67,7 +67,6 @@ function clickAcco(id){
     $(id).find(".arrow_icon").toggleClass("rotate");
 
     $(".accordion-wrap .accordion-text").not($(id).children().eq(1)).slideUp(300);
-	
 }
 
 </script>

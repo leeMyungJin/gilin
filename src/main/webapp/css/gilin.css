@@ -378,8 +378,11 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .accordion-wrap{border-bottom: 1px solid #ddd;}
 .accordion-item{cursor: pointer;}
 .accordion-header{transition: ease-in-out 100ms;display:flex;align-items:center;justify-content:space-between;padding:24px;}
-.accordion-header .date{font-size:13px;color:#aaa;margin-left:24px;}
+.accordion-header > p{display:flex;align-items: center;justify-content: space-between;width:100%;}
+.accordion-header .tit{max-width:80%;overflow: hidden;text-overflow: ellipsis;}
+.accordion-header .date{font-size:13px;color:#aaa;margin-right:24px;}
 .accordion-text{display: none;padding:24px;border-top:1px solid #ddd;}
+.accordion-text *{line-height:1.6;font-size:15px;}
 .accordion-text p{line-height:1.6;}
 .arrow_icon{transition: ease-in-out 300ms;}
 .arrow_icon.rotate{transform: rotate(180deg);}

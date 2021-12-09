@@ -154,7 +154,7 @@ function getMyChannelList(){
 		          	
 		          }else{
 		        	  //내 채널이 없을 경우
-		        	  innerHtml = '<p class="no-gallery">참여한 채널이 없습니다.</p>';	
+		        	  innerHtml = '<p class="no-gallery">참여한 채널이 없습니다.</p>';
 		          }
 		     	
 		    	$('#myChannel').html(innerHtml);
