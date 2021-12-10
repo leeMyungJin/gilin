@@ -168,7 +168,7 @@
                         </tr>
                         <tr>
                             <th>채널 대표 이미지</th>
-                            <td>
+                            <td class="flex_wrap">
                                 <input type="text" name="chImg" value="" placeholder="" class="search">
                                 <button type="button" class="btn jeon" onclick="$('input[name=chImgFileUpload]').trigger('click')">
                                     찾기
@@ -184,10 +184,10 @@
                             <th>채널 기간</th>
                             <td><input type="text" name="chDateRange" value="" placeholder="" class="search"></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th>펀딩 기간</th>
                             <td><input type="text" name="fundingDateRange" value="" placeholder="" class="search"></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <th>프로젝트 개수</th>
                             <td><input type="text" name="projectCount" readonly value="" placeholder="" class="search"></td>

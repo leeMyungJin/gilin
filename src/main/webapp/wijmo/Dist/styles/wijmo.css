@@ -378,7 +378,7 @@
 
 .wj-content {
   display: inline-block;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--bor-color);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -466,7 +466,7 @@
 }
 
 .wj-control .wj-input-group .wj-input-group-btn:last-child:not(:first-child) > .wj-btn, .wj-viewer .wj-control .wj-input-group .wj-input-group-btn:last-child:not(:first-child) > .wj-applybutton {
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid var(--bor-color);
 }
 
 .wj-control .wj-input-group .wj-input-group-btn:first-child:not(:last-child) > .wj-btn, .wj-viewer .wj-control .wj-input-group .wj-input-group-btn:first-child:not(:last-child) > .wj-applybutton {

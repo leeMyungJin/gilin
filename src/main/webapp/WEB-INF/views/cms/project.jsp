@@ -155,7 +155,7 @@
                         </tr>
                         <tr>
                             <th>채널 명</th>
-                            <td>
+                            <td class="flex_wrap">
                                 <input type="text" name="chName" value="" placeholder="" class="search">
                                 <button type="button" class="btn jeon" onclick="channelValidation(this)">
                                     검증
@@ -168,7 +168,7 @@
                         </tr>
                         <tr>
                             <th>프로젝트 대표 이미지</th>
-                            <td>
+                            <td class="flex_wrap">
                                 <input type="text" name="pjImg" value="" placeholder="" class="search">
                                 <button type="button" class="btn jeon" onclick="$('input[name=pjImageFileUpload]').trigger('click')">
                                     찾기

@@ -65,7 +65,6 @@
   padding-bottom:calc(var(--spacing) * 1.5);
   background-color: white;
   width: 100%;
-  float: right;
 }
 
 
@@ -81,15 +80,18 @@
 
 
 /* 채널관리 */
-.edit_modal .modal_cont{background:#fff;min-width:calc(var(--spacing) * 38);border-radius:var(--radius);overflow:hidden;}
+.edit_modal .modal_cont{background:#fff;min-width:calc(var(--spacing) * 38);border-radius:var(--radius);overflow-y:auto;max-height:90%;}
 .edit_modal .modal_cont .close_btn{position:absolute;top:21px;right:12px;color:#fff;cursor:pointer;}
 .edit_modal .modal_cont h2{background:var(--point-color);color:#fff;padding:calc(var(--spacing) * 2);font-size:20px;}
 .edit_modal .modal_cont .required_wrap{margin:calc(var(--spacing) * 2) calc(var(--spacing) * 2) 0;border-bottom:2px solid var(--point-color);padding-bottom:calc(var(--spacing) * 2);text-align:right;color:var(--alert-color);font-weight:600;}
 .edit_modal .modal_cont .required{color:var(--alert-color);vertical-align:super;font-weight:600;}
 .edit_modal .modal_cont .modal_table{margin:calc(var(--spacing) * 2);width:calc(100% - calc(var(--spacing) * 4));}
-.edit_modal .modal_cont .modal_table td{padding-bottom:8px;}
+.edit_modal .modal_cont .modal_table td{padding-bottom:8px;} 
 .edit_modal .modal_cont .modal_table th{color:var(--point-color);font-weight:500;text-align:left;padding-right:var(--spacing);}
+.edit_modal .modal_cont .modal_table td.flex_wrap [class*="btn"]{margin-left:8px;}
 .edit_modal .modal_cont .modal_table input, .edit_modal .modal_cont .modal_table select{border:1px solid #ddd;background:#fff;}
+.edit_modal .modal_cont .modal_table input{width:100%;}
+.edit_modal .modal_cont .modal_table input.wj-form-control, .edit_modal .modal_cont .modal_table select.wj-form-control{border:none;height:calc(var(--spacing) * 4);}
 .edit_modal .modal_cont .btn_wrap{margin:calc(var(--spacing) * 2);display:flex;justify-content:space-between;gap:var(--spacing);}
 .edit_modal .modal_cont .btn_wrap button{width:100%;}
 .edit_modal .modal_cont .chk_wrap{display:flex;align-items:center;}
@@ -127,7 +129,7 @@
 }
 
 button.btn.jeon{
-  height:calc(var(--spacing) * 3);
+  height:calc(var(--spacing) * 4);
   background:#000;
   border-radius:4px;color:#fff;
   padding:0 calc(var(--spacing) * 1.5);
