@@ -98,7 +98,8 @@
 .cms_notice .cms_filter_cont{border-radius:0 0 var(--radius) var(--radius);margin-top:-1px;}
 
 /* 공지관리 */
-.cms_terms .cms_filter_cont{border-radius:0 0 var(--radius) var(--radius);margin-top:-1px;}
+.cms_terms{height:100vh;}
+.cms_terms .cms_filter_cont{border-radius:0 0 var(--radius) var(--radius);margin-top:-1px;max-height:calc(100vh - 220px);overflow-y: auto;}
 
 
 /* 전승희 변경 */

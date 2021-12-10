@@ -7,9 +7,6 @@
 
     <title>기린</title>
     <%@ include file="./include/header.jsp" %>
-    <style type="text/css">
-        .ck-content {height: 80vh;}
-    </style>
 </head>
 <body>
 <div id="cms">
