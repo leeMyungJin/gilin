@@ -246,7 +246,7 @@ function appleLogin(){
           <ul class="mypage_menu">
             <li><a href="javascript:void(0);" onClick="moveMypage()">Mypage</a></li>
             <li><a href="javascript:void(0);" onClick="logout()">Logout</a></li>
-            <li id="btnMoveAdmin"><a href="javascript:void(0);" onClick="moveAdminPage()">AdminView</a></li>
+            <li id="btnMoveAdmin"><a href="javascript:void(0);" onClick="moveAdminPage()">Admin</a></li>
           </ul>
         </div>
         

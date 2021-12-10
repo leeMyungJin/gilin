@@ -231,8 +231,8 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .pjt_invitaion_wrap a span{margin-right:calc(var(--spacing));}
 .pjt_invitaion_wrap a:hover{color:var(--point-color);}
 
-.pjt_detail_wrap .inner{position:relative;margin-top:calc(var(--spacing) * 2);}
-.pjt_detail_wrap .funding_aside{position:absolute;right:0;top:0;width:324px;border:1px solid var(--bor-color);border-radius:4px;background:#fff;transition:.3s;overflow:hidden auto;}
+.pjt_detail_wrap .inner{position:relative;margin-top:calc(var(--spacing) * 2);display:flex;align-items: flex-start;justify-content: space-between;}
+.pjt_detail_wrap .funding_aside{position:sticky;top:96px;width:324px;border:1px solid var(--bor-color);border-radius:4px;background:#fff;transition:.3s;overflow:hidden auto;}
 .pjt_detail_wrap .funding_aside.is-fixed{position:fixed;top:96px;} /* sticky */
 .pjt_detail_wrap .item_wrap{max-height:calc(100vh - 96px);}
 .pjt_detail_wrap .item{padding:calc(var(--spacing) * 2);}

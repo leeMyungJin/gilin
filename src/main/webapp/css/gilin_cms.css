@@ -47,7 +47,7 @@
 
 
 /* 필터 & 보드 */
-.cms_filter_cont{padding:calc(var(--spacing) * 2);background:#fff;border:1px solid var(--bor-color);border-radius:var(--radius);}
+.cms_filter_cont{padding:calc(var(--spacing) * 2);background:#fff;border:1px solid var(--bor-color);border-radius:var(--radius);min-height:500px;}
 
 /* 필터영역 */
 .filter_area{align-items:center;justify-content:flex-start;padding:calc(var(--spacing) * 1.5) calc(var(--spacing) * 2);background:#eee;margin-bottom:calc(var(--spacing) * 2);border-radius:var(--radius);}

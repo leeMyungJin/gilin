@@ -468,7 +468,7 @@ function uncomma(str) {
   
 	<%@ include file="../include/footer.jsp" %>
 
-  <script>
+  <!-- <script>
     $(window).resize(function(){
       if (window.innerWidth > 750) {
         var aside = $('.pjt_detail_wrap .funding_aside');
@@ -502,6 +502,6 @@ function uncomma(str) {
         });
       }
     }).resize();
-  </script>
+  </script> -->
 </body>
 </html>
