@@ -344,7 +344,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .mypage .my_info .profile_wrap:after{content:'';width:1px;height:100%;background:var(--bor-color);position:absolute;right:0;top:0;}
 .mypage .my_info .profile_wrap .profile_img{width:calc(var(--spacing) * 8);height:calc(var(--spacing) * 8);background:#fff;border:1px solid var(--bor-color);border-radius:100%;margin-bottom:var(--spacing);overflow:hidden;position:relative;}
 .mypage .my_info .profile_wrap .profile_img>img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;}
-.mypage .my_info .profile_wrap .profile_img img.default{width: 64%;min-width: 100%;max-width:100%;top: 57px;}
+.mypage .my_info .profile_wrap .profile_img img.default{width: 64%;min-width: 100%;max-width:100%;}
 .mypage .my_info .profile_wrap .btn_wrap button{width:100%;max-width:120px;color:var(--txt-color);font-size:12px;margin-bottom:4px;height:calc(var(--spacing) * 2);border:none;background:none;border-bottom:1px solid var(--bor-color);display:flex;align-items:center;justify-content: space-between;}
 .mypage .my_info .profile_wrap .btn_wrap button span{font-size:14px;margin-left:var(--spacing);}
 .mypage .my_info_txt{width:calc(100% - calc(var(--spacing) * 8));padding:calc(var(--spacing) * 3) 0;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;}

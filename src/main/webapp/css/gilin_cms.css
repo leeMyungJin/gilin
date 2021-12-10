@@ -26,7 +26,7 @@
 .cms_cont .cms_tit span{font-size:1.5em;margin-right:var(--spacing);opacity:.2;}
 
 .overview_area{border:1px solid var(--bor-color);border-radius:var(--radius);padding:calc(var(--spçacing) * 3);margin-bottom:calc(var(--spacing) * 4);}
-.overview_area .item{text-align:center;border-right:1px solid var(--bor-color);}
+.overview_area .item{text-align:center;border-right:1px solid var(--bor-color);padding:calc(var(--spacing) * 2);}
 .overview_area.fb2 .item{width:50%;}
 .overview_area.fb3 .item{width:33.33333%;}
 .overview_area.fb4 .item{width:25%;}
