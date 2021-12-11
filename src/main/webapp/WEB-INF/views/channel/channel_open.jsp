@@ -274,7 +274,7 @@ function changeChOpenYn(type){
                   <div class="chk_btn_circle"></div>
                 </div>
                 <div id="chPassShowbox" class="showbox">
-                  <input id="chPass" type="text" placeholder="4자리 비밀번호" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                  <input id="chPass" type="text" placeholder="4자리 비밀번호" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
               </div>
             </td>
