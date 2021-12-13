@@ -9,17 +9,18 @@
 				, p.pj_img 
 				, p.pj_memo 
 				, p.pj_content 
-				, to_char(p.fd_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
-				, to_char(p.fd_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
-				, to_char(p.cret_dt  , 'YYYY.MM.DD') as cret_dt 
+				, to_char(c.ch_st_dt  , 'YYYY.MM.DD') as fd_st_dt 
+				, to_char(c.ch_end_dt  , 'YYYY.MM.DD') as fd_end_dt 
+				, to_char(c.cret_dt  , 'YYYY.MM.DD') as cret_dt 
 				, p.cret_id 
 				, to_char(p.updt_dt  , 'YYYY.MM.DD') as updt_dt 
 				, p.updt_id 
 				, pf.fd_amt as fd_sum_amt
-				, case when to_char(now()-p.fd_end_dt, 'dd')::numeric <![CDATA[<]]> 0 
-						then 'D' || to_char(now()-p.fd_end_dt, 'dd')::numeric
-						else 'D+' || to_char(now()-p.fd_end_dt, 'dd')::numeric end as d_day
+				, case when to_char(now()-c.ch_end_dt, 'dd')::numeric  <![CDATA[<]]> 0 
+						then 'D' || to_char(now()-c.ch_end_dt, 'dd')::numeric
+						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 		from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq 
+								    left join web.channel c on p.ch_seq  = c.ch_seq 
 		where 1=1
 		<if test="chSeq != null and chSeq != ''">
 			and p.ch_seq = #{chSeq}::numeric

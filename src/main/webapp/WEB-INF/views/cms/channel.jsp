@@ -243,36 +243,6 @@
 
 <script>
 
-    new wijmo.input.InputDateRange("input[name='chDateRange']", {
-        alwaysShowCalendar: true,
-        predefinedRanges: getPredefinedRanges(),
-        valueChanged: s => showDateRange(s, "input[name='chDateRange']"),
-        rangeEndChanged: s => showDateRange(s, "input[name='chDateRange']"),
-        value: new Date(),
-        rangeEnd: wijmo.DateTime.addDays(new Date(), 2),
-        closeOnSelection: true,
-        handleWheel: false,
-        monthCount: 2,
-        weeksBefore: 0,
-        weeksAfter: 0,
-        separator: "~"
-    });
-
-    new wijmo.input.InputDateRange("input[name='fundingDateRange']", {
-        alwaysShowCalendar: true,
-        predefinedRanges: getPredefinedRanges(),
-        valueChanged: s => showDateRange(s, "input[name='fundingDateRange']"),
-        rangeEndChanged: s => showDateRange(s, "input[name='fundingDateRange']"),
-        value: new Date(),
-        rangeEnd: wijmo.DateTime.addDays(new Date(), 2),
-        closeOnSelection: true,
-        handleWheel: false,
-        monthCount: 2,
-        weeksBefore: 0,
-        weeksAfter: 0,
-        separator: "~"
-    });
-
     var _from = new wijmo.input.InputDate("#from");	//시작 일자
     var _to = new wijmo.input.InputDate("#to");	//종료 일자
 
