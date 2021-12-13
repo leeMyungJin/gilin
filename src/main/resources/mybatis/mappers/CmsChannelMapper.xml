@@ -199,5 +199,9 @@
         order by t1.cret_dt desc
     </select>
 
+    <update id="channelActiveChange" parameterType="map">
+        update web.channel set ch_active_yn = ${active} where id = #{id}::integer
+    </update>
+
 
 </mapper>

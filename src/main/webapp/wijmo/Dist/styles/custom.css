@@ -3,7 +3,7 @@
 
 /* grid 관련*/
 .wj-flexgrid {
-	max-height: 620px;
+	/*max-height: 620px;*/
 	height: auto;
 	width: 100%;
 }

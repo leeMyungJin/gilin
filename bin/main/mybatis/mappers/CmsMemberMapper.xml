@@ -26,11 +26,37 @@
 		<if test="inq != null">
 			AND
 			<choose>
-				<when test="con != ''">
+				<when test="con == 'nickname'">
 					<foreach collection="inq" item="item"
 							 index="index" open="(" close=")" separator="or">
-						${con} LIKE '%' || #{item} || '%'
+						nickname LIKE '%' || #{item} || '%'
 					</foreach>
+				</when>
+				<when test="con == 'email'">
+					<foreach collection="inq" item="item"
+							 index="index" open="(" close=")" separator="or">
+						email LIKE '%' || #{item} || '%'
+					</foreach>
+				</when>
+				<when test="con == 'gender'">
+					<if test="inq == '남'">
+						(gender = 'male' or gender = 'Gender.MALE' or gender = '남자')
+					</if>
+					<if test="inq == '남자'">
+						(gender = 'male' or gender = 'Gender.MALE' or gender = '남자')
+					</if>
+					<if test="inq == 'male'">
+						(gender = 'male' or gender = 'Gender.MALE' or gender = '남자')
+					</if>
+					<if test="inq == '여'">
+						(gender = 'female' or gender = 'Gender.FEMALE' or gender = '여자')
+					</if>
+					<if test="inq == '여자'">
+						(gender = 'female' or gender = 'Gender.FEMALE' or gender = '여자')
+					</if>
+					<if test="inq == 'female'">
+						(gender = 'female' or gender = 'Gender.FEMALE' or gender = '여자')
+					</if>
 				</when>
 				<otherwise>
 					<foreach collection="inq" item="item"

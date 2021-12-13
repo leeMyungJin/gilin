@@ -34,6 +34,8 @@
                         <select id="con" name="con" title="" class="mr">
                             <option value="" selected="selected">전체</option>
                             <option value="nickname">닉네임</option>
+                            <option value="email">이메일</option>
+                            <option value="gender">성별</option>
                         </select>
 
                         <input type="text" id="search" name="inq" value="" placeholder=",로 다중검색 가능" class="search mr">
@@ -322,7 +324,7 @@
     }
 
     .comment_img {
-        max-width: 70%;
+        width: 100%;
     }
 
 

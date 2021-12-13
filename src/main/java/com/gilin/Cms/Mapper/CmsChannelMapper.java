@@ -22,4 +22,6 @@ public interface CmsChannelMapper {
     public List<CmsChannelVo> getSchedulerList();
     public List<CmsChannelVo> getChannelEndSchedulerList();
 
+    public void channelActiveChange(HashMap<String, Object> params);
+
 }

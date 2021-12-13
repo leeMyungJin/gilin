@@ -93,6 +93,16 @@ function loadGridUserList(gridBindings, layoutName) {
                 //cell.textContent = (r+1).toString();
                 cell.textContent = (gridView.pageSize * gridView.pageIndex + r + 1).toString();
             }
+
+            var numberFormat = $(".number-format");
+            $.each(numberFormat, function (i, el) {
+                var result = Number($(el).text());
+                if (typeof result == 'number') {
+                    $(el).text(result.toLocaleString()).removeClass("number-format");
+                }
+            })
+
+
         }
     });
 

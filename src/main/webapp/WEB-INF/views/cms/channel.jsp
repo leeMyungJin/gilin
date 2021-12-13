@@ -156,11 +156,11 @@
                         </tr>
                         <tr>
                             <th>등록일자</th>
-                            <td><input type="text" readonly name="cretDt" value="" placeholder="" class="search"></td>
+                            <td><input type="text" readonly name="cretDt" value="" placeholder="" class="search input-disabled"></td>
                         </tr>
                         <tr>
                             <th>개설자 닉네임</th>
-                            <td><input type="text" name="nickname" value="" placeholder="" class="search" readonly></td>
+                            <td><input type="text" name="nickname" value="" placeholder="" class="search input-disabled" readonly></td>
                         </tr>
                         <tr>
                             <th>채널명</th>
@@ -182,7 +182,7 @@
                         </tr>
                         <tr>
                             <th>채널 기간</th>
-                            <td><input type="text" name="chDateRange" value="" placeholder="" class="search"></td>
+                            <td><input type="text" name="chDateRange" value="" placeholder="" class="search date-range"></td>
                         </tr>
                         <!-- <tr>
                             <th>펀딩 기간</th>
@@ -190,11 +190,11 @@
                         </tr> -->
                         <tr>
                             <th>프로젝트 개수</th>
-                            <td><input type="text" name="projectCount" readonly value="" placeholder="" class="search"></td>
+                            <td><input type="text" name="projectCount" readonly value="" placeholder="" class="search input-disabled"></td>
                         </tr>
                         <tr>
                             <th>전체 펀딩 금액</th>
-                            <td><input type="text" name="fundingTotalPrice" readonly value="" placeholder="" class="search"></td>
+                            <td><input type="text" name="fundingTotalPrice" readonly value="" placeholder="" class="search input-disabled"></td>
                         </tr>
                         <tr>
                             <th>비밀번호</th>
@@ -235,6 +235,14 @@
     #setGridPager .selectPage {
         color: #ddd;
     }
+
+    .input-disabled {
+        background-color: #dedede !important;
+    }
+
+    .date-range {
+        width: 100%;
+    }
 </style>
 
 </body>
@@ -272,9 +280,25 @@
     })
 
 
+    new wijmo.input.InputDateRange("input[name='chDateRange']", {
+        alwaysShowCalendar: true,
+        predefinedRanges: getPredefinedRanges(),
+        valueChanged: s => showDateRange(s, "input[name='chDateRange']"),
+        rangeEndChanged: s => showDateRange(s, "input[name='chDateRange']"),
+        value: new Date(),
+        rangeEnd: wijmo.DateTime.addDays(new Date(), 2),
+        closeOnSelection: true,
+        handleWheel: false,
+        monthCount: 2,
+        weeksBefore: 0,
+        weeksAfter: 0,
+        separator: "~"
+    });
+
+
 
     var gridBindings = [
-        {binding: 'cretDt', header: '등록일자', isReadOnly: true, width: 200, align: "center"},
+        {binding: 'cretDt', header: '등록일자', isReadOnly: true, width: 200, align: "center", format: '' },
         {binding: 'nickname', header: '개설자 닉네임', isReadOnly: true, width: 150, align: "center"},
         {binding: 'chName', header: '채널명', isReadOnly: true, width: 200, align: "center"},
         {binding: 'chImg', header: '채널대표이미지', isReadOnly: true, width: 250, align: "center"},
@@ -282,8 +306,8 @@
         {binding: 'active', header: '활성화',  width: 100, align: "center", dataMap: ["Y", "N"]},
         {binding: 'chDateRange', header: '채널 기간',  width: 350, align: "center"},
         {binding: 'fundingDateRange', header: '펀딩 기간',  width: 350, align: "center"},
-        {binding: 'projectCount', header: '프로젝트 개수',  width: 100, align: "center"},
-        {binding: 'sumFunding', header: '전체 펀딩 금액',  width: 100, align: "center"},
+        {binding: 'projectCount', header: '프로젝트 개수',  width: 100, align: "center", cssClass: 'number-format'},
+        {binding: 'sumFunding', header: '전체 펀딩 금액',  width: 100, align: "center", cssClass: 'number-format'},
         {binding: 'chPass', header: '비밀번호',  width: 100, align: "center"},
         {binding: 'report', header: '결과 보고서', width: 100, align:"center",
             cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({
@@ -309,6 +333,39 @@
     setGrid = gridOption.setGrid;
     setGridPager = gridOption.setGridPager;
     gridView = gridOption.gridView;
+
+
+    /* 활성화 비활성화 변경하기 */
+    setGrid.cellEditEnded.addHandler((s, e) => {
+
+        let col = s.columns[e.col]
+        if (col.binding == 'active') {
+            if (!confirm("관리자 여부를 변경하시겠습니까?")) {
+                e.cancel = true;
+            }
+
+            let id = s.selectedItems[0].id;
+            let adminFlag = s.selectedItems[0].active == "Y" ? "true" : "false";
+
+            $.ajax({
+                type : 'post',
+                url : "/cms/channel/activeChanger",
+                data : {
+                    id: id,
+                    ch_active_yn: adminFlag
+                },
+                success : function(result) {
+                    console.log(result);
+                    alert('관리자 권한을 변경했습니다.');
+                },
+                error: function(request, status, error) {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+        }
+
+    })
+
 
 
     //회원 리스트 조회
@@ -344,6 +401,8 @@
                         "&active=" + f.active.value +
                         "&page=" + f.page.value
                 })
+
+
 
             },
             error: function(request, status, error) {

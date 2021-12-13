@@ -19,17 +19,29 @@
 
 	<select id="getListSearch" parameterType="hashMap" resultType="CmsMemberVo">
 		select
-		   *,
-		   (case when admin_yn = true then 'Y' else 'N' end) as adminFlag
+		*,
+		(case when admin_yn = true then 'Y' else 'N' end) as adminFlag
 		from web.member
 		where 1=1
 		<if test="inq != null">
 			AND
 			<choose>
-				<when test="con != ''">
+				<when test="con == 'nickname'">
 					<foreach collection="inq" item="item"
 							 index="index" open="(" close=")" separator="or">
-						${con} LIKE '%' || #{item} || '%'
+						nickname LIKE '%' || #{item} || '%'
+					</foreach>
+				</when>
+				<when test="con == 'email'">
+					<foreach collection="inq" item="item"
+							 index="index" open="(" close=")" separator="or">
+						email LIKE '%' || #{item} || '%'
+					</foreach>
+				</when>
+				<when test="con == 'gender' ">
+					<foreach collection="inq" item="item"
+							 index="index" open="(" close=")" separator="or">
+						gender LIKE '%' || #{item} || '%'
 					</foreach>
 				</when>
 				<otherwise>

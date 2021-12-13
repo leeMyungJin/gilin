@@ -578,4 +578,11 @@ public class CmsController {
         return result;
     }
 
+
+    @PostMapping("/cms/channel/activeChanger")
+    @ResponseBody
+    public void channelActiveChanger(@RequestParam HashMap<String, Object> params) {
+        cmsChannelService.channelActiveChange(params);
+    }
+
 }

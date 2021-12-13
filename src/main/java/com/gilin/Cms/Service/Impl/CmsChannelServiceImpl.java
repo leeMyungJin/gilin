@@ -71,5 +71,10 @@ public class CmsChannelServiceImpl implements CmsChannelService {
         return cmsChannelMapper.getChannelEndSchedulerList();
     }
 
+    @Override
+    public void channelActiveChange(HashMap<String, Object> params) {
+        cmsChannelMapper.channelActiveChange(params);
+    }
+
 
 }
