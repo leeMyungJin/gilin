@@ -342,6 +342,7 @@
         if (col.binding == 'active') {
             if (!confirm("활성화 여부를 변경하시겠습니까?")) {
                 e.cancel = true;
+                return false;
             }
 
             let id = s.selectedItems[0].chSeq;

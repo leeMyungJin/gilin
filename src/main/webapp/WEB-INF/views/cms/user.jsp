@@ -369,6 +369,7 @@
         if (col.binding == 'adminFlag') {
             if (!confirm("관리자 여부를 변경하시겠습니까?")) {
                 e.cancel = true;
+                return false;
             }
 
             let id = s.selectedItems[0].id;
