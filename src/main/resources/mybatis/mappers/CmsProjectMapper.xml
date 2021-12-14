@@ -135,6 +135,9 @@
         pj_seq = ${pjSeq}
     </update>
 
+    <update id="projectActiveChanger" parameterType="map">
+        update web.project set active_yn = ${activeYn} where pj_seq = #{pjSeq}::integer
+    </update>
 
     <delete id="delete" parameterType="map">
         delete from web.project where pj_seq = ${pjSeq}

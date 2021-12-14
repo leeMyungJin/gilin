@@ -54,7 +54,7 @@
                         <input type="text" id="to1" name="to" value="" placeholder="" class="search mr">
 
                         <button class="btn mr">조회</button>
-                        <button class="btn">테스트</button>
+<%--                        <button class="btn">테스트</button>--%>
                     </div>
                 </div>
 
@@ -106,6 +106,27 @@
 
             </div>
 
+            <div class="dashboard_btn_area layout02" style="justify-content: flex-end !important;">
+
+                <div class="flex_box">
+
+                    <button class="dash_btn" onclick="_getUserGridLayout('pushLayout', setGrid);">
+                        <span class="material-icons-outlined">view_list</span>
+                        칼럼 위치 저장
+                    </button>
+                    <button class="dash_btn" onclick="_resetUserGridLayout('pushLayout', setGrid, gridBindings)">
+                        <span class="material-icons-outlined">refresh</span>
+                        칼럼 초기화
+                    </button>
+                    <button class="dash_btn" onclick="exportExcel('push_list');">
+                        <span class="material-icons-outlined">file_download</span>
+                        엑셀 다운로드
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
 
@@ -125,7 +146,7 @@
                         <input type="text" id="to2" name="to" value="" placeholder="" class="search mr">
 
                         <button class="btn mr">조회</button>
-                        <button class="btn">테스트</button>
+<%--                        <button class="btn">테스트</button>--%>
                     </div>
                 </div>
 
@@ -173,6 +194,27 @@
                         <div class="btn_wrap">
                         </div>
                     </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard_btn_area layout02" style="justify-content: flex-end !important;">
+
+                <div class="flex_box">
+
+                    <button class="dash_btn" onclick="_getUserGridLayout('pushLayout', setGrid);">
+                        <span class="material-icons-outlined">view_list</span>
+                        칼럼 위치 저장
+                    </button>
+                    <button class="dash_btn" onclick="_resetUserGridLayout('pushLayout', setGrid, gridBindings)">
+                        <span class="material-icons-outlined">refresh</span>
+                        칼럼 초기화
+                    </button>
+                    <button class="dash_btn" onclick="exportExcel('push_list');">
+                        <span class="material-icons-outlined">file_download</span>
+                        엑셀 다운로드
+                    </button>
+
                 </div>
 
             </div>
@@ -658,7 +700,7 @@
         });
 
 
-        if (submitType == "삭제") {
+        if (submitType == "삭제" || submitType == "생성") {
             modalPop();
         }
 

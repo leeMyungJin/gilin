@@ -340,23 +340,23 @@
 
         let col = s.columns[e.col]
         if (col.binding == 'active') {
-            if (!confirm("관리자 여부를 변경하시겠습니까?")) {
+            if (!confirm("활성화 여부를 변경하시겠습니까?")) {
                 e.cancel = true;
             }
 
-            let id = s.selectedItems[0].id;
-            let adminFlag = s.selectedItems[0].active == "Y" ? "true" : "false";
+            let id = s.selectedItems[0].chSeq;
+            let chActiveYn = s.selectedItems[0].active == "Y" ? "true" : "false";
 
             $.ajax({
                 type : 'post',
                 url : "/cms/channel/activeChanger",
                 data : {
-                    id: id,
-                    ch_active_yn: adminFlag
+                    chSeq: id,
+                    chActiveYn: chActiveYn
                 },
                 success : function(result) {
                     console.log(result);
-                    alert('관리자 권한을 변경했습니다.');
+                    alert('활성화 여부를 변경했습니다.');
                 },
                 error: function(request, status, error) {
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -428,11 +428,6 @@
             return false;
         }
 
-        if (f.fundingDateRange.value == "") {
-            alert("펀딩 기간을 설정해주세요");
-            return false;
-        }
-
         if (f.chDateRange.value == "") {
             alert("채널 기간을 설정해주세요");
             return false;
@@ -442,13 +437,11 @@
             return false;
         }
 
+
         var chDateRangeSplit = f.chDateRange.value.split("~");
-        var fundingDateRangeSplit = f.fundingDateRange.value.split("~");
 
         f.chStDt.value = chDateRangeSplit[0];
         f.chEndDt.value = chDateRangeSplit[1];
-        f.chFdStDt.value = fundingDateRangeSplit[0];
-        f.chFdEndDt.value = fundingDateRangeSplit[1];
 
         let today = new Date();
 
@@ -459,6 +452,7 @@
         f.updtDt.value = year + "-" + month + "-" + day
         var url = '';
 
+
         switch (f.submitType.value)
         {
             case "수정":
@@ -467,11 +461,13 @@
             case "삭제":
                 url = "/cms/channel/delete"
                 break;
+
             case "생성":
+            default:
                 url = "/cms/channel/create"
                 f.chActiveYn.value = f.chActiveYn.value == 'true' ? true : false;
                 f.cretDt.value = f.updtDt.value;
-                console.log(f.cretDt.value);
+                f.chSeq.value = 0;
                 break;
         }
 
@@ -534,10 +530,13 @@
             var fInput = f.querySelectorAll("input");
             $(".modal-form-title.create").css("display", "block");
             $(".modal-form-title.modify").css("display", "none");
+            f.submitType.value = "생성"
 
             fInput.forEach((el) => {
                 el.value = '';
             })
+
+            // f.submitType.value = "생성"
 
         }
     }

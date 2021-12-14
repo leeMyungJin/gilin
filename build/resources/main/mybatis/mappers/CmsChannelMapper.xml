@@ -65,10 +65,10 @@
         left outer join web.member t2 on t1.cret_id = t2.id
         left outer join
         (
-            select t1.ch_seq, count(t1.pj_seq) as projectCount, t2.fundingCount, t2.sumFunding from web.project t1
-            left outer join
-            (select pj_seq, count(pj_seq) as fundingCount, sum(fd_amt) as sumFunding from web.project_funding group by pj_seq)
-                t2 on t1.pj_seq = t2.pj_seq group by t1.ch_seq, fundingCount, t2.sumFunding)
+        select t1.ch_seq, count(t1.pj_seq) as projectCount, sum(t2.fundingCount) as fundingcount, sum(t2.sumFunding) as sumFunding from web.project t1
+        left outer join
+        (select pj_seq, count(pj_seq) as fundingCount, sum(fd_amt) as sumFunding from web.project_funding group by pj_seq)
+        t2 on t1.pj_seq = t2.pj_seq group by t1.ch_seq)
         t3 on t1.ch_seq = t3.ch_seq
         where 1=1
         <if test="inq != ''">
@@ -125,13 +125,13 @@
     <insert id="create" parameterType="CmsChannelVo">
         insert into web.channel
         (
-            ch_name, ch_img, ch_active_yn, ch_memo, ch_st_dt, ch_end_dt, ch_fd_st_dt, ch_fd_end_dt,
+            ch_name, ch_img, ch_active_yn, ch_memo, ch_st_dt, ch_end_dt,
             ch_pass, ch_open_yn, cret_dt, cret_id, updt_dt, updt_id
         )
         values
         (
             #{chName}, #{chImg}, ${chActiveYn}, #{chMemo}, #{chStDt}::timestamp, #{chEndDt}::timestamp,
-            #{chFdStDt}::timestamp, #{chFdEndDt}::timestamp, #{chPass}, #{chOpenYn}, #{cretDt}::timestamp, #{cretId},
+            #{chPass}, #{chOpenYn}, #{cretDt}::timestamp, #{cretId},
             #{updtDt}::timestamp, #{updtId}
         )
     </insert>
@@ -146,8 +146,6 @@
                 ch_memo = #{chMemo},
                 ch_st_dt = #{chStDt}::timestamp ,
                 ch_end_dt = #{chEndDt}::timestamp ,
-                ch_fd_st_dt = #{chFdStDt}::timestamp ,
-                ch_fd_end_dt = #{chFdEndDt}::timestamp ,
                 ch_pass = #{chPass},
                 ch_open_yn = #{chOpenYn},
                 updt_dt = #{updtDt}::timestamp,
@@ -198,6 +196,10 @@
           and t1.ch_active_yn = true
         order by t1.cret_dt desc
     </select>
+
+    <update id="channelActiveChange" parameterType="map">
+        update web.channel set ch_active_yn = ${chActiveYn} where ch_seq = #{chSeq}::integer
+    </update>
 
 
 </mapper>

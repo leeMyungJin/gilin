@@ -16,4 +16,6 @@ public interface CmsProjectService {
     public void update(CmsProjectVo cmsProjectVo);
     public void create(CmsProjectVo cmsProjectVo);
     public void delete(HashMap<String, Object> params);
+    public void projectActiveChanger(HashMap<String, Object> params);
+
 }

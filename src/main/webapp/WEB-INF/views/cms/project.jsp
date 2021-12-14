@@ -295,8 +295,8 @@
         {binding: 'activeYn', header: '활성화',  width: 100, align: "center", dataMap: ["Y", "N"]},
         {binding: 'active', header: '상태',  width: 100, align: "center"},
         {binding: 'fdRangeDt', header: '펀딩 기간',  width: 350, align: "center"},
-        {binding: 'sumFdAmt', header: '펀딩 금액',  width: 100, align: "center"},
-        {binding: 'fundingCount', header: '펀딩 인원수',  width: 100, align: "center"},
+        {binding: 'sumFdAmt', header: '펀딩 금액',  width: 100, align: "center", cssClass: 'number-format'},
+        {binding: 'fundingCount', header: '펀딩 인원수',  width: 100, align: "center", cssClass: 'number-format'},
         {binding: 'edit', header: '정보수정', width: 100, align:"center",
             cellTemplate: wijmo.grid.cellmaker.CellMaker.makeButton({
                 text: '<b>수정</b>',
@@ -311,6 +311,41 @@
     setGrid = gridOption.setGrid;
     setGridPager = gridOption.setGridPager;
     gridView = gridOption.gridView;
+
+    /* 활성화 비활성화 변경하기 */
+    setGrid.cellEditEnded.addHandler((s, e) => {
+
+        let col = s.columns[e.col]
+
+        if (col.binding == 'activeYn') {
+            if (!confirm("활성화 여부를 변경하시겠습니까?")) {
+                e.cancel = true;
+                console.log(s.selectedItems[0].activeYn);
+                console.log(s.selectedItems[0]);
+                return false;
+            }
+
+            let id = s.selectedItems[0].pjSeq;
+            let activeYn = s.selectedItems[0].activeYn == "Y" ? "true" : "false";
+
+            $.ajax({
+                type : 'post',
+                url : "/cms/project/activeChanger",
+                data : {
+                    pjSeq: id,
+                    activeYn: activeYn
+                },
+                success : function(result) {
+                    console.log(result);
+                    alert('활성화 여부를 변경했습니다.');
+                },
+                error: function(request, status, error) {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+        }
+
+    })
 
     //회원 리스트 조회
     function getProjectList(f=document.searchForm) {

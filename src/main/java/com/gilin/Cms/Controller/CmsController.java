@@ -212,7 +212,12 @@ public class CmsController {
     @ResponseBody
     public void channelCreate(CmsChannelVo cmsChannelVo) {
 
+        System.out.println("test");
+        System.out.println(cmsChannelVo.toString());
+
         if (!cmsChannelVo.getChImgFileUpload().isEmpty()) {
+
+            System.out.println("test22");
 
             try {
                 MultipartFile multi = cmsChannelVo.getChImgFileUpload();
@@ -244,8 +249,11 @@ public class CmsController {
                 System.out.println(e.getMessage());
             }
 
-        }
+            System.out.println("test233");
 
+        }
+        System.out.println("test23344");
+        System.out.println("test23344");
 
         cmsChannelService.create(cmsChannelVo);
     }
@@ -256,12 +264,12 @@ public class CmsController {
 
         if (!Login.isAdmin()) return "redirect:/";;
 
-        List<CmsProjectVo> cmsProjectVoList = cmsProjectService.getProjectList();
+//        List<CmsProjectVo> cmsProjectVoList = cmsProjectService.getProjectList();
         Map<String, Integer> projectCount = cmsProjectService.getProjectCount();
 
-        String lists = new ObjectMapper().writeValueAsString(cmsProjectVoList);
+//        String lists = new ObjectMapper().writeValueAsString(cmsProjectVoList);
 
-        model.addAttribute("lists", lists);
+//        model.addAttribute("lists", lists);
         model.addAttribute("count", projectCount);
 
 
@@ -583,6 +591,13 @@ public class CmsController {
     @ResponseBody
     public void channelActiveChanger(@RequestParam HashMap<String, Object> params) {
         cmsChannelService.channelActiveChange(params);
+    }
+
+
+    @PostMapping("/cms/project/activeChanger")
+    @ResponseBody
+    public void projectActiveChanger(@RequestParam HashMap<String, Object> params) {
+        cmsProjectService.projectActiveChanger(params);
     }
 
 }

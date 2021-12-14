@@ -50,4 +50,9 @@ public class CmsProjectServiceImpl implements CmsProjectService {
     public void delete(HashMap<String, Object> params) {
         cmsProjectMapper.delete(params);
     }
+
+    @Override
+    public void projectActiveChanger(HashMap<String, Object> params) {
+        cmsProjectMapper.projectActiveChanger(params);
+    }
 }
