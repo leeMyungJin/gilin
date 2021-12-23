@@ -157,3 +157,10 @@ button.btn.jeon{
 #modalNotice.edit_modal .modal_cont .modal_table th {
   width: 10%;
 }
+
+#gridLoader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

@@ -1,0 +1,168 @@
+/* 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* reset */
+*{margin:0;padding:0;box-sizing:border-box;font-size:12px;}
+body{line-height:1;letter-spacing:-0.02rem;font-family: 'Play','Noto Sans KR',sans-serif;overflow-x:hidden;min-width:1500px;min-height:}
+img{max-width:100%;}
+ul, ol{list-style:none;}
+a{text-decoration:none;color:inherit;cursor:pointer;}
+i.italic{font-size:inherit;}
+
+:root{
+    /* 컬러 */
+    --main-color:#F7CD60;
+    --border-color:#eee;
+  }
+
+/* common */
+.inner{width:1200px;margin:0 auto;}
+.flex_wrap{display:flex;justify-content:space-between;}
+
+/* 헤더 */
+.header{width:100%;position:fixed;top:0;left:0;z-index:999;}
+.header .inner{align-items:center;height:10rem;}
+.header .appdown_wrap{position:relative}
+.header .appdown_btn{font-size:1.333em;background-color:#000;padding:1rem 2.5rem;border-radius:1.333rem;color:var(--main-color);font-weight:bold;}
+.header .appdown_item_wrap{display:none;}
+
+.header.active *{color:#fff;}
+.header.active #menu li:hover a, .header.active #menu li.active a {color: #000;background:var(--main-color);}
+
+/* section */
+.section h1{font-size:3rem;line-height:1.4;}
+.section h2{font-size:2.5rem;margin-bottom:}
+.section h3{font-size:1.5rem;font-family: 'NanumSquareRound';}
+.section p.txt{font-size:1.1rem;line-height:1.5;}
+
+.bg_dot_wrap{position:absolute;width:100%;height:100%;top:0;left:0;}
+.bg_dot_wrap .dot{position:absolute;border-radius:100%;}
+.bg_dot_wrap .dot:nth-child(1){background-color:#F0F56E;width:1rem;height:1rem;animation: dot_ani 2s ease-in-out alternate infinite;}
+.bg_dot_wrap .dot:nth-child(2){background-color:#F57F53;width:1.6rem;height:1.6rem;animation: dot_ani 2.2s ease-in-out alternate-reverse infinite;}
+.bg_dot_wrap .dot:nth-child(3){background-color:#B35FFC;width:1.2rem;height:1.2rem;animation: dot_ani 1.6s ease-in-out alternate infinite;}
+.bg_dot_wrap .dot:nth-child(4){background-color:#82FDEA;width:.8rem;height:.8rem;animation: dot_ani 1.2s ease-in-out alternate-reverse infinite;}
+@keyframes dot_ani {
+  0%{transform:translateY(-100%);opacity:.5;}
+  100%{transform:translateY(100%);}
+}
+
+/* section0 */
+#section0{background-color:var(--main-color);position:relative;}
+#section0 .bg_img01{position:absolute;right:-5rem;bottom:5rem;width:100rem;opacity:.03;}
+#section0 h3{margin-bottom:2rem;}
+#section0 .down_btn_wrap{display:flex;margin-top:6rem;}
+#section0 .down_btn{padding:1.5rem 4rem 1.5rem 3rem;border-radius:1rem;background:#fff;display:flex;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.15);transition:.2s;}
+#section0 .down_btn:nth-child(1){margin-right:1.2rem;}
+#section0 .down_btn .img_wrap{width:4rem;height:4rem;display:flex;align-items:center;justify-content:center;border-radius:100%;background:#fff;margin-right:1rem;}
+#section0 .down_btn .img_wrap img{width:24px;}
+
+#section0 .down_btn p:first-of-type{font-size:1.2rem;font-weight:lighter;}
+#section0 .down_btn p:last-of-type{font-size:1.5rem;font-weight:bold;}
+#section0 .down_btn:hover{background:#000;}
+#section0 .down_btn:hover *{color:#fff;box-shadow:none;}
+
+
+#section0 .arr_down_btn{width:6rem;height:6rem;border-radius:100%;background-color:#000;display:flex;align-items:center;justify-content: center;margin-top:6rem;}
+#section0 .arr_down_btn span{color:#fff;}
+
+#section0 .flex_wrap{align-items:center;position:relative;z-index:2;}
+#section0 .phone-outer{position:relative;}
+#section0 .phone-outer:before{content:'';width:600px;height:600px;border-radius:100%;background:#000;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+#section0 .section0_v{width:100%;margin-top:-45px;}
+
+#section0 .bg_dot_wrap .dot:nth-child(1){left:20%;bottom:30%;}
+#section0 .bg_dot_wrap .dot:nth-child(2){left:40%;top:10%;}
+#section0 .bg_dot_wrap .dot:nth-child(3){left:70%;top:15%;}
+#section0 .bg_dot_wrap .dot:nth-child(4){left:80%;top:40%;}
+
+#section1 {text-align:center;}
+#section1 .bg_img01{position:absolute;top:0;right:0;}
+#section1 .bg_img02{position:absolute;bottom:0;left:0;}
+#section1 h3{margin-bottom:2rem;}
+#section1 h2{margin-bottom:10rem;}
+#section1 p.tit{font-size:1.5rem;font-weight:bold;margin:2rem 0 1rem;}
+#section1 .flex_wrap{position:relative;}
+#section1 .flex_box{width:calc(25% - 3rem);border:1px solid var(--border-color);border-radius:.5rem;padding:3rem 0;background:#fff;position:relative;}
+#section1 .flex_box .ico{transition:.2s;}
+#section1 .flex_box:hover .ico{transform:translateY(-1rem);}
+
+#section2{background:#000 url('https://gilin.co.kr/img/landing/section2_bg_img01.png') center no-repeat;background-size:cover;}
+#section2 .flex_wrap{align-items:center;}
+#section2 .flex_box{width:50%;}
+#section2 .flex_box:first-child{position:relative;}
+#section2 img.bg01{position:absolute;top:-120px;left:-160px;}
+.phone-outer{width: 400px;height: 780px;border-radius: 38px;-webkit-box-shadow: 0px 18px 88px 3px rgba(55, 55, 55, 0.5);box-shadow: 0px 18px 88px 3px rgba(55, 55, 55, 0.5);-webkit-transform: scale(1);-ms-transform: scale(1);transform: scale(1);-webkit-backface-visibility: hidden;backface-visibility: hidden;}
+.phone-outer .power {position: absolute;top: 167px;right: -4px;width: 4px;height: 58px;border-radius: 0px 4px 4px 0px;background: #946d12;}
+.phone-outer .volume {position: absolute;top: 257px;right: -5px;width: 5px;height: 116px;border-radius: 0px 4px 4px 0px;background:#ddd;}
+.phone-inner {position: absolute;top: 2px;left: 2px;width: calc(100% - 4px);height: calc(100% - 4px);background: url("https://res.cloudinary.com/dhlebhk0x/image/upload/v1540453975/inner.svg");background-repeat: no-repeat;background-size: 100% 100%;background-position: center center;background-color: #161617;border-radius: 40px;}
+.phone-inner .border {position: absolute;top: 0;left: 0;width: 100%;height: 100%;border-radius: 40px;border: 2px solid rgba(255, 255, 255, 0.12);}
+.chin-grill {position: absolute;bottom: 23px;left: 50%;width: 138px;margin-left: -69px;height: 9px;border-radius: 9px;background: #19191a;}
+.chin-grill .inner {position: absolute;top: 2px;left: 2px;width: 134px;height: 5px;border-radius: 7px;background: #252527;background-size: 3px 3px;}
+.phone-screen {position: absolute;top: 18px;left: 17px;width: 367px;height: 706px;border-radius: 30px;overflow: hidden;}
+.slider {width: 100%;height: 100%;}
+.swiper-slide {text-align: center;width: 100%;margin:0;}
+.slide-1 {background: url("https://gilin.co.kr/img/landing/howto_img01.png") center no-repeat;}
+.slide-2 {background: url("https://gilin.co.kr/img/landing/howto_img02.png") center no-repeat;}
+.slide-3 {background: url("https://gilin.co.kr/img/landing/howto_img03.png") center no-repeat;}
+.slidebg {position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-size: cover !important;background-position: center center !important;background-repeat: no-repeat !important;}
+
+#section2 h2{color:var(--main-color);font-size:3rem;display:flex;align-items:center;margin-bottom:5rem;}
+#section2 h2 img{margin-right:1rem;}
+.slide-nav h4 {font-size:2rem;}
+.slide-nav p {font-size:1.2rem;line-height:1.6;margin-top:2rem;position: relative;display: block;overflow: hidden;}
+.slide-nav h4,.slide-nav p {color: #fff;}
+.slide-nav li {position: relative;margin:4rem 0;padding: 0 0 0 2rem;cursor: pointer;}
+.slide-nav li:first-child{margin-top:0;}
+.slide-nav li:last-child{margin-bottom:0;}
+.slide-nav li > .progress-bar {position: absolute;top: 2px;left: 0;width: 3px;overflow: hidden;height: calc(100% - 4px);background: rgba(255, 255, 255, 0.33);}
+.slide-nav li > .progress-bar > .p-b-inner {background: white;}
+.slide-nav li {opacity: .3;}
+.slide-nav li.active {opacity: 1;}
+.slide-nav li.active h4{color:var(--main-color);}
+.slide-nav .p-holder {position: relative;display: none;}
+.active .p-b-inner {height: 100% !important;-webkit-transition: height 5000ms 400ms linear !important;-o-transition: height 5000ms 400ms linear !important;transition: height 5000ms 400ms linear !important;}
+
+#section2 .bg_dot_wrap .dot:nth-child(1){left:70%;top:20%;}
+#section2 .bg_dot_wrap .dot:nth-child(2){left:80%;top:30%;}
+#section2 .bg_dot_wrap .dot:nth-child(3){left:75%;top:50%;}
+#section2 .bg_dot_wrap .dot:nth-child(4){left:85%;top:80%;}
+
+
+#section3 {background:url('https://gilin.co.kr/img/landing/section3_bg_img01.png') center bottom no-repeat;}
+#section3 .bg_img01{position: absolute;top: 0;right: 0;transform:rotate(180deg);margin-top:-1px;}
+
+#section4 {background:url('') center no-repeat;}
+
+#section5{background:#000;}
+#section5 .inner{position:relative;padding:6rem;}
+#section5 *{color:#fff;font-size:1.3rem;}
+#section5 ul{display:flex;flex-wrap:wrap;max-width:720px;}
+#section5 li{line-height:2;margin-right:1rem;}
+#section5 li span{opacity:.3;margin-right:.5rem;}
+#section5 .copyright{font-size:1.1rem;opacity:.5;margin-top:3rem;}
+#section5 .top_btn{width:8rem;height:8rem;border-radius:100%;background:var(--main-color);position:absolute;top:0;right:0;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;transition:.2s;}
+#section5 .top_btn span{font-size:2rem;color:#000;}
+#section5 .top_btn:hover{box-shadow:1rem 1.2rem 4rem rgba(247,205,96,.5);}
+
+@media (max-width:600px){
+  *{font-size:10px;}
+  body{min-width:320px;min-height:400px;}
+
+  .inner{width:100%;padding:0 2rem;}
+
+  .header #menu{display:none;}
+
+  #section0 .flex_wrap{flex-direction:column;}
+  #section0 .flex_box:last-child{height:300px;overflow:hidden;}
+  #section0 .phone-outer{width:300px;height:585px;}
+  #section0 .phone-outer:before{display:none;}
+  .phone-screen{width:266px;height:498px;}
+}

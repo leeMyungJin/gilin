@@ -216,8 +216,7 @@
 </div>
 
 
-
-
+<img src="https://gilin.co.kr/img/common/mask.gif" alt="로더" id="gridLoader">
 
 <style>
     #setGrid.wj-flexgrid .wj-cell {
@@ -242,6 +241,13 @@
 
     .date-range {
         width: 100%;
+    }
+
+    #gridLoader {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
     }
 </style>
 
@@ -372,6 +378,8 @@
     //회원 리스트 조회
     function getChannelList(f=document.searchForm) {
 
+        $("#gridLoader").css("display", "block");
+
         $.ajax({
             type : 'GET',
             url : '/cms/channel/more',
@@ -408,6 +416,9 @@
             },
             error: function(request, status, error) {
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            complete: function () {
+                $("#gridLoader").css("display", "none");
             }
         });
 

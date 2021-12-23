@@ -208,6 +208,7 @@
 </div>
 
 
+<img src="https://gilin.co.kr/img/common/mask.gif" alt="로더" id="gridLoader">
 
 
 
@@ -350,6 +351,8 @@
     //회원 리스트 조회
     function getProjectList(f=document.searchForm) {
 
+        $("#gridLoader").css("display", "block");
+
         $.ajax({
             type : 'GET',
             url : '/cms/project/more',
@@ -376,6 +379,9 @@
             },
             error: function(request, status, error) {
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            complete: function () {
+                $("#gridLoader").css("display", "none");
             }
         });
 
