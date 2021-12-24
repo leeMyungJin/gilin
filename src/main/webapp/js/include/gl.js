@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   // 풀페이지
   $('#fullpage').fullpage({
-    // responsiveWidth: 3000,
+    responsiveWidth: 600,
     verticalCentered: true,
     anchors: ['anchor1', 'anchor2', 'anchor3', 'anchor4', 'anchor5'],
     menu: '#menu',

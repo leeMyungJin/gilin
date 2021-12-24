@@ -18,12 +18,12 @@
 
 <header class="header">
     <div class="inner flex_wrap">
-        <a href="" class="logo"><img src="img/logo.svg" alt=""></a>
+        <a href="" class="logo"><img src="https://gilin.co.kr/img/landing/logo.svg" alt=""></a>
         <ul id="menu">
             <li data-menuanchor="anchor1"><a href="#1">HOME</a></li>
             <li data-menuanchor="anchor2"><a href="#2">기린이란</a></li>
             <li data-menuanchor="anchor3"><a href="#3">이용방법</a></li>
-            <!-- <li data-menuanchor="anchor5"><a href="#5">다운받기</a></li> -->
+            <li data-menuanchor="anchor4"><a href="#5">다운받기</a></li>
         </ul>
     </div>
 </header>
@@ -89,7 +89,7 @@
         <img src="https://gilin.co.kr/img/landing/section1_bg_img02.png" alt="" class="bg_img02">
         <div class="inner">
             <h3>아이디어 공유는 발전의 시작입니다!</h3>
-            <h2>친구에게 아이디어 공유하고, 피드백 받아보자<i class="italic">!</i></h2>
+            <h2>친구에게 아이디어 공유하고,<br class="m_show">피드백 받아보자<i class="italic">!</i></h2>
             <div class="flex_wrap">
                 <div class="flex_box">
                     <img src="https://gilin.co.kr/img/landing/section1_ico01.svg" alt="" class="ico">
@@ -194,13 +194,43 @@
         <img src="https://gilin.co.kr/img/landing/section1_bg_img02.png" alt="" class="bg_img01">
     </div>
 
-    <!-- <div class="section" id="section4">
+    <div class="section" id="section4">
+        <div class="flex_wrap">
+            <div class="flex_box bg">
 
-    </div> -->
+            </div>
+            <div class="flex_box down">
+                <div class="txt_wrap">
+                    <h3>기린 어플 다운로드</h3>
+                    <h1>기린으로 당신의<br>아이디어를 실현해보세요</h1>
+                    <div class="down_btn_wrap">
+                        <a href="" class="down_btn">
+                <span class="img_wrap">
+                  <img src="https://gilin.co.kr/img/landing/apple_ico.svg" alt="">
+                </span>
+                            <div class="">
+                                <p>GET IT ON</p>
+                                <p>App Store</p>
+                            </div>
+                        </a>
+                        <a href="" class="down_btn">
+                <span class="img_wrap">
+                  <img src="https://gilin.co.kr/img/landing/google_ico.svg" alt="">
+                </span>
+                            <div>
+                                <p>GET IT ON</p>
+                                <p>Google Play</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="section fp-auto-height" id="section5">
         <div class="inner">
-            <a class="top_btn" href="#1"><span class="material-icons-round">arrow_upward</span></a>
+            <a class="top_btn" a href="#1"><span class="material-icons-round">arrow_upward</span></a>
             <ul>
                 <li><span>회사명</span> 휘테커 <span>대표</span> 장기원</li>
                 <li><span>주소</span> 경남 창원시 마산합포구 3·15대로 298 경남대학교 창업보육관</li>
@@ -214,11 +244,11 @@
 </div>
 
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
 <script type="text/javascript" src="../js/include/jquery.fullPage.js"></script>
 <script type="text/javascript" src="../js/include/gl.js"></script>
+
 
 </body>
 
