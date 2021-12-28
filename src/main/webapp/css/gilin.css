@@ -129,7 +129,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 
   /* Required styles */
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   top: 0;
   left: 0;
 
