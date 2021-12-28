@@ -14,9 +14,11 @@
   <link rel="canonical" href="">
   <title>GILIN</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+  
   <link rel="stylesheet" href="../css/gilin.css">
   <link rel="stylesheet" href="../css/gilin_cms.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/headhesive/1.2.4/headhesive.min.js"></script>
   <script src="../js/include/gilin.js"></script>
   <script src="../js/include/common.js"></script>
   

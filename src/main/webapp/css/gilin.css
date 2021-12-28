@@ -74,7 +74,7 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 .modal.active {opacity: 1;visibility: visible;}
 
 /* 헤더 */
-.header{background:#fff;z-index:999;transition:.3s;}
+.header{background:#fff;z-index:999;width:100%;}
 .header .inner{height:calc(var(--spacing) * 6);display:flex;align-items:center;justify-content:space-between;}
 .header .logo svg{width:calc(var(--spacing) * 8);}
 .header .nav_wrap{display:flex;align-items:center;}
@@ -117,9 +117,44 @@ span.to{color:var(--txt-color);margin:0 var(--spacing);}
 /* 로그인 완료 */
 /* .header .nav_wrap.login .login_btn, .header .nav_wrap.login .login_modal{display:none;} */
 
-.header.active{position:fixed;top:0;left:0;width:100%;background:var(--main-color);}
-.header.active svg path{fill:#fff;}
-.header.active .search{background:#fff;}
+.header.banner--clone{position:fixed;top:0;left:0;width:100%;background:var(--main-color);}
+.header.banner--clone svg path{fill:#fff;}
+.header.banner--clone .search{background:#fff;}
+
+/*----------------------------------------------------------------------------*\
+  Headhesive Specific Styles
+/*----------------------------------------------------------------------------*/
+
+ .banner--clone {
+
+  /* Required styles */
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+
+  /* Additional styles */
+  background: #c95a5d;
+
+  /* Translate -100% to move off screen */
+  -webkit-transform: translateY(-100%);
+      -ms-transform: translateY(-100%);
+          transform: translateY(-100%);
+
+  /* Animations */
+  -webkit-transition: all 300ms ease-in-out;
+     -moz-transition: all 300ms ease-in-out;
+          transition: all 300ms ease-in-out;
+
+}
+.banner--stick {
+
+  /* Translate back to 0%; */
+  -webkit-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
 
 /* 푸터 */
 .footer{background:#000;padding-top:calc(var(--spacing) * 4);}

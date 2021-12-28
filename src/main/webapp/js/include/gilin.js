@@ -1,13 +1,26 @@
 $(document).ready(function() {
 
   // 헤더
-  $(window).scroll(function() {
-    if ($(window).scrollTop() > 0) {
-      $('.header').addClass('active');
-    } else {
-      $('.header').removeClass('active');
-    }
-  });
+  // $(window).scroll(function() {
+  //   if ($(window).scrollTop() > 0) {
+  //     $('.header').addClass('active');
+  //   } else {
+  //     $('.header').removeClass('active');
+  //   }
+  // });
+
+
+var options = {
+  offset: 300,
+  offsetSide: 'top',
+  classes: {
+      clone:   'banner--clone',
+      stick:   'banner--stick',
+      unstick: 'banner--unstick'
+  }
+};
+
+var banner = new Headhesive('.header', options);
 
   $('.header .search .search_icon').click(function() {
     $('.header .search').addClass('expand');
@@ -39,6 +52,7 @@ $(document).ready(function() {
           return false;
       });
     });
+
 
   // 로그인 모달창
   $(function() {
