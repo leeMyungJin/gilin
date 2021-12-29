@@ -8,6 +8,7 @@
 		       *,
 			   (case when admin_yn = true then 'Y' else 'N' end) as adminFlag
 		from web.member
+		where nickname = '전승희'
 	</select>
 
 	<select id="getCount" resultType="map">

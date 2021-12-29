@@ -7,6 +7,9 @@ import com.gilin.Cms.Service.CmsPushService;
 import com.gilin.Cms.Vo.CmsMemberVo;
 import com.gilin.Cms.Vo.CmsPushVo;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.messaging.*;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -18,9 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.env.Environment;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 @EnableAsync
@@ -230,6 +234,98 @@ public class CmsPushServiceImpl implements CmsPushService {
 
 
         return result;
+    }
+
+    @Override
+    public void sendPushMulti(HashMap<String, String> params, List<CmsMemberVo> pushTokens)
+            throws FirebaseMessagingException, IOException {
+        /* 로컬용 */
+        FileInputStream refreshToken = new FileInputStream("/Users/seungheejeon/Desktop/workspace/2021_11/gilin_new/src/main/resources/firebase/gilin001-a2308-firebase-adminsdk-m8xnc-e514bc06fa.json");
+
+        /* 서버용 */
+//        FileInputStream refreshToken = new FileInputStream("/var/upload/firebase/test-firebase-adminsdk-fv7cy-5cd6f955bf.json");
+
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(refreshToken))
+                .build();
+
+        if(FirebaseApp.getApps().isEmpty()) {
+            FirebaseApp.initializeApp(options);
+        }
+
+        int tokenCount = 0;
+        int failCount = 0;
+
+        List<String> tokenList = new ArrayList<>();
+
+        LocalTime localTime1 = LocalTime.now();
+
+        for (int i=0; i < pushTokens.size(); i++) {
+
+            /* 유저의 푸시토큰을 배열에 담는다 */
+            tokenList.add(pushTokens.get(i).getFcmToken());
+            tokenCount++;
+
+            /* 배열에 푸시토큰 500개 담기면 푸시보내고 배열 초기화 */
+            if ((i % 499) == 0 && (i != 0)) {
+
+                MulticastMessage message = MulticastMessage.builder()
+                        .setNotification(Notification.builder()
+                                .setTitle(params.get("title"))
+                                .setBody(params.get("body"))
+                                .build())
+                        .setApnsConfig(ApnsConfig.builder() /* 아이폰 개별 설정 */
+                                .setAps(Aps.builder()
+                                        .setBadge(42)
+                                        .setSound("default")
+                                        .build())
+                                .build())
+                        .putData("idx", params.get("idx"))
+                        .putData("click_action", "FLUTTER_NOTIFICATION_CLICK")
+                        .addAllTokens(tokenList)
+                        .build();
+
+                tokenList.clear();
+                BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
+
+                /* 실패갯수 담기. 필요없는 경우가 대부분이므로 주석처리 */
+//                if(response.getFailureCount() > 0) {
+//                    failCount += response.getFailureCount();
+//                }
+
+            }
+        }
+
+        /* 렝스500안되는 남은 토큰도 보내기 */
+        if (tokenList.size() > 0) {
+
+            MulticastMessage message = MulticastMessage.builder()
+                    .setNotification(Notification.builder()
+                            .setTitle(params.get("title"))
+                            .setBody(params.get("body"))
+                            .build())
+                    .setApnsConfig(ApnsConfig.builder()
+                            .setAps(Aps.builder()
+                                    .setBadge(42)
+                                    .setSound("default")
+                                    .build())
+                            .build())
+                    .putData("idx", params.get("idx"))
+                    .putData("click_action", "FLUTTER_NOTIFICATION_CLICK")
+                    .addAllTokens(tokenList)
+                    .build();
+
+            BatchResponse response = FirebaseMessaging.getInstance().sendMulticast(message);
+
+            /* 실패갯수 담기. 필요없는 경우가 대부분이므로 주석처리 */
+//                if(response.getFailureCount() > 0) {
+//                    failCount += response.getFailureCount();
+//                }
+        }
+
+
+        LocalTime localTime2 = LocalTime.now();
+        System.out.println("보내기시작시간 :: " + localTime1 +", 보내기종료시간 :: " + localTime2);
     }
 
     @Override

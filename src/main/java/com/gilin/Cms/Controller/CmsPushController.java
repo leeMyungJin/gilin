@@ -31,7 +31,6 @@ public class CmsPushController {
     @ResponseBody
     public String sendPush(@RequestParam String id) throws Exception {
 
-        System.out.println(id);
         HashMap<String, String> params = new HashMap<>();
         params.put("id", id);
         String userToken = pushService.getUserToken(params); // DB에서 사용자 토큰 가져오기
@@ -45,12 +44,16 @@ public class CmsPushController {
 
             params.put("title", "타이틸"); // key파일 path 가져오기
             params.put("body", "내용입니다"); // key파일 path 가져오기
-            System.out.println("인바::"+environment.getProperty("firebase.path.key"));
             result = pushService.sendPush(params);
-            System.out.println(result);
         }
         return result;
     }
+
+
+//    @RequestMapping(value="/sendPushTest")
+//    public String sendPushTest(@RequestParam String id) throws Exception {
+//
+//    }
 
 
 }

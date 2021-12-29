@@ -582,9 +582,32 @@ public class CmsController {
         params.put("web_sender", Login.getId());
         int index = cmsPushService.create(params);
         params.put("history_idx", Integer.toString(index));
-        String result = cmsPushService.sendPushForEach(params, cmsUserVos);
-        return result;
+        cmsPushService.sendPushMulti(params, cmsUserVos);
+        return "";
     }
+
+    @PostMapping("/cms/notice/pushTest")
+    @ResponseBody
+    public String adminPushTest(@RequestParam HashMap<String, String> params) throws Exception {
+
+        List<CmsMemberVo> cmsUserVos = cmsMemberService.getList();
+        params.put("title", params.get("push_title"));
+        params.put("body", params.get("push_body"));
+        params.put("idx", params.get("push_notice_idx"));
+
+        params.put("push_title", params.get("push_title"));
+        params.put("push_body", params.get("push_body"));
+        params.put("push_notice_idx", params.get("push_notice_idx"));
+        params.put("notice_flag", params.get("notice_flag"));
+        params.put("web_sender", Login.getId());
+        int index = cmsPushService.create(params);
+        params.put("history_idx", Integer.toString(index));
+        cmsPushService.sendPushMulti(params, cmsUserVos);
+        return "";
+
+    }
+
+
 
 
     @PostMapping("/cms/channel/activeChanger")
