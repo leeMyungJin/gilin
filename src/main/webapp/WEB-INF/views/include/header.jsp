@@ -213,31 +213,7 @@ function appleLogin(){
         <!-- 로그인 전 -->
         <div id="b_login" style="display:none;">
 	        <a href="javascript:void(0);" onClick="loginInit()" class="login_btn modal_btn" data-modal-link="login_modal">LOGIN</a>
-	        <div class="modal login_modal">
-	          <div class="modal_bg"></div>
-	          <div class="modal_cont flex_wrap">
-	            <span class="material-icons-outlined close_btn">close</span>
-	            <div class="txt_wrap">
-	              <img src="../img/gilin_app_logo.svg" alt="" class="logo">
-	              <p class="maintxt">프로젝트의 시작은<br>기린에서<i>!</i></p>
-	              <p class="subtxt">기린에서 성공적인 프로젝트를 만들어보세요.</p>
-	            </div>
-	
-	            <div class="login_cont">
-	              <h2>로그인</h2>
-	              <p>간편로그인으로 기린 시작하기</p>
-	              <a class="kakao modal_login_btn" href="javascript:void(0);" onClick="kakaoLogin()"><img src="../img/icon_kakao.svg">카카오로 로그인</a>
-                   <div class="apple-login-wrap" style="position: relative">
-                      <a class="apple modal_login_btn" style="position:absolute; opacity: 0" href="javascript:void(0);" onClick="appleLogin()" id="appleid-signin"><img src="../img/icon_apple.svg">Apple로 로그인</a>
-                        <!-- 수정추가 -->
-                        <a class="apple modal_login_btn" href="javascript:void(0);" ><img src="img/icon_apple.svg" alt="">Apple로 로그인</a>
-                        <!-- 수정끝 -->
-                   </div>
-
-	            
-	            </div>
-	          </div>
-	        </div>
+	       
         </div>
 
         <!-- 로그인 완료 -->
@@ -256,6 +232,32 @@ function appleLogin(){
       </div>
     </div>
   </header>
+
+  <div class="modal login_modal">
+	<div class="modal_bg"></div>
+	<div class="modal_cont flex_wrap">
+	  <span class="material-icons-outlined close_btn">close</span>
+	  <div class="txt_wrap">
+		<img src="../img/gilin_app_logo.svg" alt="" class="logo">
+		<p class="maintxt">프로젝트의 시작은<br>기린에서<i>!</i></p>
+		<p class="subtxt">기린에서 성공적인 프로젝트를 만들어보세요.</p>
+	  </div>
+
+	  <div class="login_cont">
+		<h2>로그인</h2>
+		<p>간편로그인으로 기린 시작하기</p>
+		<a class="kakao modal_login_btn" href="javascript:void(0);" onClick="kakaoLogin()"><img src="../img/icon_kakao.svg">카카오로 로그인</a>
+		 <div class="apple-login-wrap" style="position: relative">
+			<a class="apple modal_login_btn" style="position:absolute; opacity: 0" href="javascript:void(0);" onClick="appleLogin()" id="appleid-signin"><img src="../img/icon_apple.svg">Apple로 로그인</a>
+			  <!-- 수정추가 -->
+			  <a class="apple modal_login_btn" href="javascript:void(0);" ><img src="img/icon_apple.svg" alt="">Apple로 로그인</a>
+			  <!-- 수정끝 -->
+		 </div>
+
+	  
+	  </div>
+	</div>
+  </div>
  
     <!-- 수정추가 -->
   <div class="side_btn_wrap">
