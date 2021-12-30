@@ -240,10 +240,10 @@ public class CmsPushServiceImpl implements CmsPushService {
     public void sendPushMulti(HashMap<String, String> params, List<CmsMemberVo> pushTokens)
             throws FirebaseMessagingException, IOException {
         /* 로컬용 */
-        FileInputStream refreshToken = new FileInputStream("/Users/seungheejeon/Desktop/workspace/2021_11/gilin_new/src/main/resources/firebase/gilin001-a2308-firebase-adminsdk-m8xnc-e514bc06fa.json");
+//        FileInputStream refreshToken = new FileInputStream("/Users/seungheejeon/Desktop/workspace/2021_11/gilin_new/src/main/resources/firebase/gilin001-a2308-firebase-adminsdk-m8xnc-e514bc06fa.json");
 
         /* 서버용 */
-//        FileInputStream refreshToken = new FileInputStream("/var/upload/firebase/test-firebase-adminsdk-fv7cy-5cd6f955bf.json");
+        FileInputStream refreshToken = new FileInputStream("/var/upload/firebase/gilin001-a2308-firebase-adminsdk-m8xnc-e514bc06fa.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(refreshToken))
