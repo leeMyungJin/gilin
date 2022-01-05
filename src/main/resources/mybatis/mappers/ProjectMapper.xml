@@ -26,6 +26,8 @@
 										where cret_id = #{memberId}) pfc on pfc.pj_seq = p.pj_seq
 							left join web.channel c on p.ch_seq = c.ch_seq 
 		where p.ch_seq = #{chSeq}::numeric
+		and c.ch_active_yn  = 'Y'
+		and p.active_yn = 'Y'
 		<choose>
 			<when test="state == 'orderName'">
 				order by p.pj_name
@@ -66,6 +68,8 @@
 										where cret_id = #{memberId}) pfc on pfc.pj_seq = p.pj_seq
 							left join web.channel c on p.ch_seq = c.ch_seq 
 		where 1=1
+		and c.ch_active_yn  = 'Y'
+		and p.active_yn = 'Y'
 		<if test="chSeq != null and chSeq != ''">
 			and p.ch_seq = #{chSeq}::numeric
 		</if>
@@ -139,11 +143,15 @@
 	</update>
 	
 	<delete id="deleteProject" parameterType="hashMap">
-		delete from web.project 
+		<!-- delete from web.project 
 		where pj_seq = #{pjSeq}::numeric;
 		
 		delete from web.project_funding 
-		where pj_seq = #{pjSeq}::numeric;
+		where pj_seq = #{pjSeq}::numeric; -->
+		
+		update web.project set 
+			active_yn = false
+		where pj_seq = #{pjSeq}::numeric
 	</delete>
 	
 

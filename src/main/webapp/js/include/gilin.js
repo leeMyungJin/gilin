@@ -121,7 +121,7 @@ var banner = new Headhesive('.header', options);
 
 
   // 채널 오픈
-  $('.chk_wrap').click(function() {
+ /* $('.chk_wrap').click(function() {
     if ($('.channel_open input[name="radio"]:checked').val() == 'public') {
       $('.channel_open .chk_wrap .showbox').removeClass('active');
     } else {
@@ -135,7 +135,7 @@ var banner = new Headhesive('.header', options);
     } else {
       $('.mychannel_modi .chk_wrap .showbox').addClass('active');
     }
-  });
+  });*/
 
 
 });

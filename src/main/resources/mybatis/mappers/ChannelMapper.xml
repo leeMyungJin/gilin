@@ -23,8 +23,10 @@
 						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 		from web.channel c left join (select p.ch_seq, sum(pf.fd_amt) as fd_sum_amt
 										from web.project p left join web.project_funding pf on pf.pj_seq = p.pj_seq 
+										where p.active_yn = 'Y'
 										group by p.ch_seq) p on c.ch_seq = p.ch_seq
 		where 1=1
+		and c.ch_active_yn  = 'Y'
 		<if test="name != null">
 		and c.ch_name LIKE '%' || #{name} || '%'
 		</if>
@@ -64,11 +66,13 @@
 						else 'D+' || to_char(now()-c.ch_end_dt, 'dd')::numeric end as d_day
 		from web.channel c left join (select p.ch_seq, sum(pf.fd_amt) as fd_sum_amt
 									from web.project p left join web.project_funding pf on pf.pj_seq = p.pj_seq 
+									where p.active_yn = 'Y'
 									group by p.ch_seq) p on c.ch_seq = p.ch_seq
 		where (c.cret_id = #{memberId} or c.ch_seq in (select distinct ch_seq
 														from web.project 
 														where cret_id = #{memberId})
 				)
+		and c.ch_active_yn  = 'Y'		
 		<if test="name != null and name != ''">
 		and	c.ch_name LIKE '%' || #{name} || '%'
 		</if>
@@ -106,6 +110,7 @@
 						else 384 end as d_day_percent
 		from web.channel c left join (select p.ch_seq, count(distinct p.pj_seq) as pj_cnt, sum(pf.fd_amt) as fd_sum_amt
 										from web.project p left join web.project_funding pf on pf.pj_seq = p.pj_seq 
+										where p.active_yn = 'Y'
 										group by p.ch_seq) p on c.ch_seq = p.ch_seq
 		where c.ch_seq = #{chSeq}::numeric
 	</select>
@@ -149,7 +154,7 @@
 	</update>
 	
 	<delete id="deleteChannel" parameterType="hashMap">
-		delete from web.project_funding pf using web.project p
+		<!-- delete from web.project_funding pf using web.project p
 		where pf.pj_seq = p.pj_seq
 		and p.ch_seq = #{chSeq}::numeric;
 		
@@ -157,7 +162,12 @@
 		where ch_seq = #{chSeq}::numeric;
 		
 		delete from web.channel
-		where ch_seq = #{chSeq}::numeric;
+		where ch_seq = #{chSeq}::numeric; -->
+		
+		update web.channel set 
+			ch_active_yn = false
+		where ch_seq = #{chSeq}::numeric
+		
 	</delete>
 	
 	<insert id="insertChannerVisitHist" parameterType="hashMap">
