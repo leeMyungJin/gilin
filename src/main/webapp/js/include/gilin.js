@@ -33,11 +33,13 @@ var banner = new Headhesive('.header', options);
   $('.header .mypage_wrap .mypage_btn').click(function() {
     $('.mypage_menu').toggleClass('active');
   });
+  
 
 
   // 사이드 버튼
   $(function() {
       $(window).scroll(function() {
+        $('.mypage_menu').removeClass('active');
           if ($(this).scrollTop() > 500) {
               $('.side_btn_wrap .top').show(350);
           } else {
