@@ -199,8 +199,9 @@
             </div>
 
             <!-- 로그인 전 -->
-            <div id="b_login">
+            <div id="b_login" style="display:none;">
                 <a href="javascript:void(0);" onClick="loginInit()" class="login_btn modal_btn" data-modal-link="login_modal">LOGIN</a>
+
             </div>
 
             <!-- 로그인 완료 -->
