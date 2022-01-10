@@ -199,13 +199,12 @@
             </div>
 
             <!-- 로그인 전 -->
-            <div id="b_login" style="display:none;">
+            <div id="b_login">
                 <a href="javascript:void(0);" onClick="loginInit()" class="login_btn modal_btn" data-modal-link="login_modal">LOGIN</a>
-
             </div>
 
             <!-- 로그인 완료 -->
-            <div class="mypage_wrap" id="a_login">
+            <div class="mypage_wrap" id="a_login" style="display:none;">
                 <span class="material-icons-round mypage_btn">person</span>
                 <ul class="mypage_menu">
                     <li><a href="javascript:void(0);" onClick="moveMypage()">Mypage</a></li>
