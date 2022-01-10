@@ -39,7 +39,6 @@ var banner = new Headhesive('.header', options);
   // 사이드 버튼
   $(function() {
       $(window).scroll(function() {
-        $('.mypage_menu').removeClass('active');
           if ($(this).scrollTop() > 500) {
               $('.side_btn_wrap .top').show(350);
           } else {
@@ -53,6 +52,10 @@ var banner = new Headhesive('.header', options);
           }, 400);
           return false;
       });
+    });
+
+    $(window).scroll(function() {
+      $('.mypage_menu').removeClass('active');
     });
 
 
