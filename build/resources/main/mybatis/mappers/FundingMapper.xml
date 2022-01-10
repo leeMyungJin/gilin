@@ -22,6 +22,8 @@
 		from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq 
 								    left join web.channel c on p.ch_seq  = c.ch_seq 
 		where 1=1
+		and c.ch_active_yn  = 'Y'
+		and p.active_yn = 'Y'
 		<if test="chSeq != null and chSeq != ''">
 			and p.ch_seq = #{chSeq}::numeric
 		</if>

@@ -205,7 +205,7 @@
             </div>
 
             <!-- 로그인 완료 -->
-            <div class="mypage_wrap" id="a_login" style="display:none;">
+            <div class="mypage_wrap" id="a_login">
                 <span class="material-icons-round mypage_btn">person</span>
                 <ul class="mypage_menu">
                     <li><a href="javascript:void(0);" onClick="moveMypage()">Mypage</a></li>

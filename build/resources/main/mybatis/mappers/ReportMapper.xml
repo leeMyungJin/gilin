@@ -9,6 +9,7 @@
 				select to_char(p.cret_dt, 'yy.mm.dd') as date, count(*) as val
 				from web.project p left join web.channel c on p.ch_seq = c.ch_seq 
 				where p.ch_seq = #{chSeq}::numeric
+				and p.active_yn = 'Y'
 				and p.cret_dt between c.ch_st_dt and c.ch_end_dt
 				group by to_char(p.cret_dt, 'yy.mm.dd')
 				order by to_char(p.cret_dt, 'yy.mm.dd')
@@ -19,6 +20,7 @@
 				from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
 				                     left join web.channel c on p.ch_seq = c.ch_seq
 				where c.ch_seq = #{chSeq}::numeric
+				and p.active_yn = 'Y'
 				and pf.cret_dt between c.ch_st_dt and c.ch_end_dt
 				group by to_char(pf.cret_dt, 'yy.mm.dd')
 				order by to_char(pf.cret_dt, 'yy.mm.dd')
@@ -38,6 +40,7 @@
 				from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
 				                     left join web.channel c on p.ch_seq = c.ch_seq
 				where c.ch_seq = #{chSeq}::numeric
+				and p.active_yn = 'Y'
 				and pf.cret_dt between c.ch_st_dt and c.ch_end_dt
 				group by to_char(pf.cret_dt, 'yy.mm.dd')
 				order by to_char(pf.cret_dt, 'yy.mm.dd')
@@ -50,12 +53,14 @@
 	   ( select count(*) 
 	      from web.project p left join web.channel c on p.ch_seq = c.ch_seq 
 	      where p.ch_seq = #{chSeq}::numeric
+	      and p.active_yn = 'Y'
 	      and p.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totPjtCnt
 	      
 	   , ( select coalesce(sum(pf.fd_amt), 0)
 	      from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
 	                           left join web.channel c on p.ch_seq = c.ch_seq
 	      where c.ch_seq = #{chSeq}::numeric
+	      and p.active_yn = 'Y'
 	      and pf.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totFdAmt
 	   
 	   , ( select count(*)
@@ -67,6 +72,7 @@
 	      from web.project_funding pf left join web.project p on pf.pj_seq = p.pj_seq
 	                           left join web.channel c on p.ch_seq = c.ch_seq
 	      where c.ch_seq = #{chSeq}::numeric
+	      and p.active_yn = 'Y'
 	      and pf.cret_dt between c.ch_st_dt and c.ch_end_dt ) as totCmtCnt
 	</select>
 </mapper>
