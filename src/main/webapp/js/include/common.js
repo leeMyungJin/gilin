@@ -343,8 +343,8 @@ function sessionCheck(id, auth, view){
 	console.log("id : "+id+", auth : "+auth);
 	
     if (id=="null"){
-    	$('#a_login').hide();
-        $('#b_login').show();
+    	$('.a_login').hide();
+        $('.b_login').show();
 		
 		if(view == "channelOpen" || view == "projectOpen" || view == "mypage"){
         	alert("세션이 종료되어 메인화면으로 이동합니다.");
@@ -354,8 +354,8 @@ function sessionCheck(id, auth, view){
     	
     // 세션 존재
     }else{
-    	$('#a_login').show();
-        $('#b_login').hide();
+    	$('.a_login').show();
+        $('.b_login').hide();
     }
     
     //어드민 뷰 권한 설정

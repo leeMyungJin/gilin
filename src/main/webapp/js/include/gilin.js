@@ -31,7 +31,8 @@ var banner = new Headhesive('.header', options);
   });
 
   $('.header .mypage_wrap .mypage_btn').click(function() {
-    $('.mypage_menu').toggleClass('active');
+      var prt = $(this).parents("header");
+      $('.mypage_menu', prt).toggleClass('active');
   });
   
 
