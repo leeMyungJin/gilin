@@ -97,6 +97,8 @@ var banner = new Headhesive('.header', options);
   }
 
 
+
+
   // 서브
   // 서브헤더
   let chn_img = $('.sub .detail_info_wrap .img_wrap img').attr('src');
