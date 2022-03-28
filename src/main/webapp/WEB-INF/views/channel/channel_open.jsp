@@ -109,10 +109,10 @@ function saveChannel(type){
     var curtDate = new Date();
     curtDate.setDate(curtDate.getDate() - 1)
     console.log(curtDate);
-    if (curtDate-1 > inputDate) {
-        alert("과거일자를 입력하셨습니다. \n과거일자는 채널 개설이 불가합니다.");
-        return false;
-    }
+    // if (curtDate-1 > inputDate) { // 2022.03.28 과거날짜 가능하게 수정...
+    //     alert("과거일자를 입력하셨습니다. \n과거일자는 채널 개설이 불가합니다.");
+    //     return false;
+    // }
 	
 	if(confirm(msg)){
 		

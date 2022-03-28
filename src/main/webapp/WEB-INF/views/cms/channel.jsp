@@ -132,6 +132,7 @@
                     <input type="hidden" name="chEndDt">
                     <input type="hidden" name="chFdStDt">
                     <input type="hidden" name="chFdEndDt">
+                    <input type="hidden" name="chOpenYn">
 
                     <input type="hidden" name="cretId">
                     <input type="hidden" name="updtDt">
@@ -454,6 +455,19 @@
 
         f.chStDt.value = chDateRangeSplit[0];
         f.chEndDt.value = chDateRangeSplit[1];
+
+        if (f.chOpenYn.value == "t") {
+            f.chOpenYn.value = "true";
+        } else {
+            f.chOpenYn.value = "false";
+        }
+
+        /* 비밀번호가 있을 경우 무조건 오픈펄스 */
+        if (f.chPass.value != "") {
+            f.chOpenYn.value = "false";
+        } else {
+            f.chOpenYn.value = "true";
+        }
 
         let today = new Date();
 

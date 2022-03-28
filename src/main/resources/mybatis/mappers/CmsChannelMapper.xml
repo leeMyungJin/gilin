@@ -131,7 +131,7 @@
         values
         (
             #{chName}, #{chImg}, ${chActiveYn}, #{chMemo}, #{chStDt}::timestamp, #{chEndDt}::timestamp,
-            #{chPass}, #{chOpenYn}, #{cretDt}::timestamp, #{cretId},
+            #{chPass}, #{chOpenYn}::boolean, #{cretDt}::timestamp, #{cretId},
             #{updtDt}::timestamp, #{updtId}
         )
     </insert>
@@ -147,7 +147,7 @@
                 ch_st_dt = #{chStDt}::timestamp ,
                 ch_end_dt = #{chEndDt}::timestamp ,
                 ch_pass = #{chPass},
-                ch_open_yn = #{chOpenYn},
+                ch_open_yn = #{chOpenYn}::boolean,
                 updt_dt = #{updtDt}::timestamp,
                 updt_id = #{updtId}
             where
